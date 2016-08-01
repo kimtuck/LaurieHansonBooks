@@ -1,0 +1,106 @@
+@mixin layout-margins { margin: 0px 0px; }
+@mixin header-padding { padding: 0px 0px 0px 0px; }
+@mixin main-padding { }
+@mixin footer-padding { }
+     
+/////////////////////////////////////////////////////////////////////////////
+// Flexbox layout
+/////////////////////////////////////////////////////////////////////////////   
+body {
+    //min-height: 100vh;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-width: 320px;
+    overflow: hidden;
+    @include flexbox-flex-display;
+    @include flexbox-direction-columns; // flex-direction: column;
+    @include flexbox-nowrap;
+}
+ 
+html {
+    // for Safari, to prevent the "bounce effect" http://stackoverflow.com/questions/7768269/ipad-safari-disable-scrolling-and-bounce-effect
+    position: fixed;
+
+    // for Safari, prevent the font size from zooming when rotate from portrait to landscape (http://stackoverflow.com/questions/2710764/preserve-html-font-size-when-iphone-orientation-changes-from-portrait-to-landsca)
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+header {
+    @include flexbox-fixed-size-element;
+    @include layout-margins;
+    @include header-padding;
+}
+
+// because we reuse "header" everywhere, we should just do underline on the actual header
+body > header > div:first-child {
+   border-bottom: solid black 1px;
+}
+main {
+    @include flexbox-flex-grow(1);
+    overflow: auto;
+    @include layout-margins;
+    @include main-padding;
+}
+
+// breaks "similar books" display in book details dialog
+//.mmm-modal main {
+//        @include flexbox-flex-display;
+//}
+footer {
+    @include flexbox-fixed-size-element;
+    @include layout-margins;
+    @include footer-padding;
+    font-size: 0.9em;
+}
+
+#modals, #topmodals, #quickmodals, #compactmenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 101;
+}
+#modals {
+    @include flexbox-flex-display;
+    @include flexbox-align-items(center);
+    @include flexbox-justify-content(center);
+}
+#topmodals {
+    @include flexbox-flex-display;
+    @include flexbox-align-items(flex-start);
+    @include flexbox-justify-content(center);
+}
+#compactmenu {
+    @include flexbox-flex-display;
+    @include flexbox-align-items(flex-start);
+    top: initial;
+    left: initial;
+}
+
+.mmm-modal {
+    position: relative;
+    pointer-events: auto;   // causes browser to register pointer events on the modal.  Without this, modal is not clickable anywhere.
+    min-height: 100px;
+    max-height: 80%;
+    margin-left: 10px;
+    margin-right: 10px;
+    //max-width: 75%;
+    @include flexbox-flex-display;
+    @include flexbox-direction-columns; // flex-direction: column;
+    @include flexbox-nowrap;
+}
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Layout appearance
+/////////////////////////////////////////////////////////////////////////////
+body {
+    @include body_font;
+    background-color: #DFDFDF;
+}
+ 
