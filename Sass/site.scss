@@ -428,7 +428,7 @@ body {
 
 
 //////////////////
-.about-treasure {
+.page-treasure, .page-laurie, .page-about {
   font-size: 26px;
 }
 
@@ -440,11 +440,9 @@ body {
 
     .photo:nth-of-type(odd) img{
       @include flexbox-flow-order(1);
-      border: solid red 1px;
     }
     &.photo:nth-of-type(even) img{
       @include flexbox-flow-order(2);
-      border: solid blue 1px;
     }
 
     img {
