@@ -726,4 +726,13 @@ body {
 .navbar .page-about .navbar ul li:nth-of-type(3) {
   outline: solid teal 1px; }
 
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font: initial;
+  color: initial; }
+
+form {
+  margin-top: 30px;
+  font-size: 0.7em; }
+
 /*# sourceMappingURL=site.css.map */

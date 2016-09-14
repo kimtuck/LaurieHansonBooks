@@ -497,3 +497,15 @@ $color-selected: teal;
   .page-laurie .navbar ul li:nth-of-type(2) { outline: solid $color-selected 1px; }
   .page-about .navbar ul li:nth-of-type(3) { outline: solid $color-selected 1px; }
 }
+
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font: initial;
+  color: initial;
+}
+
+form {
+  margin-top: 30px;
+  font-size: 0.7em;
+
+}
