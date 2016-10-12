@@ -469,6 +469,11 @@ body {
     span {
       //flex-basis: 80%;
     }
+
+    &.photo.larger img {
+      width: 40%;
+      height: 40%;
+    }
   }
 }
 @media screen and (max-width: $break-mobiledevice) {
@@ -532,5 +537,12 @@ form {
 .page-home {
   div div  div {
     margin-bottom: 20px;
+  }
+}
+
+.quotes {
+  blockquote {
+    font-size: 1.4em;
+    color: purple;
   }
 }

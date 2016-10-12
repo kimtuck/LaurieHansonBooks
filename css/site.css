@@ -700,6 +700,9 @@ body {
     width: 20%;
     height: 20%;
     margin-right: 3%; }
+  .photo-text p.photo.larger img {
+    width: 40%;
+    height: 40%; }
 
 @media screen and (max-width: 1024px) {
   .photo-text {
@@ -750,5 +753,9 @@ form {
 
 .page-home div div div {
   margin-bottom: 20px; }
+
+.quotes blockquote {
+  font-size: 1.4em;
+  color: purple; }
 
 /*# sourceMappingURL=site.css.map */
