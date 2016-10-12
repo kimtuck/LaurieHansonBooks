@@ -409,7 +409,17 @@ hr.small {
     -moz-transform: translate3d(0, 100%, 0);
     -ms-transform: translate3d(0, 100%, 0);
     -o-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0); } }
+    transform: translate3d(0, 100%, 0); }
+  .nav-buy {
+    margin-top: 20px;
+    background-color: purple;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 300px !important;
+    text-align: center; }
+    .nav-buy div:nth-child(1) {
+      font-size: 1.5em;
+      padding: 10px 10px; } }
 
 .intro-header {
   background-color: #777777;
@@ -697,8 +707,8 @@ body {
     margin-right: 5%; } }
 
 .cover-image img {
-  height: 60%;
-  width: 60%; }
+  height: 50%;
+  width: 50%; }
 
 .navbar ul {
   list-style: none;
@@ -734,5 +744,11 @@ button, input, optgroup, select, textarea {
 form {
   margin-top: 30px;
   font-size: 0.7em; }
+
+.paypal-button {
+  height: 75px; }
+
+.page-home div div div {
+  margin-bottom: 20px; }
 
 /*# sourceMappingURL=site.css.map */
