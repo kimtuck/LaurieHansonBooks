@@ -1,16 +1,17 @@
 // Floating label headings for the contact form
-/*$(function() {
+$(function() {
     $("body").on("input propertychange", ".floating-label-form-group", function(e) {
+        debugger
         $(this).toggleClass("floating-label-form-group-with-value", !!$(e.target).val());
     }).on("focus", ".floating-label-form-group", function() {
+        debugger
         $(this).addClass("floating-label-form-group-with-focus");
-    }).on("blur", ".floating-lab
-    el-form-group", function() {
+    }).on("blur", ".floating-label-form-group", function() {
+        debugger
         $(this).removeClass("floating-label-form-group-with-focus");
     });
 });
-*/
-/*
+
 // Navigation Scripts to Show Header on Scroll-Up
 jQuery(document).ready(function($) {
     var MQL = 1170;
@@ -40,4 +41,3 @@ jQuery(document).ready(function($) {
             });
     }
 });
-*/
