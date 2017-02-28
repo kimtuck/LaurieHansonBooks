@@ -335,7 +335,7 @@ hr.small {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 15%;
   z-index: 3;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 
@@ -770,7 +770,8 @@ body {
   -webkit-padding-before: 0;
   -webkit-padding-start: 0;
   -webkit-margin-before: 0;
-  -webkit-margin-after: 0; }
+  -webkit-margin-after: 0;
+  width: 201px; }
   .navbar ul li {
     color: white;
     font-weight: bold;
