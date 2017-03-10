@@ -1,3 +1,22 @@
+angular.module('myapp', []);
+
+angular.module('myapp').directive('mynav', function () {
+return {
+    restrict: 'EA', //E = element, A = attribute, C = class, M = comment
+    templateUrl: 'nav.html',
+    replace: true
+    };
+});
+angular.module('myapp').directive('page', function () {
+    return {
+        restrict: 'EA', //E = element, A = attribute, C = class, M = comment
+        templateUrl: 'page.html',
+        transclude: true,
+        replace: true
+    };
+});
+
+/*
 // Floating label headings for the contact form
 $(function() {
     $("body").on("input propertychange", ".floating-label-form-group", function(e) {
@@ -41,3 +60,4 @@ jQuery(document).ready(function($) {
             });
     }
 });
+*/
