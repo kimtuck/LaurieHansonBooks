@@ -1,4 +1,4 @@
-angular.module('myapp', []);
+angular.module('myapp', ['thermo']);
 
 angular.module('myapp').directive('mynav', function () {
 return {

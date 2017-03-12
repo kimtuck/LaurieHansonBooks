@@ -1,3 +1,6 @@
+@import "../vendor/thermometer-directive-angular/css/style.scss";
+/**/
+
 $nav-color: black;
 $nav-hover-color: silver;
 $nav-arrow-width: 1em;
@@ -112,6 +115,7 @@ nav {
     margin-bottom: 10px;
   }
 
+  /**/
   .paybutton {
     & a:hover { text-decoration: none; }
     & {
@@ -232,6 +236,10 @@ $break-mobiledevice: 768px;
       height: 40%;
     }
   }
+}
+
+.thermo {
+  font-size: 0.6em;
 }
 /*
 
