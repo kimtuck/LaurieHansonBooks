@@ -583,17 +583,18 @@ nav {
     font-size: 0.7em;
     margin: 20px;
     text-align: center; }
-    nav .maf .maf-image {
-      display: block;
-      height: 40px;
-      border: solid black 20px;
-      background-image: url("../img/MorrisAnimal.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-color: black; }
     nav .maf a {
       margin-top: 10px; }
+
+.maf-image {
+  display: block;
+  height: 40px;
+  border: solid black 20px;
+  background-image: url("../img/MorrisAnimal.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: black; }
 
 article, section {
   padding: 10px; }
@@ -628,7 +629,7 @@ section {
     -ms-flex-order: 2;
     -webkit-order: 2;
     order: 2; }
-  .photo-text p img {
+  .photo-text p img, .photo-text p .graphic {
     flex-basis: 20%;
     width: 20%;
     height: 20%;
@@ -639,6 +640,17 @@ section {
 
 .thermo {
   font-size: 0.6em; }
+
+.thermo-date {
+  margin-top: 2px;
+  text-align: center; }
+
+.maf {
+  font-size: 0.8em; }
+  .maf .title {
+    margin: 5px;
+    font-size: 1.2em;
+    font-weight: bold; }
 
 /*
 
