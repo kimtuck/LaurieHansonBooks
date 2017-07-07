@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   font-family: "Roboto", sans-serif;
   font-size: 12px; }
@@ -191,6 +192,15 @@ body {
     color: #3F51B5; }
 
 /**/
+.dragonfly-color {
+  color: #98499c; }
+
+.dragonfly-award {
+  text-align: center;
+  align-self: center; }
+  .dragonfly-award img {
+    width: 50%; }
+
 html, body {
   width: 100%;
   height: 100%; }
@@ -473,6 +483,12 @@ body {
   color: #333333;
   background-color: #99BE9C; }
 
+.cover-image:nth-child(1) {
+  flex-grow: 2; }
+
+.cover-image:nth-child(2) {
+  flex-grow: 1; }
+
 /* APPEARANCE */
 a {
   color: #333333;
@@ -508,7 +524,7 @@ nav {
   max-width: 20%;
   font-size: 0.8em;
   background-color: #7aaa7e;
-  padding: 0px 30px;
+  padding: 15px 30px 0px 30px;
   border-right: solid black 1px;
   /**/ }
   nav > * {
@@ -596,6 +612,44 @@ nav {
   background-position: center;
   background-color: black; }
 
+.winner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+  .winner img {
+    width: 10%; }
+
+.quotes {
+  width: 80%;
+  font: 14px/20px italic Times, serif;
+  padding: 8px;
+  background-color: #faebbc;
+  border-top: 1px solid #e1cc89;
+  border-bottom: 1px solid #e1cc89;
+  margin: 5px;
+  text-align: center; }
+  .quotes blockquote {
+    font-size: 1.2em;
+    quotes: "“" "”" "‘" "’"; }
+    .quotes blockquote:before {
+      color: #ccc;
+      content: open-quote;
+      font-size: 4em;
+      line-height: 0.1em;
+      margin-right: 0.25em;
+      vertical-align: -0.4em; }
+    .quotes blockquote:after {
+      color: #ccc;
+      content: close-quote;
+      font-size: 4em;
+      line-height: 0.1em;
+      margin-right: 0.25em;
+      vertical-align: -0.4em; }
+
+.newsevents a {
+  text-decoration: underline; }
+
 article, section {
   padding: 10px; }
 
@@ -608,7 +662,7 @@ section {
   margin-right: 10px; }
 
 .book-title {
-  color: #69577F;
+  color: #98499c;
   font-family: 'Devonshire', cursive; }
 
 .large-text {
@@ -651,6 +705,8 @@ section {
     margin: 5px;
     font-size: 1.2em;
     font-weight: bold; }
+  .maf button {
+    cursor: hand; }
 
 /*
 
@@ -1069,9 +1125,6 @@ body {
 }
 
 
-.cover-image {
-  img { height: 50%; width: 50%; }
-}
 
 $color-selected: teal;
 .navbar {
@@ -1126,12 +1179,6 @@ form {
   }
 }
 
-.quotes {
-  blockquote {
-    font-size: 1.4em;
-    color: purple;
-  }
-}
 */
 
 /*# sourceMappingURL=site.css.map */

@@ -1,28 +1,12 @@
 /*!
  * Start Bootstrap - Clean Blog v1.1.0 (http://startbootstrap.com/template-overviews/clean-blog)
- * Copyright 2013-2016 Start Bootstrap
+ * Copyright 2013-2017 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
-
-/*
-background-color: #99BE9C;
-Treasures Gift color #69577F
-*/
-
-.book-title {
-    color: #69577F;
-    font-family: 'Devonshire', cursive;
-}
-
-.large-text {
-    font-size: 4em;
-}
-
 body {
   font-family: 'Lora', 'Times New Roman', serif;
   font-size: 20px;
   color: #333333;
-    background-color: #99BE9C;
 }
 p {
   line-height: 1.5;
@@ -162,7 +146,6 @@ hr.small {
   background-size: cover;
   -o-background-size: cover;
   margin-bottom: 50px;
-    height:
 }
 .intro-header .site-heading,
 .intro-header .post-heading,
@@ -414,17 +397,4 @@ img::-moz-selection {
 }
 body {
   -webkit-tap-highlight-color: #0085A1;
-}
-
-
-//////////////////
-.about-treasure {
-
-}
-.about-treasure .hero {
-    width: 50%;
-}
-.about-treasure .hero img {
-    width: 50px;
-    height: 50px;
 }
