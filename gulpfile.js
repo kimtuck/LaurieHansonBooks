@@ -1,35 +1,28 @@
 // Assigning modules to local variables
-var gulp = require('gulp');
-var less = require('gulp-less');
+var gulp = require('gulp');;
+var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer')
 var browserSync = require('browser-sync').create();
-var header = require('gulp-header');
 var cleanCSS = require('gulp-clean-css');
 var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
 var pkg = require('./package.json');
 
-// Set the banner content
-var banner = ['/*!\n',
-    ' * Start Bootstrap - <%= pkg.title %> v<%= pkg.version %> (<%= pkg.homepage %>)\n',
-    ' * Copyright 2013-' + (new Date()).getFullYear(), ' <%= pkg.author %>\n',
-    ' * Licensed under <%= pkg.license.type %> (<%= pkg.license.url %>)\n',
-    ' */\n',
-    ''
-].join('');
+var sass_input='Sass/**/*.scss'
+var sass_output='css'
 
-// Default task
-// Default task
-gulp.task('default', ['less', 'minify-css', 'minify-js', 'copy']);
+var sassOptions= {
+    errLogToConsole: true,
+    outputStyle: 'expanded'
+};
 
-// Less task to compile the less files and add the banner
-gulp.task('less', function() {
-    return gulp.src('less/clean-blog.less')
-        .pipe(less())
-        .pipe(header(banner, { pkg: pkg }))
-        .pipe(gulp.dest('css'))
-        .pipe(browserSync.reload({
-            stream: true
-        }))
+gulp.task('sass', function() {
+    return gulp
+        .src(sass_input)
+        .pipe(sass(sassOptions).on('error', sass.logError))
+        .pipe(autoprefixer())
+        .pipe(gulp.dest(sass_output))
 });
 
 // Minify CSS
@@ -93,11 +86,14 @@ gulp.task('browserSync', function() {
 })
 
 // Watch Task that compiles LESS and watches for HTML or JS changes and reloads with browserSync
-gulp.task('dev', ['browserSync', 'less', 'minify-css', 'minify-js'], function() {
-    gulp.watch('less/*.less', ['less']);
-    gulp.watch('css/*.css', ['minify-css']);
-    gulp.watch('js/*.js', ['minify-js']);
+gulp.task('watch', ['browserSync', 'sass'], function() {
+    gulp.watch(sass_input, ['sass']);
+    //gulp.watch(sass_output, ['minify-css']);
+    //gulp.watch('js/*.js', ['minify-js']);
     // Reloads the browser whenever HTML or JS files change
-    gulp.watch('*.html', browserSync.reload);
+    gulp.watch(sass_output+'/*.css', browserSync.reload)
+    gulp.watch('**/*.html', browserSync.reload);
     gulp.watch('js/**/*.js', browserSync.reload);
 });
+
+gulp.task('default', ['sass', 'watch'])
