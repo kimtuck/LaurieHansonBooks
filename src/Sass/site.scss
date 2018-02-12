@@ -1,0 +1,155 @@
+@import "_variables";
+@import "_Thermometer";
+@import "flexbox";
+@import "layout";
+@import "nav";
+@import "index";
+@import "newsevents";
+/**/
+
+
+
+.dragonfly-color {
+  color: $dragonfly-color;
+}
+
+.dragonfly-award {
+  text-align: center;
+  align-self: center;
+  img { width: 50%;
+  }
+}
+
+body {
+  padding:0;
+  margin:0;
+  font-family: 'Roboto', 'Lora', 'Times New Roman', sans-serif;
+  font-size: 20px;
+  color: #333333;
+  background-color: $body-background-color;
+}
+
+.wrapper {
+  @extend .flexbox-container-row;
+}
+
+
+.cover-image {
+  &:nth-child(1) {
+    flex-grow: 2;
+  }
+  &:nth-child(2) {
+    flex-grow: 1;
+  }
+}
+
+/* APPEARANCE */
+a {
+  color: #333333;
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    color: #0085A1;
+  }
+}
+
+
+.make-it-fast {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  /* Pre-render the bigger shadow, but hide it */
+  &::after {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Transition to showing the bigger shadow on hover */
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+.glow-button {
+  &:hover {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+  }
+}
+
+.strikeout {
+  text-decoration: line-through;
+  font-size: 0.8em;
+}
+article, section {
+  @extend .flexbox-container-column;
+  padding: 10px;
+}
+
+section {
+  flex-grow: 5;
+}
+.payment {
+  border: solid black 2px;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+
+$break-mobiledevice: 768px;
+
+.book-title {
+  color: $dragonfly-color;
+  font-family: 'Devonshire', cursive;
+}
+
+.large-text {
+  font-size: 4em;
+}
+
+.photo-text {
+  margin-left: 20%;
+  margin-right: 20%;
+  p {
+    @extend .flexbox-container-row;
+
+    .photo:nth-of-type(odd) img{
+      @include flexbox-flow-order(1);
+    }
+    &.photo:nth-of-type(even) img{
+      @include flexbox-flow-order(2);
+    }
+
+    img,.graphic {
+      flex-basis: 20%;
+      width: 20%;
+      height: 20%;
+      margin-right: 3%;
+    }
+    span {
+      //flex-basis: 80%;
+    }
+
+    &.photo.larger img {
+      width: 40%;
+      height: 40%;
+    }
+  }
+}
+
+.thermo {
+  font-size: 0.6em;
+}
+.thermo-date {
+  margin-top: 2px;
+  text-align: center;
+}
+
+.maf {
+  font-size: 0.8em;
+  .title {
+    margin: 5px;
+    font-size: 1.2em;
+    font-weight: bold; }
+  button {
+    cursor: hand;
+  }
+}

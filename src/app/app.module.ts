@@ -1,16 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent } from './app.component';
-
+import { NavComponent } from './nav/nav.component';
+import { HomeComponent } from './home/home.component';
+import { AboutTreasureComponent } from './about-treasure/about-treasure.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavComponent,
+    HomeComponent,
+    AboutTreasureComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
