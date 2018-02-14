@@ -11,6 +11,7 @@ import { AboutTheBookComponent } from './about-the-book/about-the-book.component
 import { AboutLaurieComponent } from './about-laurie/about-laurie.component';
 import { NewsAndEventsComponent } from './news-and-events/news-and-events.component';
 import { CharityComponent } from './charity/charity.component';
+import { ThermoComponent } from './thermo/thermo.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CharityComponent } from './charity/charity.component';
     AboutTheBookComponent,
     AboutLaurieComponent,
     NewsAndEventsComponent,
-    CharityComponent
+    CharityComponent,
+    ThermoComponent
   ],
   imports: [
     BrowserModule,
