@@ -5,9 +5,7 @@ nav > div {
 nav {
   @extend .flexbox-container-column;
   flex-grow: 0;
-  max-width: 20%;
   font-size: 0.8em;
-  background-color: $nav-background-color;
   padding: 15px 30px 0px 30px;
   border-right: solid black 1px;
 
@@ -27,8 +25,8 @@ nav {
   }
 
   .navbar-brand {
-    @extend .flexbox-container-row;
-    @extend .flexbox-center-items;
+    //@extend .flexbox-container-row;
+    //@extend .flexbox-center-items;
     font-weight: 800;
     text-align: center;
   }

@@ -40,10 +40,11 @@ app-root > div {
 }
 
 app-nav {
-  background-color: orange;
   display:flex;
   flex-grow: 0;
-
+  max-width:300px;
+  overflow-y: auto;
+  background-color: $nav-background-color;
 }
 
 
