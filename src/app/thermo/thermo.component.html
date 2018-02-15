@@ -1,11 +1,8 @@
-<div style="height: 200px;" class="tg-thermometer" ng-class="size">
-  <div class="draw-a"></div>
+<div [style.height.px]="height" class="tg-thermometer" ng-class="size">
+<div class="draw-a"></div>
   <div class="draw-b"></div>
   <div class="meter">
     <div class="statistics">
-      <div ng-repeat="step in intervals" class="percent" style="bottom: calc({{step.percent}}% - 2px);">
-        {{step.label}}
-      </div>
     </div>
     <div style="height: {{percent}}%" class="mercury">
       <div class="percent-current">{{valstr}}</div>
