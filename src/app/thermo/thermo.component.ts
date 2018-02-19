@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,  For, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-thermo',
@@ -6,44 +6,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./thermo.component.scss']
 })
 export class ThermoComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  @Input() height: number;
+  @Input() value: number;
+  @Input() max: number;
+  @Input() steps: number;
+  percent: number;
+  intervals: any;
+  valstr: string;
+  constructor() {
   }
 
+  ngOnInit() {
+    this.height = this.height || 100;
+    this.value = this.value || 100;
+    this.max = this.max || 1000;
+    this.steps = this.steps || 4;
+
+    this.percent = this.value / this.max * 100;
+    this.valstr = '$' + this.value;
+
+    console.log(this.steps)
+    const rng = Array.apply(null, {length: this.steps}).map(Function.call, Number);
+    console.log(rng);
+    this.intervals = Array.apply(null, {length: this.steps}).map(Function.call, Number)
+      .map(step => {
+        const val = (this.max / this.steps) * step;
+        const percent = (val / this.max) * 100;
+        return { percent: percent, label: '$' + val };
+      });
+    console.log("hi")
+    console.log(this.intervals);
+  }
 }
-
-/*
-var app = angular.module('thermo',[]).directive('thermo', ['$window', "$interpolate", function($window, $interpolate) {
-
-	return {
-		restrict: 'E',
-		scope: true,
-		templateUrl: 'vendor/thermometer-directive-angular/js/tg-thermometer-vertical.html',
-		link: function(scope, elem, attrs) {
-
-			scope.max=attrs.max || 100;
-			scope.steps = attrs.steps || 4;
-			scope.format = (attrs.format || "{{val}}%").replace(/\[/g,'{').replace(/\]/g,'}');
-            scope.size = attrs.size;
-            scope.height = attrs.height;
-            scope.value = attrs.value || 0;
-
-            var intervals=[];
-
-            scope.valstr = $interpolate(scope.format)({ val: scope.value} );
-            scope.percent = scope.value / scope.max * 100;
-
-            for (var step = 0; step <= scope.steps; step++) {
-            	var val = (scope.max / scope.steps) * step;
-            	var percent = (val / scope.max)*100;
-            	var interval = { percent: percent, label: $interpolate(scope.format)({ val: val })};
-				intervals.push(interval);
-            }
-            scope.intervals = intervals;
-		}
-	};
-
-}]);
-*/
