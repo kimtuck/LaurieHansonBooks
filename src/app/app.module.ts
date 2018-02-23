@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -12,6 +14,10 @@ import { AboutLaurieComponent } from './about-laurie/about-laurie.component';
 import { NewsAndEventsComponent } from './news-and-events/news-and-events.component';
 import { CharityComponent } from './charity/charity.component';
 import { ThermoComponent } from './thermo/thermo.component';
+import { ProgramsComponent } from './programs/programs.component';
+import { ContactComponent } from './contact/contact.component';
+import {SendMailService} from './send-mail.service';
+
 
 @NgModule({
   declarations: [
@@ -23,13 +29,19 @@ import { ThermoComponent } from './thermo/thermo.component';
     AboutLaurieComponent,
     NewsAndEventsComponent,
     CharityComponent,
-    ThermoComponent
+    ThermoComponent,
+    ProgramsComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    SendMailService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,6 +6,7 @@ import { AboutTheBookComponent } from './about-the-book/about-the-book.component
 import { AboutLaurieComponent } from './about-laurie/about-laurie.component';
 import { NewsAndEventsComponent } from './news-and-events/news-and-events.component';
 import { CharityComponent } from './charity/charity.component';
+import { ProgramsComponent } from './programs/programs.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'AboutLaurie', component: AboutLaurieComponent },
   { path: 'NewsAndEvents', component: NewsAndEventsComponent },
   { path: 'Charity', component: CharityComponent },
+  { path: 'Programs', component: ProgramsComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' }];
 
