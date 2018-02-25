@@ -32,6 +32,7 @@ export class SendMailService {
   }
 
   extractData(res: Response) {
+    return { success: true };
     const body = res.json();
     console.log('success', body);
     return body || {};
@@ -46,7 +47,6 @@ export class SendMailService {
     let headers: HttpHeaders;
     headers = new HttpHeaders(
       {
-        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json'
       }
     );
