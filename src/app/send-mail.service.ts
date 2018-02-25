@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 import { ContactForm } from './contact/contactform.interface';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class SendMailService {
+
+  const;
+  url = 'https://lauriehansonbooksfns.azurewebsites.net/api/HttpTriggerJS1?code=kay7zrp0wij8EYxrRqwaYbOanq8414hlhqz6Lo0VONBaAQvHacTv0A==';
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -19,18 +23,31 @@ export class SendMailService {
     }
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  sendContactForm(form: ContactForm ) {
+  extractData(res: Response) {
+    const body = res.json();
+    console.log('success', body);
+    return body || {};
+  }
+
+  handleErrorObservable(error: Response | any) {
+    console.error('Error', error.message || error);
+    return Observable.throw(error.message || error);
+  }
+
+  sendContactForm(form: ContactForm) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
       })
     };
 
-    const url  = 'https://lauriehansonbooksfns.azurewebsites.net/api/HttpTriggerJS1?code=kay7zrp0wij8EYxrRqwaYbOanq8414hlhqz6Lo0VONBaAQvHacTv0A=='
 
-    console.log('Calling email service', form)
-    this.http.post<ContactForm>(url, form, httpOptions);
+    console.log('Calling email service', form);
+    return this.http.post(this.url, form, httpOptions)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
   }
 }
