@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +18,8 @@ import { ThermoComponent } from './thermo/thermo.component';
 import { ProgramsComponent } from './programs/programs.component';
 import { ContactComponent } from './contact/contact.component';
 import {SendMailService} from './send-mail.service';
+import { PaypalComponent } from './paypal/paypal.component';
+import { BookSigningComponent } from './book-signing/book-signing.component';
 
 
 @NgModule({
@@ -31,9 +34,12 @@ import {SendMailService} from './send-mail.service';
     CharityComponent,
     ThermoComponent,
     ProgramsComponent,
-    ContactComponent
+    ContactComponent,
+    PaypalComponent,
+    BookSigningComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
