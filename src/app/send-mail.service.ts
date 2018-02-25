@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
-import { ContactForm } from './contact/contactform.interface';
-import { HttpClient } from '@angular/common/http';
+import { Http, Response } from '@angular/http';
+import { Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/toPromise';
 import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
+
+import { ContactForm } from './contact/contactform.interface';
 
 @Injectable()
 export class SendMailService {
 
-  const;
   url = 'https://lauriehansonbooksfns.azurewebsites.net/api/HttpTriggerJS1?code=kay7zrp0wij8EYxrRqwaYbOanq8414hlhqz6Lo0VONBaAQvHacTv0A==';
 
   private handleError(error: HttpErrorResponse) {
@@ -38,15 +43,15 @@ export class SendMailService {
   }
 
   sendContactForm(form: ContactForm) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
-    };
-
-
+    let headers: HttpHeaders;
+    headers = new HttpHeaders(
+      {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      }
+    );
     console.log('Calling email service', form);
-    return this.http.post(this.url, form, httpOptions)
+    return this.http.post(this.url, form, { headers: headers })
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
