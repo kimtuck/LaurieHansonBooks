@@ -33,9 +33,6 @@ export class SendMailService {
 
   extractData(res: Response) {
     return { success: true };
-    const body = res.json();
-    console.log('success', body);
-    return body || {};
   }
 
   handleErrorObservable(error: Response | any) {
