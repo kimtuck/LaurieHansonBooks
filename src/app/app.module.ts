@@ -20,6 +20,7 @@ import { ContactComponent } from './contact/contact.component';
 import {SendMailService} from './send-mail.service';
 import { PaypalComponent } from './paypal/paypal.component';
 import { BookSigningComponent } from './book-signing/book-signing.component';
+import { PaypalAfterPurchaseComponent } from './paypal-after-purchase/paypal-after-purchase.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { BookSigningComponent } from './book-signing/book-signing.component';
     ProgramsComponent,
     ContactComponent,
     PaypalComponent,
-    BookSigningComponent
+    BookSigningComponent,
+    PaypalAfterPurchaseComponent
   ],
   imports: [
     HttpClientModule,

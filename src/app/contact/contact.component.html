@@ -1,0 +1,38 @@
+<form class="cf" [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value, myForm.valid)">
+  <h1>Request more information or schedule a visit.</h1>
+  <div class="half left cf">
+
+    <label>Your Name</label>
+    <input type="text" placeholder="Name" formControlName="name">
+    <small [hidden]="myForm.controls.name.valid || (myForm.controls.name.pristine && !submitted)">
+      Name is required.
+    </small>
+
+    <label>School, Grade Level, and Classroom</label>
+    <input type="text" placeholder="School, Grade Level, Classroom Number" formControlName="school">
+    <small [hidden]="myForm.controls.school.valid || (myForm.controls.school.pristine && !submitted)">
+      School information is required.
+    </small>
+
+    <label>Email Address</label>
+    <input type="email" placeholder="Email Address" formControlName="email">
+    <small [hidden]="myForm.controls.email.valid || (myForm.controls.email.pristine && !submitted)">
+      Email address is required.
+    </small>
+  </div>
+
+  <div class="half right cf">
+    <label>Message</label>
+    <textarea type="text" placeholder="Message" formControlName="message"></textarea>
+    <small [hidden]="myForm.controls.message.valid || (myForm.controls.message.pristine && !submitted)">
+      Message is required.
+    </small>
+  </div>
+  <input type="submit" value="Submit" id="input-submit">
+</form>
+
+<div [hidden]="!sending">Sending your message ...</div>
+<div [hidden]="!complete">Thank you for contacting Laurie.  Your message has been sent.  She will reply with a follow-up email message shortly.</div>
+<div [hidden]="!error">We're sorry, but there was a problem sending your message.  You can contact Laurie directly at kimtuck@comcast.net</div>
+
+
