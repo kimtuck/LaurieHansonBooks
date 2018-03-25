@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import {ContactForm } from './contactform.interface';
 import { SendMailService } from '../send-mail.service';
 import {Observable} from 'rxjs/Observable';
+import {SignBookForm } from './signbookform.interface';
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  selector: 'app-after-paypal-purchase',
+  templateUrl: './after-paypal-purchase.component.html',
+  styleUrls: ['./after-paypal-purchase.component.scss']
 })
-export class ContactComponent implements OnInit {
+export class AfterPaypalPurchaseComponent implements OnInit {
+
   public myForm: FormGroup; // our model driven form
   public submitted: boolean; // keep track on whether form is submitted
   public complete: boolean;
@@ -30,14 +31,15 @@ export class ContactComponent implements OnInit {
       message: new FormControl('', [<any>Validators.required]),
     });
   }
-  save(model: ContactForm, isValid: boolean) {
+
+  save(model: SignBookForm, isValid: boolean) {
     if (isValid) {
 
       this.sending = true;
       let op: Observable<Comment[]>;
 
       this.submitted = true; // set form submit to true
-      op = this.sendMailService.sendContactForm(model);
+      op = this.sendMailService.sendSignBookForm(model);
 
       // Subscribe to observable
       op.subscribe(

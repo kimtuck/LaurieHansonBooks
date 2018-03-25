@@ -21,6 +21,8 @@ import {SendMailService} from './send-mail.service';
 import { PaypalComponent } from './paypal/paypal.component';
 import { BookSigningComponent } from './book-signing/book-signing.component';
 import { PaypalAfterPurchaseComponent } from './paypal-after-purchase/paypal-after-purchase.component';
+import { AfterPaypalPurchaseComponent } from './after-paypal-purchase/after-paypal-purchase.component';
+import { NumberListPipe } from './pipe/number-list.pipe';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { PaypalAfterPurchaseComponent } from './paypal-after-purchase/paypal-aft
     ContactComponent,
     PaypalComponent,
     BookSigningComponent,
-    PaypalAfterPurchaseComponent
+    PaypalAfterPurchaseComponent,
+    AfterPaypalPurchaseComponent,
+    NumberListPipe
   ],
   imports: [
     HttpClientModule,

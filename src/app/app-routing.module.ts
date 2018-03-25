@@ -8,6 +8,7 @@ import { NewsAndEventsComponent } from './news-and-events/news-and-events.compon
 import { CharityComponent } from './charity/charity.component';
 import { ProgramsComponent } from './programs/programs.component';
 import { PaypalComponent } from './paypal/paypal.component';
+import { AfterPaypalPurchaseComponent } from './after-paypal-purchase/after-paypal-purchase.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'Charity', component: CharityComponent },
   { path: 'Programs', component: ProgramsComponent },
   { path: 'Paypal', component: PaypalComponent },
+  { path: 'AfterPaypalPurchase', component: AfterPaypalPurchaseComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' }];
 

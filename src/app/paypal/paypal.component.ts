@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class PaypalComponent implements OnInit {
 
 
-  //paypalUrl='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7WRU8K4D58PBQ';
+  // paypalUrl='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7WRU8K4D58PBQ';
 
   constructor() { }
 

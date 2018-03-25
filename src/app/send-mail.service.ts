@@ -9,11 +9,13 @@ import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 
 import { ContactForm } from './contact/contactform.interface';
+import { SignBookForm } from './after-paypal-purchase/signbookform.interface';
 
 @Injectable()
 export class SendMailService {
 
-  url = 'https://lauriehansonbooksfns.azurewebsites.net/api/HttpTriggerJS1?code=kay7zrp0wij8EYxrRqwaYbOanq8414hlhqz6Lo0VONBaAQvHacTv0A==';
+  contactFormUrl = 'https://lauriehansonbooksfns.azurewebsites.net/api/HttpTriggerJS1?code=kay7zrp0wij8EYxrRqwaYbOanq8414hlhqz6Lo0VONBaAQvHacTv0A==';
+  sendSignBookUrl = 'https://lauriehansonbooksfns.azurewebsites.net/api/HttpTriggerJS1?code=kay7zrp0wij8EYxrRqwaYbOanq8414hlhqz6Lo0VONBaAQvHacTv0A==';
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -48,8 +50,21 @@ export class SendMailService {
       }
     );
     console.log('Calling email service', form);
-    return this.http.post(this.url, form, { headers: headers })
+    return this.http.post(this.contactFormUrl, form, { headers: headers })
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
+  sendSignBookForm(form: SignBookForm) {
+    let headers: HttpHeaders;
+    headers = new HttpHeaders(
+      {
+        'Content-Type': 'application/json'
+      }
+    );
+    console.log('Calling email service', form);
+    return this.http.post(this.contactFormUrl, form, { headers: headers })
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
 }

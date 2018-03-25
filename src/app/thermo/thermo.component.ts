@@ -25,7 +25,7 @@ export class ThermoComponent implements OnInit {
     this.percent = this.value / this.max * 100;
     this.valstr = '$' + this.value;
 
-    console.log(this.steps)
+    console.log(this.steps);
     const rng = Array.apply(null, {length: this.steps}).map(Function.call, Number);
     console.log(rng);
     this.intervals = Array.apply(null, {length: this.steps}).map(Function.call, Number)
@@ -34,7 +34,7 @@ export class ThermoComponent implements OnInit {
         const percent = (val / this.max) * 100;
         return { percent: percent, label: '$' + val };
       });
-    console.log("hi")
+    console.log('hi');
     console.log(this.intervals);
   }
 }
