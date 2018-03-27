@@ -75,3 +75,12 @@ nav {
   background-color: black;
   outline: solid green 2px;
 }
+
+.paypalbutton {
+  border: solid black 2px !important;
+  & div:nth-child(1) {
+    color: red;
+    font-size: 1.05em;
+    margin-bottom: 5px;
+  }
+}

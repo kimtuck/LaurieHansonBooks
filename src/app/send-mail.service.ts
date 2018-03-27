@@ -15,7 +15,7 @@ import { SignBookForm } from './after-paypal-purchase/signbookform.interface';
 export class SendMailService {
 
   contactFormUrl = 'https://lauriehansonbooksfns.azurewebsites.net/api/HttpTriggerJS1?code=kay7zrp0wij8EYxrRqwaYbOanq8414hlhqz6Lo0VONBaAQvHacTv0A==';
-  sendSignBookUrl = 'https://lauriehansonbooksfns.azurewebsites.net/api/HttpTriggerJS1?code=kay7zrp0wij8EYxrRqwaYbOanq8414hlhqz6Lo0VONBaAQvHacTv0A==';
+  sendSignBookUrl = 'https://lauriehansonbooksfns.azurewebsites.net/api/SendBookSignForm?code=lLPerYxyDzTqKCxmcJuw5EQAILtReIVAAGY3TGRfiP1I9h1iYXCxag==';
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -62,7 +62,7 @@ export class SendMailService {
       }
     );
     console.log('Calling email service', form);
-    return this.http.post(this.contactFormUrl, form, { headers: headers })
+    return this.http.post(this.sendSignBookUrl, form, { headers: headers })
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
