@@ -1,0 +1,30 @@
+
+
+li span {
+  font-weight: bold;
+}
+
+table {
+  background: #ffffff;
+  border-right: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
+  padding: 20px;
+
+  tr > td {
+    padding-bottom: 40px;
+    padding-right: 30px;
+    vertical-align: top;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  ul {
+    padding: 15px;
+
+    li {
+      margin-bottom: 15px;
+    }
+  }
+}
