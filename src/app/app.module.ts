@@ -23,6 +23,7 @@ import { BookSigningComponent } from './book-signing/book-signing.component';
 import { PaypalAfterPurchaseComponent } from './paypal-after-purchase/paypal-after-purchase.component';
 import { AfterPaypalPurchaseComponent } from './after-paypal-purchase/after-paypal-purchase.component';
 import { NumberListPipe } from './pipe/number-list.pipe';
+import { AngularLightboxComponent } from './angular-lightbox/angular-lightbox.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { NumberListPipe } from './pipe/number-list.pipe';
     BookSigningComponent,
     PaypalAfterPurchaseComponent,
     AfterPaypalPurchaseComponent,
-    NumberListPipe
+    NumberListPipe,
+    AngularLightboxComponent
   ],
   imports: [
     HttpClientModule,
