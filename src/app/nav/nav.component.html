@@ -9,21 +9,23 @@
 
     <a routerLink="/AboutLaurie">About Laurie</a>
     <a routerLink="/NewsAndEvents">News And Events</a>
+    <a routerLink="/Programs">Programs for Your School</a>
     <a routerLink="/Charity">Charity</a>
   </div>
 
   <div class="navbar-brand">Buy Treasure's Gift</div>
   <div class="navbar-brand">$16.95 plus shipping</div>
 
-  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-    <button class="paybutton" type="submit" name="submit" value="PayPal">
-      <div>With Credit Card<br>(processed by Paypal)</div>
+  <a routerLink="/Paypal">
+
+    <button class="paypalbutton paybutton" value="PayPal">
       <div>Signed by author</div>
+      <div>Credit Card<br>(processed by Paypal)</div>
     </button>
     <input type="hidden" name="cmd" value="_s-xclick">
     <input type="hidden" name="hosted_button_id" value="7WRU8K4D58PBQ">
     <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1" style="display:none">
-  </form>
+  </a>
 
   <form action="https://www.amazon.com/Treasures-Gift-Laurie-Hanson/dp/1592986234" method="post" target="_top">
     <button class="paybutton" onclick="window.location.href='https://www.amazon.com/Treasures-Gift-Laurie-Hanson/dp/1592986234'">
@@ -33,13 +35,13 @@
   </form>
 
   <form action="https://www.amazon.com/review/create-review/ref=cm_cr_dp_wrt_btm?ie=UTF8&asin=1592986234#" method="post" target="_top">
-    <button class="paybutton" onclick="window.location.href='https://www.amazon.chttps://www.amazon.com/review/create-review/ref=cm_cr_dp_wrt_btm?ie=UTF8&asin=15929867234#om/Treasures-Gift-Laurie-Hanson/dp/1592986234'">
+    <button class="paybutton" onclick="window.location.href='https://www.amazon.com/review/create-review/ref=cm_cr_dp_wrt_btm?ie=UTF8&asin=15929867234#om/Treasures-Gift-Laurie-Hanson/dp/1592986234'">
       <div>Write a review on Amazon.com</div>
     </button>
   </form>
 
   <div class="maf">
-    <a href="MAF.html">
+    <a routerLink="/Charity">
       <div class="maf-image"></div>
       <span>A dollar of each sale will go to the Morris Animal Foundation towards the Golden Retriever Lifetime Study</span>
       <button><i class="fa fa-thermometer-three-quarters"></i>&nbsp;We've given $300!</button>

@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -12,6 +15,15 @@ import { AboutLaurieComponent } from './about-laurie/about-laurie.component';
 import { NewsAndEventsComponent } from './news-and-events/news-and-events.component';
 import { CharityComponent } from './charity/charity.component';
 import { ThermoComponent } from './thermo/thermo.component';
+import { ProgramsComponent } from './programs/programs.component';
+import { ContactComponent } from './contact/contact.component';
+import {SendMailService} from './send-mail.service';
+import { PaypalComponent } from './paypal/paypal.component';
+import { BookSigningComponent } from './book-signing/book-signing.component';
+import { PaypalAfterPurchaseComponent } from './paypal-after-purchase/paypal-after-purchase.component';
+import { AfterPaypalPurchaseComponent } from './after-paypal-purchase/after-paypal-purchase.component';
+import { NumberListPipe } from './pipe/number-list.pipe';
+
 
 @NgModule({
   declarations: [
@@ -23,13 +35,25 @@ import { ThermoComponent } from './thermo/thermo.component';
     AboutLaurieComponent,
     NewsAndEventsComponent,
     CharityComponent,
-    ThermoComponent
+    ThermoComponent,
+    ProgramsComponent,
+    ContactComponent,
+    PaypalComponent,
+    BookSigningComponent,
+    PaypalAfterPurchaseComponent,
+    AfterPaypalPurchaseComponent,
+    NumberListPipe
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    SendMailService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

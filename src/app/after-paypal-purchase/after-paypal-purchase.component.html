@@ -1,0 +1,57 @@
+<div class="flexbox-container-column flexbox-align-items-center">
+  <span class="book-title large-text">Book Signing</span>
+</div>
+
+<div class="photo-text flexbox-container-column">
+  <p class="photo left">
+    <img src="assets/img/bookcover.jpg"/>
+    <span class="thankyou">Thank you for your purchase of <span class="book-title">"Treasure's Gift"</span>.</span>
+  </p>
+
+  <p>
+    Laurie signs each book with the message "Friends are a special gift!  -- Laurie."
+  </p>
+  <p>
+    If you want Laurie to sign the book with a different message, let her know using the form below.  For example "To Katy, from your grandmother Eve", you can fill out this form and she'll do that.
+  </p>
+  <p>
+    If you bought more than one book, include each message.  For example, "Book 1: To Laura from Mom, Book 2: To Katie from Aunt Bess"
+  </p>
+
+</div>
+
+<form class="contact cf" [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value, myForm.valid)">
+  <h1>Customize your book's message</h1>
+  <div class="half center cf">
+
+    <label>Your Name</label>
+    <input type="text" placeholder="Name" formControlName="name">
+    <small [hidden]="myForm.controls.name.valid || (myForm.controls.name.pristine && !submitted)">
+      Name is required.
+    </small>
+
+    <label>Email Address</label>
+    <input type="email" placeholder="Email Address" formControlName="email">
+    <small [hidden]="myForm.controls.email.valid || (myForm.controls.email.pristine && !submitted)">
+      Email address is required.
+    </small>
+
+    <label>Number of books purchased</label>
+    <input type="number" placeholder="Books Purchased" formControlName="books" type="number">
+    <small [hidden]="myForm.controls.books.valid || (myForm.controls.books.pristine && !submitted)">
+      Number of books purchased is required.
+    </small>
+
+    <div>
+      <label>Message</label>
+      <textarea type="text" placeholder="Message" formControlName="message"></textarea>
+      <small [hidden]="myForm.controls.message.valid || (myForm.controls.message.pristine && !submitted)">
+        Message is required.
+      </small>
+    </div>
+    <input type="submit" value="Submit" id="input-submit">
+
+  </div>
+</form>
+
+

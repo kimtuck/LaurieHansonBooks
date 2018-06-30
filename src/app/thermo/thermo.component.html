@@ -1,10 +1,13 @@
 <div [style.height.px]="height" class="tg-thermometer" ng-class="size">
-<div class="draw-a"></div>
+  <div class="draw-a"></div>
   <div class="draw-b"></div>
   <div class="meter">
     <div class="statistics">
+      <div *ngFor="let step of intervals" class="percent" [style.bottom.%]="step.percent">
+        {{step.label}}
+      </div>
     </div>
-    <div style="height: {{percent}}%" class="mercury">
+    <div [style.height.%]="percent" class="mercury">
       <div class="percent-current">{{valstr}}</div>
       <div class="mask">
         <div class="bg-color" style="height: calc({{height}}px - 57px);"></div>
