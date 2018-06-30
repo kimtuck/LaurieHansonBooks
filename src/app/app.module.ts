@@ -24,6 +24,7 @@ import { PaypalAfterPurchaseComponent } from './paypal-after-purchase/paypal-aft
 import { AfterPaypalPurchaseComponent } from './after-paypal-purchase/after-paypal-purchase.component';
 import { NumberListPipe } from './pipe/number-list.pipe';
 import { AngularLightboxComponent } from './angular-lightbox/angular-lightbox.component';
+import { SafePipe } from './pipe/safe-pipe.pipe';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { AngularLightboxComponent } from './angular-lightbox/angular-lightbox.co
     PaypalAfterPurchaseComponent,
     AfterPaypalPurchaseComponent,
     NumberListPipe,
-    AngularLightboxComponent
+    AngularLightboxComponent,
+    SafePipe
   ],
   imports: [
     HttpClientModule,

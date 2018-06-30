@@ -127,7 +127,10 @@ $break-mobiledevice: 768px;
       @include flexbox-flow-order(2);
     }
 
-    img,.graphic {
+    p > img,
+    p > app-angular-lightbox,
+    .graphic {
+      outline: solid red 2px;
       flex-basis: 20%;
       width: 20%;
       height: 20%;
