@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatDialogModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -24,6 +24,9 @@ import { PaypalAfterPurchaseComponent } from './paypal-after-purchase/paypal-aft
 import { AfterPaypalPurchaseComponent } from './after-paypal-purchase/after-paypal-purchase.component';
 import { NumberListPipe } from './pipe/number-list.pipe';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { LightboxBodyComponent } from './lightbox/lightbox-body/lightbox-body.component';
+import { LightboxDialogDirective } from './lightbox/lightbox-dialog.directive';
 
 @NgModule({
   declarations: [
@@ -42,18 +45,23 @@ import { NumberListPipe } from './pipe/number-list.pipe';
     BookSigningComponent,
     PaypalAfterPurchaseComponent,
     AfterPaypalPurchaseComponent,
-    NumberListPipe
+    NumberListPipe,
+    LightboxBodyComponent,
+    LightboxDialogDirective
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [
     SendMailService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent ],
+  entryComponents: [ LightboxBodyComponent ]
 })
 export class AppModule { }
