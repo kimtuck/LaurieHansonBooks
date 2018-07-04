@@ -27,6 +27,7 @@ import { NumberListPipe } from './pipe/number-list.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LightboxBodyComponent } from './lightbox/lightbox-body/lightbox-body.component';
 import { LightboxDialogDirective } from './lightbox/lightbox-dialog.directive';
+import { LightboxModule } from 'angular2-lightbox';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { LightboxDialogDirective } from './lightbox/lightbox-dialog.directive';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    LightboxModule
   ],
   providers: [
     SendMailService
