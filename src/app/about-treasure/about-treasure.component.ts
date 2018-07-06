@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {IAlbum, Lightbox} from 'angular2-lightbox';
 
 @Component({
   selector: 'app-about-treasure',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutTreasureComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _lightbox: Lightbox) { }
 
   ngOnInit() {
+  }
+
+  open() {
+    this._lightbox.open([ { src: "assets/img/Treasure2.jpg", caption: 'treasure', thumb: "assets/img/Treasure2.jpg" }], 0);
   }
 
 }
