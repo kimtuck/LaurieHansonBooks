@@ -1,4 +1,15 @@
+@import "../../sass/_variables.scss";
+
 button.paypal-button {
   padding: 0;
-
+}
+.actionpanel {
+  background-color:$nav-action-color;
+  margin-left: -10px;
+  margin-right: -10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: solid black 1px;
 }

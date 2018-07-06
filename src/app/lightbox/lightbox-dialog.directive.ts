@@ -1,25 +1,22 @@
 import { Directive } from '@angular/core';
-import { HostListener } from '@angular/core';
-import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { LightboxBodyComponent } from './lightbox-body/lightbox-body.component'
+import { HostListener, Input } from '@angular/core';
+import {IAlbum, Lightbox} from 'angular2-lightbox';
 
 
 @Directive({
   selector: '[appLightboxDialog]'
 })
 export class LightboxDialogDirective {
-  constructor(public dialog: MatDialog) {}
 
-  @HostListener('click', ['$event'])
-  openLightBox() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = { name: 'someName'};
-    let dialogRef = this.dialog.open(LightboxBodyComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
-      //console.log(`Dialog closed: ${result}`);
-      //this.dialogResult = result;
-    });
+  @Input('src') src: string;
+  @Input('caption') caption: string;
+  constructor(private _lightbox: Lightbox) {
+  }
+
+  @HostListener('click')
+  openLightbox() {
+    console.log('src: x' + this.caption + 'x')
+    this._lightbox.open([ { src: this.src, caption: this.caption, thumb: this.src }], 0);
   }
 }
+
