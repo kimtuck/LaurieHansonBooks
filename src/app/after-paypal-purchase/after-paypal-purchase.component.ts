@@ -52,7 +52,8 @@ export class AfterPaypalPurchaseComponent implements OnInit {
           // Log errors if any
           this.sending = false;
           console.log(err);
-          this.error = false;
+          this.error = true;
+          this.complete=false;
         });
     }
   }

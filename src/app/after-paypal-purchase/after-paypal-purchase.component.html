@@ -49,7 +49,9 @@
         Message is required.
       </small>
     </div>
-    <input type="submit" value="Submit" id="input-submit">
+    <input [hidden]="this.complete == true || this.sending == true" type="submit" value="Submit" id="input-submit">
+    <div [hidden]="this.sending==false">Sending...</div>
+    <div [hidden]="this.complete==false">Message has been sent.</div>
 
   </div>
 </form>
