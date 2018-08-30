@@ -1,4 +1,6 @@
 @charset "UTF-8";
+@import url(~@angular/material/prebuilt-themes/indigo-pink.css);
+@import url(../../node_modules/angular2-lightbox/lightbox.css);
 @import url(https://fonts.googleapis.com/css?family=Merriweather);
 html, body {
   width: 100%;
@@ -323,7 +325,7 @@ app-nav {
       -ms-flex-positive: 0;
           flex-grow: 0;
   max-width: 500px;
-  min-width: 330px;
+  min-width: 500px;
   overflow-y: auto;
   background-color: #7aaa7e;
 }
@@ -342,6 +344,7 @@ nav {
   font-size: 0.8em;
   padding: 15px 30px 0px 30px;
   border-right: solid black 1px;
+  font-size: 1.2em;
   /**/
 }
 
@@ -392,7 +395,7 @@ nav button {
 
 nav .maf {
   font-size: 0.7em;
-  margin: 21px;
+  margin: 20px;
   text-align: center;
 }
 
@@ -403,7 +406,6 @@ nav .maf a {
 .maf-image {
   display: block;
   height: 40px;
-  border: 0;
   background-image: url("../assets/img/MorrisAnimal.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -722,6 +724,11 @@ section {
   font-size: 4em;
 }
 
+img[applightboxdialog]:hover {
+  outline: solid red 2px;
+  cursor: pointer;
+}
+
 .photo-text {
   margin-left: 20%;
   margin-right: 20%;
@@ -733,7 +740,7 @@ section {
   order: 1;
 }
 
-.photo-text p.photo:nth-of-type(even) img {
+.photo-text p .photo:nth-of-type(even) img {
   -webkit-box-ordinal-group: 2;
   -ms-flex-order: 2;
   order: 2;
@@ -742,7 +749,7 @@ section {
 .photo-text p img, .photo-text p .graphic {
   -ms-flex-preferred-size: 20%;
       flex-basis: 20%;
-  width: 20%;
+  width: 25%;
   height: 20%;
   margin-right: 3%;
 }
