@@ -1,4 +1,8 @@
 {
+  "engines" : {
+    "node" : ">=6.9.3",
+    "npm" : "5.6.0"
+  },
   "name": "laurie-hanson-books",
   "version": "0.0.0",
   "license": "MIT",
