@@ -31,6 +31,7 @@ nav {
     @extend .flexbox-center-items;
     font-weight: 800;
     text-align: center;
+    color: purple;
   }
 
   .nav-buttons {
@@ -56,6 +57,7 @@ nav {
 
   /**/
   .paybutton {
+    & > div.navbar-brand { color: purple; }
     & a:hover { text-decoration: none; }
     & {
 
