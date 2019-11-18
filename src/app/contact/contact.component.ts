@@ -34,14 +34,14 @@ export class ContactComponent implements OnInit {
     if (isValid) {
 
       this.sending = true;
-      let op: Observable<Comment[]>;
+      let op: Observable<Object>;
 
       this.submitted = true; // set form submit to true
       op = this.sendMailService.sendContactForm(model);
 
       // Subscribe to observable
       op.subscribe(
-        comments => {
+        () => {
           console.log('success');
           this.sending = false;
           this.complete = true;

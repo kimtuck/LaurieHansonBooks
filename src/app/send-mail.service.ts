@@ -33,7 +33,7 @@ export class SendMailService {
   constructor(private http: HttpClient) {
   }
 
-  extractData(res: Response) {
+  extractData(res: Response) : Object {
     return { success: true };
   }
 

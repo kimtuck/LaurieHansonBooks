@@ -1,7 +1,7 @@
 {
-  "engines" : {
-    "node" : ">=6.9.3",
-    "npm" : "5.6.0"
+  "engines": {
+    "node": ">=6.9.3",
+    "npm": "5.6.0"
   },
   "name": "laurie-hanson-books",
   "version": "0.0.0",
@@ -38,10 +38,12 @@
     "@types/node": "^10.12.6",
     "angular2-lightbox": "^1.4.0",
     "core-js": "^2.4.1",
-    "rxjs": "^5.5.6",
+    "rxjs": "^6.5.3",
+    "rxjs-compat": "^6.5.3",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.10.0",
     "browser-sync": "^2.13.0",
     "codelyzer": "^4.0.1",
     "font-awesome": "^4.6.3",
@@ -67,6 +69,6 @@
     "protractor": "~5.1.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
-    "typescript": "~2.5.3"
+    "typescript": "3.1.6"
   }
 }
