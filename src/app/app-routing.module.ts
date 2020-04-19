@@ -12,6 +12,7 @@ import { AfterPaypalPurchaseComponent } from './after-paypal-purchase/after-payp
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'fb', component: HomeComponent },
   { path: 'AboutTreasure', component: AboutTreasureComponent },
   { path: 'AboutTheBook', component: AboutTheBookComponent },
   { path: 'AboutLaurie', component: AboutLaurieComponent },
