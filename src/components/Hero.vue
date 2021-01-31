@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="h-96 border-black bg-pink-400 ">
+        <img src="../assets/Cover.jpg" />
         <h1 class="">Hero</h1>
     </div>
 </template>
@@ -11,8 +12,3 @@ export default defineComponent({
     name: 'Hero'
 });
 </script>
-
-<style scoped lang="scss">
-.main {
-}
-</style>

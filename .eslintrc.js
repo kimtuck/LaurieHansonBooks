@@ -98,7 +98,7 @@ module.exports = {
 
         //'vue/require-direct-export': 'error',
 
-        'vue/static-class-names-order': 'error',
+        //'vue/static-class-names-order': 'error',
 
         'vue/v-for-delimiter-style': 'error',
 
