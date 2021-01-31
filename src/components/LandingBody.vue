@@ -1,17 +1,14 @@
 <template>
     <div>
-        <landing />
+        <h1>LandingBody</h1>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Landing from '@/components/Landing.vue';
 
 export default defineComponent({
-    name: 'Home',
-    components: {
-        Landing
-    }
+    name: 'LandingBody',
+    props: {}
 });
 </script>
