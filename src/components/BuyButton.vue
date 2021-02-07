@@ -1,8 +1,12 @@
 <template>
-    <div>
-        Buy Button
-    </div>
-</template>
+    <router-link :to="{ name: 'Purchase' }">
+        <button
+            class="bg-green-500 hover:bg-green-300 text-white hover:text-black rounded shadow hover:shadow-lg py-2 px-4 border border-black"
+        >
+            Buy Treasure's Gift
+        </button>
+    </router-link></template
+>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
@@ -11,9 +15,3 @@ export default defineComponent({
     name: 'BuyButton'
 });
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-.main {
-}
-</style>

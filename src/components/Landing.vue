@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container mx-auto ">
         <hero />
         <landing-body />
     </div>
@@ -19,8 +19,3 @@ export default defineComponent({
     props: {}
 });
 </script>
-
-<style scoped lang="scss">
-.main {
-}
-</style>
