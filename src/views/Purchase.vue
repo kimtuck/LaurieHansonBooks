@@ -1,12 +1,12 @@
 <template>
-    <div class="mx-28 flex flex-row flex-auto bg-red-600">
-        <div class="bg-green-500 flex-1">
+    <div class="flex flex-row flex-auto bg-red-600 mx-28">
+        <div class="flex-1 bg-green-500">
             <!-- left side -->
             <small-hero />
             <what-you-get />
-            <meet-the-author />
+            <meet-the-author-short />
         </div>
-        <div class="bg-blue-200 flex-1">
+        <div class="flex-1 bg-blue-200">
             <!-- right side -->
             <order-form />
         </div>
@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import MeetTheAuthor from '@/components/MeetTheAuthor.vue';
+import MeetTheAuthorShort from '@/components/MeetTheAuthorShort.vue';
 import OrderForm from '@/components/OrderForm.vue';
 import SmallHero from '@/components/SmallHero.vue';
 import WhatYouGet from '@/components/WhatYouGet.vue';
@@ -26,7 +26,7 @@ export default defineComponent({
         SmallHero,
         WhatYouGet,
         OrderForm,
-        MeetTheAuthor
+        MeetTheAuthorShort
     }
 });
 </script>
