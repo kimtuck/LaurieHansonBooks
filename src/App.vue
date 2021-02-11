@@ -1,5 +1,5 @@
 <template>
-    <div class="container  mx-auto flex flex-wrap items-center">
+    <div class="container flex flex-wrap items-center mx-auto">
         <navigation />
         <div id="nav" class="hidden">
             <router-link to="/">Home</router-link> |

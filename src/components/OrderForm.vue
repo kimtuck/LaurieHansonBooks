@@ -2,25 +2,12 @@
     <div>
         <div>Order form</div>
         <v-form id="app" @submit="onSubmit">
-            <p>
-                <label for="name">Name</label>
-                <v-field id="name" v-model="name" type="text" name="name" :rules="isRequired" />
-                <error-message name="name" />
-            </p>
-
-            <p>
-                <label for="age">Age</label>
-                <input id="age" v-model="age" type="number" name="age" min="0" />
-            </p>
-
-            <p>
-                <label for="movie">Favorite Movie</label>
-                <select id="movie" v-model="movie" name="movie">
-                    <option>Star Wars</option>
-                    <option>Vanilla Sky</option>
-                    <option>Atomic Blonde</option>
-                </select>
-            </p>
+            <div>Name: {{ name }}</div>
+            <input-field v-model="name" name="name" label="Name" :required="true" />
+            <input-field v-model="address" name="address" label="Address" :required="true" />
+            <input-field v-model="city" name="city" label="City" :required="true" />
+            <input-field v-model="state" name="state" label="State" :required="true" />
+            <input-field v-model="zip" name="zip" label="Zip" :required="true" />
 
             <p>
                 <input type="submit" value="Submit" />
@@ -29,21 +16,23 @@
 ></template>
 
 <script lang="ts">
-import { Field as VField, Form as VForm, ErrorMessage } from 'vee-validate';
+import { Form as VForm } from 'vee-validate';
 import { defineComponent } from 'vue';
+import InputField from './InputField.vue';
 
 export default defineComponent({
     name: 'OrderForm',
     components: {
         VForm,
-        VField,
-        ErrorMessage
+        InputField
     },
     data() {
         return {
             name: '',
-            age: 0,
-            movie: ''
+            address: '',
+            city: '',
+            state: '',
+            zip: ''
         };
     },
     methods: {

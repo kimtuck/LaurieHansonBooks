@@ -406,7 +406,7 @@ module.exports = {
         'import/no-webpack-loader-syntax': 'error',
 
         'import/order': [
-            'error',
+            'off',
 
             {
                 groups: ['builtin', 'external', 'parent', 'sibling', 'index', 'internal', 'object', 'unknown'],
