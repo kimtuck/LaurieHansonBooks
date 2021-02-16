@@ -9,6 +9,7 @@
         <div class="flex-1 bg-blue-200">
             <!-- right side -->
             <order-form />
+            <div id="paypal-buttons" class="w-1/2 m-auto" />
         </div>
     </div>
 </template>
@@ -19,6 +20,7 @@ import MeetTheAuthorShort from '@/components/MeetTheAuthorShort.vue';
 import OrderForm from '@/components/OrderForm.vue';
 import SmallHero from '@/components/SmallHero.vue';
 import WhatYouGet from '@/components/WhatYouGet.vue';
+import { mapActions } from 'vuex';
 
 export default defineComponent({
     name: 'Purchase',
@@ -27,6 +29,12 @@ export default defineComponent({
         WhatYouGet,
         OrderForm,
         MeetTheAuthorShort
+    },
+    created() {
+        this.showPaypalButtons('#paypal-buttons');
+    },
+    methods: {
+        ...mapActions(['showPaypalButtons'])
     }
 });
 </script>
