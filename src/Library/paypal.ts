@@ -1,58 +1,32 @@
 import { loadScript } from '@paypal/paypal-js';
-// import { PurchaseItem, PurchaseUnit } from '@paypal/paypal-js/types/apis/orders';
+// const sandboxAccount = 'sb-1nykf590489@business.example.com';
 
-// // const sandboxAccount = 'sb-1nykf590489@business.example.com';
-
-// // const clientId = 'Ae3nrUHnL2vj1mBZcmMUSMZe4xf7CY7Wzft3VXpJJhEHPVR8kPrr3_M4mW4MZWI21xsO-B6W9jTnT9ZE';
-// // const sbClientId = 'sb';
-// // const secret = 'ENkAlAuCOgcI6X0rY5R9RWizwzaQTPl8Q2PXLz4-qIAKAJZZ3SI7HRjl72o1K07iCS5eTNUBrCRLweKF';
+// const clientId = 'Ae3nrUHnL2vj1mBZcmMUSMZe4xf7CY7Wzft3VXpJJhEHPVR8kPrr3_M4mW4MZWI21xsO-B6W9jTnT9ZE';
+// const sbClientId = 'sb';
+// const secret = 'ENkAlAuCOgcI6X0rY5R9RWizwzaQTPl8Q2PXLz4-qIAKAJZZ3SI7HRjl72o1K07iCS5eTNUBrCRLweKF';
 
 const installPayPal = async function() {
     return await loadScript({ 'client-id': 'sb' });
 };
 
-// const unit_price = 16;
-// const quantity = 3;
-const money = (value: number, key: string) => ({ currency_code: 'USD', [key]: `${value}` });
+const money = (value: number, key: string) => ({ currency_code: 'USD', [key]: `${value.toFixed(2)}` });
 
-// const amount= {
-//                 ...money(unit_price * quantity, 'total'),
-//                 details: {
-//                     subtotal: unit_price * quantity,
-//                     shipping: '0.00',
-//                     tax: '0.00'
-//                 }
-//             }
-
-// const item = {
-//     ...money(unit_price, 'price'),
-//     name: "Treasure's Gift",
-//     quantity
-// };
-// const items = [item];
-
-const amount2 = {
-    ...money(70.0, 'value'),
+const amount = (unit_price: number, quantity: number) => ({
+    ...money(quantity * unit_price, 'value'),
     breakdown: {
-        item_total: money(70.0, 'value')
+        item_total: money(quantity * unit_price, 'value')
     }
-};
-const items2 = [
+});
+const items = (unit_price: number, quantity: number) => [
     {
-        name: 'Denim Woven Shirt',
-        unit_amount: money(20.0, 'value'),
-        quantity: '1',
+        name: "Treasure's Gift book",
+        unit_amount: money(unit_price, 'value'),
+        quantity,
         sku: 'SKU1'
-    },
-    {
-        name: 'Casual Boots',
-        unit_amount: money(50.0, 'value'),
-        quantity: '1',
-        sku: 'SKU2'
     }
 ];
 
-const order = {
+const purchaseConfig = (unit_price: number, quantity: number) => ({
     purchase_units: [
         {
             reference_id: '123',
@@ -60,14 +34,11 @@ const order = {
             custom_id: 'my-order-number',
             invoice_id: 'invoice-id',
             soft_descriptor: "Treasure's Gift",
-            amount: amount2,
-            items: items2
+            amount: amount(unit_price, quantity),
+            items: items(unit_price, quantity)
         }
     ]
-};
-
-console.log(order);
-const purchaseConfig = () => order;
+});
 
 export { installPayPal, purchaseConfig };
 

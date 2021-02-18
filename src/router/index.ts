@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/purchase',
         name: 'Purchase',
-        component: () => import(/* webpackChunkName: "about" */ '../views/Purchase.vue')
+        component: () => import(/* webpackChunkName: "purchase" */ '../views/Purchase.vue')
     },
     {
         path: '/about',

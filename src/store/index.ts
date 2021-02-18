@@ -37,7 +37,8 @@ export default createStore({
                     label: 'paypal'
                 },
                 createOrder(data: any, actions: any) {
-                    return actions.order.create(purchaseConfig());
+                    console.log(purchaseConfig(19.65, 3));
+                    return actions.order.create(purchaseConfig(16.95, 3));
                 }
             };
             // @ts-expect-error

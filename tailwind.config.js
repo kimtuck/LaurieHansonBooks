@@ -5,7 +5,10 @@ module.exports = {
         extend: {}
     },
     variants: {
-        extend: {}
+        extend: {
+            opacity: ['disabled'],
+            cursor: ['disabled']
+        }
     },
-    plugins: ['@tailwindcss/custom-forms']
+    plugins: ['@tailwindcss/custom-forms', '@tailwindcss/forms']
 };
