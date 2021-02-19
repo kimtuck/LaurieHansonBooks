@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 import { installPayPal, purchaseConfig } from '@/Library/paypal';
+import { pricing, formatPrice } from '@/Library/pricing';
 
 export default createStore({
     state: {
@@ -9,6 +10,17 @@ export default createStore({
         paypal: state => state.paypalInstance,
         hasPaypal: state => {
             return state.paypalInstance !== null;
+        },
+        orderOptions: () => {
+            return [1, 2, 3, 4].map(x => {
+                const pricingInfo = pricing(x);
+                return {
+                    value: x,
+                    text: `${x} copies - $${formatPrice(pricingInfo.price)}  - shipping $${formatPrice(
+                        pricingInfo.shipping
+                    )} - Total $${formatPrice(pricingInfo.price + pricingInfo.shipping)}`
+                };
+            });
         }
     },
     mutations: {

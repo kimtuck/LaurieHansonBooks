@@ -2,7 +2,7 @@
     <div class="flex flex-row flex-auto bg-red-600 mx-28">
         <div class="flex-1 bg-green-500">
             <!-- left side -->
-            <quantity />
+            <quantity :options="orderOptions" />
             <small-hero />
             <what-you-get />
             <meet-the-author-short />
@@ -22,7 +22,7 @@ import OrderForm from '@/components/OrderForm.vue';
 import SmallHero from '@/components/SmallHero.vue';
 import WhatYouGet from '@/components/WhatYouGet.vue';
 import Quantity from '@/components/Quantity.vue';
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default defineComponent({
     name: 'Purchase',
@@ -32,6 +32,9 @@ export default defineComponent({
         OrderForm,
         MeetTheAuthorShort,
         Quantity
+    },
+    computed: {
+        ...mapGetters(['orderOptions'])
     },
     created() {
         this.showPaypalButtons('#paypal-buttons');

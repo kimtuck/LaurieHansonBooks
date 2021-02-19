@@ -28,7 +28,11 @@ const shipping = (quantity: number) => {
     return quantity * entry.shippingPer + entry.shippingFixed;
 };
 
-export default {
-    price,
-    shipping
-};
+const pricing = (quantity: number) => ({
+    price: quantity * price,
+    shipping: shipping(quantity)
+});
+
+const formatPrice = (value: number) => `${value.toFixed(2)}`;
+
+export { price, shipping, pricing, formatPrice };
