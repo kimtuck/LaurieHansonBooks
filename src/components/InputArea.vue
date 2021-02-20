@@ -2,10 +2,11 @@
     <div>
         <label class="block m-2">
             <div for="name" class="text-gray-700">{{ label }}</div>
-            <v-field
+            <textarea
+                rows="4"
                 :name="name"
                 :type="inputtype"
-                class="block border-2 border-black border-solid resize-y"
+                class="block w-11/12 border-2 border-black border-solid resize-y"
                 :value="modelValue"
                 :rules="isRequired"
                 @input="$emit('update:modelValue', $event.target.value)"
@@ -16,13 +17,12 @@
 </template>
 
 <script lang="ts">
-import { Field as VField, ErrorMessage } from 'vee-validate';
+import { ErrorMessage } from 'vee-validate';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'InputField',
+    name: 'InputArea',
     components: {
-        VField,
         ErrorMessage
     },
     props: {

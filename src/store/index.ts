@@ -4,10 +4,14 @@ import { pricing, formatPrice } from '@/Library/pricing';
 
 export default createStore({
     state: {
-        paypalInstance: null
+        paypalInstance: null,
+        quantity: 1,
+        dedications: []
     },
     getters: {
         paypal: state => state.paypalInstance,
+        quantity: state => state.quantity,
+        dedications: state => state.dedications,
         hasPaypal: state => {
             return state.paypalInstance !== null;
         },
@@ -26,9 +30,17 @@ export default createStore({
     mutations: {
         paypalInstance(state, paypal) {
             state.paypalInstance = paypal;
+        },
+        updateOrder(state, { quantity, dedications }) {
+            state.quantity = quantity;
+            state.dedications = dedications;
         }
     },
     actions: {
+        async updateOrder({ commit }, { quantity, dedications }) {
+            commit('updateOrder', quantity, dedications);
+        },
+
         async loadPaypal({ getters, commit }) {
             if (!getters.hasPaypal) {
                 console.log('get paypal');
