@@ -2,8 +2,10 @@
     <div class="flex flex-row flex-auto bg-red-600">
         <div class="flex-1 bg-green-500">
             <!-- left side -->
-            <quantity v-model="quantity" :options="orderOptions" />
-            <dedication :books="quantity" />
+            <div>{{ quantity }}</div>
+            <quantity v-model="quantityb" :options="orderOptions" />
+
+            <dedications />
             <small-hero />
             <what-you-get />
             <meet-the-author-short />
@@ -22,8 +24,9 @@ import MeetTheAuthorShort from '@/components/MeetTheAuthorShort.vue';
 import OrderForm from '@/components/OrderForm.vue';
 import SmallHero from '@/components/SmallHero.vue';
 import WhatYouGet from '@/components/WhatYouGet.vue';
+
+import Dedications from '@/components/Dedications.vue';
 import Quantity from '@/components/Quantity.vue';
-import Dedication from '@/components/Dedication.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default defineComponent({
@@ -34,21 +37,31 @@ export default defineComponent({
         OrderForm,
         MeetTheAuthorShort,
         Quantity,
-        Dedication
+        Dedications
     },
     data() {
         return {
-            quantity: 1
+            quantitya: 1
         };
     },
     computed: {
-        ...mapGetters(['orderOptions'])
+        ...mapGetters(['quantity', 'orderOptions']),
+        quantityb: {
+            // @ts-expect-error
+            get() {
+                // @ts-expect-error
+                return this.quantity;
+            },
+            set(value: any) {
+                this.updateQuantity({ quantity: value });
+            }
+        }
     },
     created() {
         this.showPaypalButtons('#paypal-buttons');
     },
     methods: {
-        ...mapActions(['showPaypalButtons'])
+        ...mapActions(['updateQuantity', 'showPaypalButtons'])
     }
 });
 </script>

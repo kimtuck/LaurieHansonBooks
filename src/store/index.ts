@@ -33,7 +33,7 @@ export default createStore({
         paypalInstance(state, paypal) {
             state.paypalInstance = paypal;
         },
-        updateOrderQuantity(state, { quantity }) {
+        updateQuantity(state, { quantity }) {
             state.quantity = quantity;
         },
 
@@ -42,8 +42,8 @@ export default createStore({
         }
     },
     actions: {
-        async updateOrderQuantity({ commit }, { quantity }) {
-            commit('updateOrderQuantity', { quantity });
+        async updateQuantity({ commit }, { quantity }) {
+            commit('updateQuantity', { quantity });
         },
         async updateDedication({ commit }, { dedication, index }) {
             commit('updatededication', { dedication, index });
