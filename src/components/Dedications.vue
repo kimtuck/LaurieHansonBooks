@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div>Dedications start here {{ dedications }}</div>
         <group label="Dedications">
             <div v-for="(n, index) in dedications.length" :key="index">
                 <dedication-container :index="index" :label="label(index)" />

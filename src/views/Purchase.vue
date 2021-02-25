@@ -2,9 +2,7 @@
     <div class="flex flex-row flex-auto bg-red-600">
         <div class="flex-1 bg-green-500">
             <!-- left side -->
-            <div>{{ quantity }}</div>
             <quantity v-model="quantityb" :options="orderOptions" />
-
             <dedications />
             <small-hero />
             <what-you-get />

@@ -31,7 +31,6 @@ export default defineComponent({
                 return this.dedication(this.index);
             },
             set(value: any) {
-                console.log('dedication changed', value);
                 this.updateDedication({
                     dedication: value,
                     index: this.index

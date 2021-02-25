@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div>Dedication: value {{ dedication }}</div>
         <input-area v-model="dedication" :name="label" class="w-auto" :label="label" :required="false" />
     </div>
 </template>
@@ -32,7 +31,6 @@ export default defineComponent({
                 return this.modelValue;
             },
             set(value: string) {
-                console.log('dedication changed', value);
                 this.$emit('update:modelValue', value);
             }
         }

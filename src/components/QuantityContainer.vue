@@ -32,7 +32,6 @@ export default defineComponent({
                 return this.modelValue;
             },
             set(value: any) {
-                console.log('order quantity changed', value);
                 this.$emit('update:modelValue', value);
             }
         }
