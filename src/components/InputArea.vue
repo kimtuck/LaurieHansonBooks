@@ -5,7 +5,6 @@
             <textarea
                 rows="4"
                 :name="name"
-                :type="inputtype"
                 class="block w-11/12 border-2 border-black border-solid resize-y"
                 :value="modelValue"
                 :rules="isRequired"
@@ -37,10 +36,6 @@ export default defineComponent({
         label: {
             required: true,
             type: String
-        },
-        inputtype: {
-            type: String,
-            default: 'text'
         }
     },
     methods: {
