@@ -9,7 +9,7 @@
             </div>
             <div class="flex-1 ">
                 <!-- right side -->
-                <order-form />
+                <order-form-container />
                 <group label="Payment options">
                     <div id="paypal-buttons" class="w-1/2 m-auto" />
                 </group>
@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import OrderForm from '@/components/OrderForm.vue';
+import OrderFormContainer from '@/components/OrderFormContainer.vue';
 import SmallHero from '@/components/SmallHero.vue';
 import Group from '@/components/Group.vue';
 
@@ -31,7 +31,7 @@ export default defineComponent({
     name: 'Purchase',
     components: {
         SmallHero,
-        OrderForm,
+        OrderFormContainer,
         Quantity,
         Dedications,
         Group

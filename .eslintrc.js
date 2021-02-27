@@ -128,6 +128,10 @@ module.exports = {
 
         'vue/require-name-property': 'off',
 
+
+        'vue/no-v-model-argument': 'off',
+        'vue/no-unsupported-features': 'off',
+        
         // core eslint rules https://eslint.org/docs/rules/
 
         curly: ['error', 'all'],

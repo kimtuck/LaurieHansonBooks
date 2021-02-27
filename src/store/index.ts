@@ -6,11 +6,20 @@ export default createStore({
     state: {
         paypalInstance: null,
         quantity: 1,
-        dedications: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+        dedications: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+        orderForm: {
+            name: 'name',
+            email: 'email',
+            address: 'address',
+            city: 'city',
+            state: 'state',
+            zip: 'zip'
+        }
     },
     getters: {
         paypal: state => state.paypalInstance,
         quantity: state => state.quantity,
+        orderForm: state => state.orderForm,
         dedication: state => (index: number) => state.dedications[index],
         dedications: state => state.dedications.slice(0, state.quantity),
 
@@ -39,6 +48,10 @@ export default createStore({
 
         updatededication(state, { dedication, index }) {
             state.dedications[index] = dedication;
+        },
+
+        updateOrderForm(state, { orderForm }) {
+            state.orderForm = orderForm;
         }
     },
     actions: {
@@ -47,6 +60,9 @@ export default createStore({
         },
         async updateDedication({ commit }, { dedication, index }) {
             commit('updatededication', { dedication, index });
+        },
+        async updateOrderForm({ commit }, { orderForm }) {
+            commit('updateOrderForm', { orderForm });
         },
 
         async loadPaypal({ getters, commit }) {

@@ -8,7 +8,7 @@ import Quantity from '@/components/Quantity.vue';
 import { mapActions } from 'vuex';
 
 export default defineComponent({
-    name: 'Quantity',
+    name: 'QuantityContainer',
     components: {
         Quantity
     },
