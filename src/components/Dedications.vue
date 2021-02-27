@@ -1,6 +1,6 @@
 <template>
     <div>
-        <group label="Dedications">
+        <group label="Dedications" sublabel="Laurie can personalize each copy of the book with a handwritten message.">
             <div v-for="(n, index) in dedications.length" :key="index">
                 <dedication-container :index="index" :label="label(index)" />
             </div>
@@ -25,7 +25,7 @@ export default defineComponent({
     },
     methods: {
         label(index: number) {
-            return `Dedication for book ${index + 1}`;
+            return `Dedication for book ${index + 1}:`;
         }
     }
 });

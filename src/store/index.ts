@@ -6,7 +6,7 @@ export default createStore({
     state: {
         paypalInstance: null,
         quantity: 1,
-        dedications: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q']
+        dedications: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
     },
     getters: {
         paypal: state => state.paypalInstance,

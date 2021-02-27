@@ -1,9 +1,7 @@
 <template>
-    <div>
-        <group label="Order Quantity">
-            <radio-button-group id="radio" v-model="quantity" :options="options" />
-        </group>
-    </div>
+    <group label="Order Quantity:">
+        <radio-button-group id="radio" v-model="quantity" :options="options" />
+    </group>
 </template>
 
 <script>

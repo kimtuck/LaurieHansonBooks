@@ -1,19 +1,23 @@
 <template>
-    <div class="p-2">
-        <div class="text-sm">Winner, 2017</div>
+    <group>
+        <div class="text-2xl text-black ">Winner, 2017</div>
         <div class="flex flex-row justify-center rounded-md">
-            <img class="border-black border-0 bg-white rounded-md w-1/4 h-auto" src="@assets/PurpleDragonflyLogo.png" />
+            <img class="w-1/4 h-auto m-4 bg-white border-2 border-black rounded-md" src="@assets/PurpleDragonflyLogo.png" />
         </div>
         <div>Treasure's Gift is a 2017 winner of the</div>
         <div>Purple Dragonfly Award</div>
         <div>for Best Children's Book in the Animal/Pet category.</div>
-    </div>
+    </group>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import Group from '@/components/Group.vue';
 
 export default defineComponent({
-    name: 'PurpleDragonfly'
+    name: 'PurpleDragonfly',
+    components: {
+        Group
+    }
 });
 </script>

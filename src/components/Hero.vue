@@ -10,7 +10,7 @@
                 <div class="text-7xl">Treasure's Gift</div>
                 <div class="m-4">A funny, thoughful story about a Golden Retriever and her best friend.</div>
 
-                <purple-dragonfly class="w-1/2 m-2 text-white bg-purple-600 rounded-md shadow-lg " />
+                <purple-dragonfly class="w-3/4 m-2 " />
 
                 <buy-button />
             </div>

@@ -1,27 +1,27 @@
 <template>
-    <div class="flex flex-row flex-auto bg-red-600">
-        <div class="flex-1 bg-green-500">
-            <!-- left side -->
-            <quantity v-model="quantityb" :options="orderOptions" />
-            <dedications />
-            <small-hero />
-            <what-you-get />
-            <meet-the-author-short />
-        </div>
-        <div class="flex-1 bg-blue-200">
-            <!-- right side -->
-            <order-form />
-            <div id="paypal-buttons" class="w-1/2 m-auto" />
-        </div>
-    </div>
-</template>
+    <div class="bg-pink-300 bg-opacity-30">
+        <small-hero />
+        <div class="flex flex-row flex-auto ">
+            <div class="flex-1">
+                <!-- left side -->
+                <quantity v-model="quantityb" :options="orderOptions" />
+                <dedications />
+            </div>
+            <div class="flex-1 ">
+                <!-- right side -->
+                <order-form />
+                <group label="Payment options">
+                    <div id="paypal-buttons" class="w-1/2 m-auto" />
+                </group>
+            </div>
+        </div></div
+></template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import MeetTheAuthorShort from '@/components/MeetTheAuthorShort.vue';
 import OrderForm from '@/components/OrderForm.vue';
 import SmallHero from '@/components/SmallHero.vue';
-import WhatYouGet from '@/components/WhatYouGet.vue';
+import Group from '@/components/Group.vue';
 
 import Dedications from '@/components/Dedications.vue';
 import Quantity from '@/components/Quantity.vue';
@@ -31,11 +31,10 @@ export default defineComponent({
     name: 'Purchase',
     components: {
         SmallHero,
-        WhatYouGet,
         OrderForm,
-        MeetTheAuthorShort,
         Quantity,
-        Dedications
+        Dedications,
+        Group
     },
     data() {
         return {

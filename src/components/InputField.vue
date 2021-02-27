@@ -5,7 +5,7 @@
             <v-field
                 :name="name"
                 :type="inputtype"
-                class="block border-2 border-black border-solid resize-y"
+                class="block w-full border-2 border-black border-solid resize-y"
                 :value="modelValue"
                 :rules="isRequired"
                 @input="$emit('update:modelValue', $event.target.value)"
