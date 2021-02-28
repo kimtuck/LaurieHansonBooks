@@ -34,7 +34,6 @@ const g = (field: string) => {
             return this[field];
         },
         set(value: any) {
-            console.log('update modelvalue', field, value);
             // @ts-expect-error
             this.$emit(`update:${field}`, value);
         }

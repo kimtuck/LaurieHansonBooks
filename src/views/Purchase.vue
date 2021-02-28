@@ -10,6 +10,9 @@
             <div class="flex-1 ">
                 <!-- right side -->
                 <order-form-container />
+                <group v-if="showCompleteFormMsg" label="Contact/Shipping information is incomplete">
+                    <div>Please complete the above form</div>
+                </group>
                 <group label="Payment options">
                     <div id="paypal-buttons" class="w-1/2 m-auto" />
                 </group>
@@ -42,7 +45,7 @@ export default defineComponent({
         };
     },
     computed: {
-        ...mapGetters(['quantity', 'orderOptions']),
+        ...mapGetters(['quantity', 'orderOptions', 'showCompleteFormMsg']),
         quantityb: {
             // @ts-expect-error
             get() {

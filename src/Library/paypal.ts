@@ -1,4 +1,6 @@
 import { loadScript } from '@paypal/paypal-js';
+import { pricing, formatPrice } from './pricing';
+
 // const sandboxAccount = 'sb-1nykf590489@business.example.com';
 
 // const clientId = 'Ae3nrUHnL2vj1mBZcmMUSMZe4xf7CY7Wzft3VXpJJhEHPVR8kPrr3_M4mW4MZWI21xsO-B6W9jTnT9ZE';
@@ -6,39 +8,45 @@ import { loadScript } from '@paypal/paypal-js';
 // const secret = 'ENkAlAuCOgcI6X0rY5R9RWizwzaQTPl8Q2PXLz4-qIAKAJZZ3SI7HRjl72o1K07iCS5eTNUBrCRLweKF';
 
 const installPayPal = async function() {
-    return await loadScript({ 'client-id': 'sb' });
+    return await loadScript({ 'client-id': 'sb', 'disable-funding': 'credit' });
 };
 
-const money = (value: number, key: string) => ({ currency_code: 'USD', [key]: `${value.toFixed(2)}` });
+const money = (value: number, key: string) => ({ currency_code: 'USD', [key]: formatPrice(value) });
 
-const amount = (unit_price: number, quantity: number) => ({
-    ...money(quantity * unit_price, 'value'),
+const amount = (priceInfo: any) => ({
+    ...money(priceInfo.price + priceInfo.shipping, 'value'),
     breakdown: {
-        item_total: money(quantity * unit_price, 'value')
+        item_total: money(priceInfo.price, 'value'),
+        shipping: money(priceInfo.shipping, 'value')
     }
 });
-const items = (unit_price: number, quantity: number) => [
+const items = (priceInfo: any, quantity: number) => [
     {
         name: "Treasure's Gift book",
-        unit_amount: money(unit_price, 'value'),
-        quantity,
-        sku: 'SKU1'
+        unit_amount: money(priceInfo.price / quantity, 'value'),
+        quantity
     }
 ];
 
-const purchaseConfig = (unit_price: number, quantity: number) => ({
-    purchase_units: [
-        {
-            reference_id: '123',
-            description: 'description',
-            custom_id: 'my-order-number',
-            invoice_id: 'invoice-id',
-            soft_descriptor: "Treasure's Gift",
-            amount: amount(unit_price, quantity),
-            items: items(unit_price, quantity)
-        }
-    ]
-});
+const purchaseConfig = (quantity: number) => {
+    const priceInfo = pricing(quantity);
+    const payload = {
+        purchase_units: [
+            {
+                reference_id: '123',
+                description: 'description',
+                custom_id: 'my-order-number',
+                invoice_id: 'invoice-id',
+                soft_descriptor: "Treasure's Gift",
+                amount: amount(priceInfo),
+                items: items(priceInfo, quantity)
+            }
+        ]
+    };
+
+    console.table(payload);
+    return payload;
+};
 
 export { installPayPal, purchaseConfig };
 

@@ -8,21 +8,29 @@ export default createStore({
         quantity: 1,
         dedications: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
         orderForm: {
-            name: 'name',
-            email: 'email',
-            address: 'address',
-            city: 'city',
-            state: 'state',
-            zip: 'zip'
-        }
+            name: '',
+            email: '',
+            address: '',
+            city: '',
+            state: '',
+            zip: ''
+        },
+        showCompleteFormMsg: false
     },
     getters: {
         paypal: state => state.paypalInstance,
         quantity: state => state.quantity,
         orderForm: state => state.orderForm,
+        orderFormValid: state =>
+            state.orderForm.name &&
+            state.orderForm.email &&
+            state.orderForm.address &&
+            state.orderForm.city &&
+            state.orderForm.state &&
+            state.orderForm.zip,
         dedication: state => (index: number) => state.dedications[index],
         dedications: state => state.dedications.slice(0, state.quantity),
-
+        showCompleteFormMsg: (state, getters) => !getters.orderFormValid && state.showCompleteFormMsg,
         hasPaypal: state => {
             return state.paypalInstance !== null;
         },
@@ -52,6 +60,9 @@ export default createStore({
 
         updateOrderForm(state, { orderForm }) {
             state.orderForm = orderForm;
+        },
+        showCompleteFormMsg(state, val) {
+            state.showCompleteFormMsg = val;
         }
     },
     actions: {
@@ -71,7 +82,7 @@ export default createStore({
                 commit('paypalInstance', paypal);
             }
         },
-        async showPaypalButtons({ state, dispatch }, id) {
+        async showPaypalButtons({ state, commit, getters, dispatch }, id) {
             await dispatch('loadPaypal');
 
             const ButtonConfig = {
@@ -82,7 +93,20 @@ export default createStore({
                     label: 'paypal'
                 },
                 createOrder(data: any, actions: any) {
-                    return actions.order.create(purchaseConfig(16.95, 3));
+                    return actions.order.create(purchaseConfig(getters.quantity));
+                },
+                onApprove: () => console.log('On approve'),
+                onCancel: () => console.log('On cancel'),
+                onError: () => console.log('On error'),
+                // @ts-expect-error
+                onClick: (data, actions: any) => {
+                    if (!getters.orderFormValid) {
+                        commit('showCompleteFormMsg', true);
+                        return actions.reject();
+                    }
+
+                    commit('showCompleteFormMsg', false);
+                    return actions.resolve();
                 }
             };
             // @ts-expect-error

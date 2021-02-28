@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div>XXXX XXX Order form {{ orderForm }}</div>
         <order-form
             v-model:name="name"
             v-model:email="email"
@@ -24,10 +23,8 @@ const d = (field: string) => {
             return this.orderForm[field];
         },
         set(value: any) {
-            console.log('update orderForm', field, value);
             // @ts-expect-error
             const newOrderForm = { ...this.orderForm, ...{ [field]: value } };
-            console.log('update orderForm, new orderForm', newOrderForm);
             // @ts-expect-error
             this.updateOrderForm({ orderForm: newOrderForm });
         }
