@@ -1,9 +1,13 @@
 import { createStore } from 'vuex';
 import { installPayPal, purchaseConfig } from '@/Library/paypal';
 import { pricing, formatPrice } from '@/Library/pricing';
+import { initFirebase, logOrderInformation } from '@/Library/firebase';
+import { v4 as uuidv4 } from 'uuid';
+import orderState from '@/Library/orderState';
 
 export default createStore({
     state: {
+        orderId: uuidv4(),
         paypalInstance: null,
         quantity: 1,
         dedications: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
@@ -34,6 +38,13 @@ export default createStore({
         hasPaypal: state => {
             return state.paypalInstance !== null;
         },
+        orderInformation: (state, getters) => ({
+            orderId: state.orderId,
+            state: orderState.BeginPurchase,
+            quantity: state.quantity,
+            dedications: getters.dedications,
+            contact: state.orderForm
+        }),
         orderOptions: () => {
             return [1, 2, 3, 4].map(x => {
                 const pricingInfo = pricing(x);
@@ -83,6 +94,7 @@ export default createStore({
             }
         },
         async showPaypalButtons({ state, commit, getters, dispatch }, id) {
+            await dispatch('logOrder');
             await dispatch('loadPaypal');
 
             const ButtonConfig = {
@@ -95,16 +107,25 @@ export default createStore({
                 createOrder(data: any, actions: any) {
                     return actions.order.create(purchaseConfig(getters.quantity));
                 },
-                onApprove: () => console.log('On approve'),
+                onApprove(data: any, actions: any) {
+                    // This function captures the funds from the transaction.
+                    return actions.order.capture().then(function(details: any) {
+                        // This function shows a transaction success message to your buyer.
+                        // alert(`Transaction completed by ${details.payer.name.given_name}`);
+                        console.log(details);
+                    });
+                },
                 onCancel: () => console.log('On cancel'),
                 onError: () => console.log('On error'),
                 // @ts-expect-error
-                onClick: (data, actions: any) => {
+                onClick: async (data, actions: any) => {
                     if (!getters.orderFormValid) {
                         commit('showCompleteFormMsg', true);
                         return actions.reject();
                     }
 
+                    // Intentionally not awaited
+                    await dispatch('logOrder');
                     commit('showCompleteFormMsg', false);
                     return actions.resolve();
                 }
@@ -114,7 +135,10 @@ export default createStore({
                 // @ts-expect-error
                 state.paypalInstance.Buttons(ButtonConfig).render(id);
             }
+        },
+        async logOrder({ getters }) {
+            await initFirebase();
+            await logOrderInformation(getters.orderInformation);
         }
-    },
-    modules: {}
+    }
 });

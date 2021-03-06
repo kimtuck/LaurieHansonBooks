@@ -1,14 +1,18 @@
 import { loadScript } from '@paypal/paypal-js';
 import { pricing, formatPrice } from './pricing';
 
+const liveClientId = 'AZST4alfX8Pm2K1Iw55j7-QfRdCdSi-Yt4WuOLJ9orkmIhMC-obTIcVhtC82Bl9LnQJsJ0Jihtq6XDpR';
+// const secret = 'ENbbjmSsyF5bAiW8sdlMjDJSNuNxYkka10gd34juHPrR_jbRnkOV1gqVoFWly9dl07BQk9tgSrJMVlNR';
+
+const useSandbox = true;
+
+const clientId = useSandbox ? 'sb' : liveClientId;
 // const sandboxAccount = 'sb-1nykf590489@business.example.com';
 
-// const clientId = 'Ae3nrUHnL2vj1mBZcmMUSMZe4xf7CY7Wzft3VXpJJhEHPVR8kPrr3_M4mW4MZWI21xsO-B6W9jTnT9ZE';
 // const sbClientId = 'sb';
-// const secret = 'ENkAlAuCOgcI6X0rY5R9RWizwzaQTPl8Q2PXLz4-qIAKAJZZ3SI7HRjl72o1K07iCS5eTNUBrCRLweKF';
 
 const installPayPal = async function() {
-    return await loadScript({ 'client-id': 'sb', 'disable-funding': 'credit' });
+    return await loadScript({ debug: true, 'client-id': clientId, 'disable-funding': 'credit', 'enable-funding': 'venmo' });
 };
 
 const money = (value: number, key: string) => ({ currency_code: 'USD', [key]: formatPrice(value) });

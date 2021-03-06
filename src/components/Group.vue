@@ -1,5 +1,5 @@
 <template>
-    <box cls="p-4 m-8 bg-indigo-100 shadow-2xl ">
+    <box :class="computedClass">
         <div v-if="label" class="pb-2 text-2xl">{{ label }}</div>
         <div v-if="sublabel" class="pb-2 text-lg">{{ sublabel }}</div>
         <slot />
@@ -23,6 +23,22 @@ export default defineComponent({
         sublabel: {
             type: String,
             default: ''
+        },
+        type: {
+            type: String,
+            default: 'normal'
+        }
+    },
+    computed: {
+        computedClass(): String {
+            switch (this.type) {
+                case 'normal':
+                    return 'bg-indigo-100 p-4 m-8 shadow-2xl';
+                case 'alert':
+                    return 'bg-red-600 text-white p-4 m-8 shadow-2xl';
+                default:
+                    return '';
+            }
         }
     }
 });

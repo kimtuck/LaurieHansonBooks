@@ -10,7 +10,7 @@
             <div class="flex-1 ">
                 <!-- right side -->
                 <order-form-container />
-                <group v-if="showCompleteFormMsg" label="Contact/Shipping information is incomplete">
+                <group v-if="showCompleteFormMsg" type="alert" label="Contact/Shipping information is incomplete">
                     <div>Please complete the above form</div>
                 </group>
                 <group label="Payment options">
