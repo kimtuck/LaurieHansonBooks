@@ -2,6 +2,8 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import asyncOnce from './asyncOnce';
 
+let db: any;
+
 const initFirebase = asyncOnce(() => {
     const firebaseConfig = {
         apiKey: 'AIzaSyD28ZiJOOSaUh6nMeVIo2Q4jjV169snOO4',
@@ -14,17 +16,26 @@ const initFirebase = asyncOnce(() => {
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
     console.log('firebase initialized');
 });
 
 const logOrderInformation = async (order: any) => {
-    return firebase
-        .firestore()
+    return db
         .collection('orders')
-        .add({ ...order, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
-        .catch(function(error) {
+        .doc(order.orderId)
+        .set({ ...order, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
+        .catch(function(error: any) {
             console.error('Error writing new message to database', error);
         });
 };
 
-export { initFirebase, logOrderInformation };
+const logCompletedOrderInformation = async (orderId: any, orderState: any, details: any) => {
+    debugger;
+    return db
+        .collection('orders')
+        .doc(orderId)
+        .update({ orderState, details });
+};
+
+export { initFirebase, logOrderInformation, logCompletedOrderInformation };

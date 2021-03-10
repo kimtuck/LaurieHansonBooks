@@ -1,67 +1,36 @@
 <template>
-    <div class="bg-pink-300 bg-opacity-30">
-        <small-hero />
-        <div class="flex flex-row flex-auto ">
-            <div class="flex-1">
-                <!-- left side -->
-                <quantity v-model="quantityb" :options="orderOptions" />
-                <dedications />
-            </div>
-            <div class="flex-1 ">
-                <!-- right side -->
-                <order-form-container />
-                <group v-if="showCompleteFormMsg" type="alert" label="Contact/Shipping information is incomplete">
-                    <div>Please complete the above form</div>
-                </group>
-                <group label="Payment options">
-                    <div id="paypal-buttons" class="w-1/2 m-auto" />
-                </group>
-            </div>
-        </div></div
-></template>
+    <div class="w-full h- bg-pink-200">
+        <purchase-form v-if="viewingState === ViewingState.Form" />
+        <purchase-successful v-if="viewingState === ViewingState.SuccessfulPurchase" />
+    </div>
+</template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import OrderFormContainer from '@/components/OrderFormContainer.vue';
-import SmallHero from '@/components/SmallHero.vue';
-import Group from '@/components/Group.vue';
-
-import Dedications from '@/components/Dedications.vue';
-import Quantity from '@/components/Quantity.vue';
+import PurchaseSuccessful from '@/components/PurchaseSuccessful.vue';
+import PurchaseForm from '@/components/PurchaseForm.vue';
 import { mapGetters, mapActions } from 'vuex';
+import { ViewingState } from '@/store/index';
 
 export default defineComponent({
     name: 'Purchase',
     components: {
-        SmallHero,
-        OrderFormContainer,
-        Quantity,
-        Dedications,
-        Group
+        PurchaseForm,
+        PurchaseSuccessful
     },
     data() {
         return {
-            quantitya: 1
+            ViewingState
         };
     },
     computed: {
-        ...mapGetters(['quantity', 'orderOptions', 'showCompleteFormMsg']),
-        quantityb: {
-            // @ts-expect-error
-            get() {
-                // @ts-expect-error
-                return this.quantity;
-            },
-            set(value: any) {
-                this.updateQuantity({ quantity: value });
-            }
-        }
+        ...mapGetters(['viewingState'])
     },
     created() {
-        this.showPaypalButtons('#paypal-buttons');
+        // this.viewingPurchaseForm();
     },
     methods: {
-        ...mapActions(['updateQuantity', 'showPaypalButtons'])
+        ...mapActions(['viewingPurchaseForm'])
     }
 });
 </script>

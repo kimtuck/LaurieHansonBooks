@@ -12,7 +12,7 @@ const clientId = useSandbox ? 'sb' : liveClientId;
 // const sbClientId = 'sb';
 
 const installPayPal = async function() {
-    return await loadScript({ debug: true, 'client-id': clientId, 'disable-funding': 'credit', 'enable-funding': 'venmo' });
+    return await loadScript({ 'client-id': clientId, 'disable-funding': 'credit', 'enable-funding': 'venmo' });
 };
 
 const money = (value: number, key: string) => ({ currency_code: 'USD', [key]: formatPrice(value) });
@@ -32,23 +32,21 @@ const items = (priceInfo: any, quantity: number) => [
     }
 ];
 
-const purchaseConfig = (quantity: number) => {
+const purchaseConfig = (orderId: any, quantity: number) => {
     const priceInfo = pricing(quantity);
     const payload = {
         purchase_units: [
             {
-                reference_id: '123',
+                reference_id: orderId,
                 description: 'description',
                 custom_id: 'my-order-number',
-                invoice_id: 'invoice-id',
+                invoice_id: orderId,
                 soft_descriptor: "Treasure's Gift",
                 amount: amount(priceInfo),
                 items: items(priceInfo, quantity)
             }
         ]
     };
-
-    console.table(payload);
     return payload;
 };
 

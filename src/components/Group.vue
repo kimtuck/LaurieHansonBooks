@@ -33,7 +33,7 @@ export default defineComponent({
         computedClass(): String {
             switch (this.type) {
                 case 'normal':
-                    return 'bg-indigo-100 p-4 m-8 shadow-2xl';
+                    return 'bg-indigo-100 text-black p-4 m-8 shadow-2xl';
                 case 'alert':
                     return 'bg-red-600 text-white p-4 m-8 shadow-2xl';
                 default:

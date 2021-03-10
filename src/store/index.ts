@@ -1,12 +1,19 @@
 import { createStore } from 'vuex';
 import { installPayPal, purchaseConfig } from '@/Library/paypal';
 import { pricing, formatPrice } from '@/Library/pricing';
-import { initFirebase, logOrderInformation } from '@/Library/firebase';
+import { initFirebase, logOrderInformation, logCompletedOrderInformation } from '@/Library/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import orderState from '@/Library/orderState';
 
+const ViewingState = {
+    Form: 'form',
+    SuccessfulPurchase: 'successfulPurchase'
+};
+
 export default createStore({
     state: {
+        showSpinner: false,
+        viewingState: ViewingState.SuccessfulPurchase,
         orderId: uuidv4(),
         paypalInstance: null,
         quantity: 1,
@@ -19,10 +26,13 @@ export default createStore({
             state: '',
             zip: ''
         },
-        showCompleteFormMsg: false
+        showCompleteFormMsg: false,
+        details: { purchase_units: [{ soft_descriptor: '', amount: { value: 0 }, shipping: { address: {} } }] }
     },
     getters: {
+        showSpinner: state => state.showSpinner,
         paypal: state => state.paypalInstance,
+        viewingState: state => state.viewingState,
         quantity: state => state.quantity,
         orderForm: state => state.orderForm,
         orderFormValid: state =>
@@ -40,7 +50,7 @@ export default createStore({
         },
         orderInformation: (state, getters) => ({
             orderId: state.orderId,
-            state: orderState.BeginPurchase,
+            orderState: orderState.BeginPurchase,
             quantity: state.quantity,
             dedications: getters.dedications,
             contact: state.orderForm
@@ -55,6 +65,13 @@ export default createStore({
                     )} - Total $${formatPrice(pricingInfo.price + pricingInfo.shipping)}`
                 };
             });
+        },
+        shippingPrice: state => state.details.purchase_units[0].amount.value,
+        shippingTo: state => {
+            return state.details.purchase_units[0].shipping.address;
+        },
+        shippingBillId: state => {
+            return state.details.purchase_units[0].soft_descriptor;
         }
     },
     mutations: {
@@ -74,9 +91,28 @@ export default createStore({
         },
         showCompleteFormMsg(state, val) {
             state.showCompleteFormMsg = val;
+        },
+        purchaseSuccessful(state, details) {
+            state.viewingState = ViewingState.SuccessfulPurchase;
+            state.details = details;
+            console.log(JSON.stringify(details));
+        },
+        viewing(state, viewingState) {
+            state.viewingState = viewingState;
+        },
+        showSpinner(state, show) {
+            state.showSpinner = show;
         }
     },
     actions: {
+        async viewingPurchaseForm({ commit }) {
+            commit('viewing', ViewingState.Form);
+        },
+
+        async viewingSuccessfulPurchase({ commit }) {
+            commit('viewing', ViewingState.SuccessfulPurchase);
+        },
+
         async updateQuantity({ commit }, { quantity }) {
             commit('updateQuantity', { quantity });
         },
@@ -105,20 +141,9 @@ export default createStore({
                     label: 'paypal'
                 },
                 createOrder(data: any, actions: any) {
-                    return actions.order.create(purchaseConfig(getters.quantity));
+                    return actions.order.create(purchaseConfig(getters.orderId, getters.quantity));
                 },
-                onApprove(data: any, actions: any) {
-                    // This function captures the funds from the transaction.
-                    return actions.order.capture().then(function(details: any) {
-                        // This function shows a transaction success message to your buyer.
-                        // alert(`Transaction completed by ${details.payer.name.given_name}`);
-                        console.log(details);
-                    });
-                },
-                onCancel: () => console.log('On cancel'),
-                onError: () => console.log('On error'),
-                // @ts-expect-error
-                onClick: async (data, actions: any) => {
+                onClick: async (data: any, actions: any) => {
                     if (!getters.orderFormValid) {
                         commit('showCompleteFormMsg', true);
                         return actions.reject();
@@ -128,7 +153,18 @@ export default createStore({
                     await dispatch('logOrder');
                     commit('showCompleteFormMsg', false);
                     return actions.resolve();
-                }
+                },
+                async onApprove(data: any, actions: any) {
+                    await dispatch('showSpinner');
+                    // This function captures the funds from the transaction.
+                    // await dispatch('viewingSuccessfulPurchase');
+                    return actions.order.capture().then(async function(details: any) {
+                        await dispatch('completedPurchase', details);
+                        await dispatch('hideSpinner');
+                    });
+                },
+                onCancel: () => console.log('On cancel'),
+                onError: () => console.log('On error')
             };
             // @ts-expect-error
             if (state.paypalInstance && state.paypalInstance.Buttons) {
@@ -139,6 +175,22 @@ export default createStore({
         async logOrder({ getters }) {
             await initFirebase();
             await logOrderInformation(getters.orderInformation);
+        },
+
+        async completedPurchase({ commit, getters }, details) {
+            debugger;
+            commit('purchaseSuccessful', details);
+            debugger;
+            await initFirebase();
+            debugger;
+            await logCompletedOrderInformation(getters.orderInformation.orderId, orderState.SuccessfulPurchase, details);
+        },
+        async showSpinner({ commit }) {
+            commit('showSpinner', true);
+        },
+        async hideSpinner({ commit }) {
+            commit('showSpinner', false);
         }
     }
 });
+export { ViewingState };

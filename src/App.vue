@@ -1,22 +1,23 @@
 <template>
-    <div class="container flex flex-wrap items-center mx-auto">
+    <div class="container h-screen mx-auto bg-pink-200 border">
         <navigation />
-        <div id="nav" class="hidden">
-            <router-link to="/">Home</router-link> |
-            <router-link to="/about">About</router-link>
+        <div class="" w-full h-screen>
+            <router-view />
         </div>
-        <router-view />
+        <spinner />
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Navigation from '@/components/Navigation.vue';
+import Spinner from '@/components/Spinner.vue';
 
 export default defineComponent({
     name: 'App',
     components: {
-        Navigation
+        Navigation,
+        Spinner
     }
 });
 </script>
