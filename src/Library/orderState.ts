@@ -1,6 +1,7 @@
 const orderState = {
     BeginPurchase: 'BeginPurchase',
-    SuccessfulPurchase: 'SuccessfulPurchase'
+    SuccessfulPurchase: 'SuccessfulPurchase',
+    CancelledPurchase: 'CancelledPurchase'
 };
 
 export default orderState;

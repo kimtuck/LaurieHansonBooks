@@ -1,7 +1,12 @@
 import { createStore } from 'vuex';
 import { installPayPal, purchaseConfig } from '@/Library/paypal';
 import { pricing, formatPrice } from '@/Library/pricing';
-import { initFirebase, logOrderInformation, logCompletedOrderInformation } from '@/Library/firebase';
+import {
+    initFirebase,
+    logOrderInformation,
+    logCompletedOrderInformation,
+    logCancelledOrderInformation
+} from '@/Library/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import orderState from '@/Library/orderState';
 
@@ -13,7 +18,7 @@ const ViewingState = {
 export default createStore({
     state: {
         showSpinner: false,
-        viewingState: ViewingState.SuccessfulPurchase,
+        viewingState: ViewingState.Form,
         orderId: uuidv4(),
         paypalInstance: null,
         quantity: 1,
@@ -163,7 +168,9 @@ export default createStore({
                         await dispatch('hideSpinner');
                     });
                 },
-                onCancel: () => console.log('On cancel'),
+                async onCancel() {
+                    await dispatch('cancelPurchase');
+                },
                 onError: () => console.log('On error')
             };
             // @ts-expect-error
@@ -178,12 +185,13 @@ export default createStore({
         },
 
         async completedPurchase({ commit, getters }, details) {
-            debugger;
             commit('purchaseSuccessful', details);
-            debugger;
             await initFirebase();
-            debugger;
             await logCompletedOrderInformation(getters.orderInformation.orderId, orderState.SuccessfulPurchase, details);
+        },
+        async cancelPurchase({ getters }) {
+            await initFirebase();
+            await logCancelledOrderInformation(getters.orderInformation.orderId, orderState.CancelledPurchase);
         },
         async showSpinner({ commit }) {
             commit('showSpinner', true);

@@ -31,11 +31,17 @@ const logOrderInformation = async (order: any) => {
 };
 
 const logCompletedOrderInformation = async (orderId: any, orderState: any, details: any) => {
-    debugger;
     return db
         .collection('orders')
         .doc(orderId)
         .update({ orderState, details });
 };
 
-export { initFirebase, logOrderInformation, logCompletedOrderInformation };
+const logCancelledOrderInformation = async (orderId: any, orderState: any) => {
+    return db
+        .collection('orders')
+        .doc(orderId)
+        .update({ orderState });
+};
+
+export { initFirebase, logOrderInformation, logCompletedOrderInformation, logCancelledOrderInformation };
