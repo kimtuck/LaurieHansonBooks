@@ -65,9 +65,11 @@ export default createStore({
                 const pricingInfo = pricing(x);
                 return {
                     value: x,
-                    text: `${x} copies - $${formatPrice(pricingInfo.price)}  - shipping $${formatPrice(
-                        pricingInfo.shipping
-                    )} - Total $${formatPrice(pricingInfo.price + pricingInfo.shipping)}`
+                    text: `${x} ${x === 1 ? 'copy' : 'copies'} - $${formatPrice(
+                        pricingInfo.price
+                    )}  - shipping $${formatPrice(pricingInfo.shipping)} - Total $${formatPrice(
+                        pricingInfo.price + pricingInfo.shipping
+                    )}`
                 };
             });
         },

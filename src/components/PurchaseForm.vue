@@ -15,6 +15,7 @@
                 </group>
                 <group label="Payment options">
                     <div id="paypal-buttons" class="w-1/2 m-auto" />
+                    <amazon-purchase />
                 </group>
             </div>
         </div>
@@ -29,6 +30,7 @@ import Group from '@/components/Group.vue';
 
 import Dedications from '@/components/Dedications.vue';
 import Quantity from '@/components/Quantity.vue';
+import AmazonPurchase from '@/components/AmazonPurchase.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default defineComponent({
@@ -38,7 +40,8 @@ export default defineComponent({
         OrderFormContainer,
         Quantity,
         Dedications,
-        Group
+        Group,
+        AmazonPurchase
     },
     computed: {
         ...mapGetters(['viewingState', 'quantity', 'orderOptions', 'showCompleteFormMsg']),
