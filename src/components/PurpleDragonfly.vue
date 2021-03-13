@@ -2,7 +2,11 @@
     <group>
         <div class="text-2xl text-black ">Winner, 2017</div>
         <div class="flex flex-row justify-center rounded-md">
-            <img class="w-1/4 h-auto m-4 bg-white border-2 border-black rounded-md" src="@assets/PurpleDragonflyLogo.png" />
+            <img
+                style="width: 131px; height: 131px"
+                class="w-1/4 h-auto m-4 bg-white border-2 border-black rounded-md"
+                src="@assets/PurpleDragonflyLogo.png"
+            />
         </div>
         <div>Treasure's Gift is a 2017 winner of the</div>
         <div>Purple Dragonfly Award</div>
