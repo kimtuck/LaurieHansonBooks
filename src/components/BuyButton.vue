@@ -1,7 +1,7 @@
 <template>
     <router-link :to="{ name: 'Purchase' }">
         <button
-            class="bg-green-500 hover:bg-green-300 text-white hover:text-black rounded shadow hover:shadow-lg py-2 px-4 border border-black"
+            class="px-4 py-2 text-4xl text-white bg-green-500 border border-black rounded shadow hover:bg-green-300 hover:text-black hover:shadow-lg"
         >
             Buy Treasure's Gift
         </button>

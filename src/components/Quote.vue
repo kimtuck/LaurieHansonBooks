@@ -1,28 +1,25 @@
 <template>
-    <quote>
-        <template #quote>
-            I'm delighted that you've chosen to purchase Treasure's Gift. I expect that you will enjoy reading the book as
-            much as I have enjoyed writing it.
-        </template>
-        <template #cite>
-            Laurie
-        </template>
-    </quote>
+    <box class="p-6 px-20 m-10 text-2xl bg-white">
+        <blockquote>
+            <slot name="quote" />
+        </blockquote>
+        <cite>&mdash;&mdash; <slot name="cite"/></cite>
+    </box>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Quote from './Quote.vue';
+import Box from './Box.vue';
 
 export default defineComponent({
-    name: 'SmallHero',
+    name: 'Quote',
     components: {
-        Quote
+        Box
     }
 });
 </script>
 
-<style>
+<style scoped>
 cite,
 blockquote {
     display: inline;
