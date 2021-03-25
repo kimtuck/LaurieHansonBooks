@@ -32,8 +32,8 @@ const items = (priceInfo: any, quantity: number) => [
     }
 ];
 
-const purchaseConfig = (orderId: any, quantity: number) => {
-    const priceInfo = pricing(quantity);
+const purchaseConfig = (orderId: any, quantity: number, discount: any) => {
+    const priceInfo = pricing(quantity, discount);
     const payload = {
         purchase_units: [
             {

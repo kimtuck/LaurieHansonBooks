@@ -1,11 +1,11 @@
 <template>
-    <quantity v-model="quantityValue" :options="orderOptions" />
+    <quantity v-model="quantityValue" :options="orderOptions" :saleprice="salePrice" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Quantity from '@/components/Quantity.vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default defineComponent({
     name: 'QuantityContainer',
@@ -24,7 +24,7 @@ export default defineComponent({
         }
     },
     computed: {
-        // ...mapGetters(['quantity', 'orderOptions']),
+        ...mapGetters(['salePrice']),
         quantityValue: {
             // @ts-expect-error
             get() {

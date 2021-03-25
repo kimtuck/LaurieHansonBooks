@@ -2,7 +2,7 @@ const price = 16.95;
 
 const shippingTable = [
     {
-        upTo: 4,
+        upTo: 3,
         shippingPer: 3.0,
         shippingFixed: 0.0
     },
@@ -24,12 +24,13 @@ const shippingTable = [
 ];
 
 const shipping = (quantity: number) => {
-    const entry = shippingTable.find(x => x.upTo <= quantity) || shippingTable[0];
+    const entry = shippingTable.find(x => quantity <= x.upTo) || shippingTable[0];
+    console.log('q', quantity, entry.upTo);
     return quantity * entry.shippingPer + entry.shippingFixed;
 };
 
-const pricing = (quantity: number) => ({
-    price: quantity * price,
+const pricing = (quantity: number, discount: any) => ({
+    price: quantity * (discount ? discount.salePrice : price),
     shipping: shipping(quantity)
 });
 

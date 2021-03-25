@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h- bg-pink-200">
+    <div class="w-full bg-pink-200 h-">
         <purchase-form v-if="viewingState === ViewingState.Form" />
         <purchase-successful v-if="viewingState === ViewingState.SuccessfulPurchase" />
     </div>
@@ -10,7 +10,7 @@ import { defineComponent } from 'vue';
 import PurchaseSuccessful from '@/components/PurchaseSuccessful.vue';
 import PurchaseForm from '@/components/PurchaseForm.vue';
 import { mapGetters, mapActions } from 'vuex';
-import { ViewingState } from '@/store/index';
+import { ViewingState } from '@/store/modules/orderForm';
 
 export default defineComponent({
     name: 'Purchase',

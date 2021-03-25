@@ -1,5 +1,6 @@
 <template>
     <group label="Order Quantity:">
+        <div>Prices reflect ${{ percentSavings }} off of the ${{ regularPrice }} regular price</div>
         <radio-button-group id="radio" v-model="quantity" :options="options" />
     </group>
 </template>
@@ -24,6 +25,11 @@ export default defineComponent({
         options: {
             default: [],
             required: true
+        },
+        saleprice: {
+            default: 0,
+            required: true,
+            type: Number
         }
     },
     data() {
