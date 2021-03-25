@@ -10,7 +10,7 @@ import { defineComponent } from 'vue';
 import PurchaseSuccessful from '@/components/PurchaseSuccessful.vue';
 import PurchaseForm from '@/components/PurchaseForm.vue';
 import { mapGetters, mapActions } from 'vuex';
-import { ViewingState } from '@/store/modules/orderForm';
+import { ViewingState } from '@/store/index';
 
 export default defineComponent({
     name: 'Purchase',

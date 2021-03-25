@@ -34,7 +34,9 @@ export default defineComponent({
     },
     data() {
         return {
-            quantity: 0
+            quantity: 0,
+            percentSavings: 0,
+            regularPrice: 0
         };
     },
     watch: {
