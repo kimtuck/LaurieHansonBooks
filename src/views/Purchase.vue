@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full bg-pink-200 h-">
+    <div class="w-full text-indigo-400 bg-pink-200">
         <purchase-form v-if="viewingState === ViewingState.Form" />
         <purchase-successful v-if="viewingState === ViewingState.SuccessfulPurchase" />
     </div>

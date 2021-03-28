@@ -1,6 +1,14 @@
 <template>
     <div>
-        <small-hero />
+        <quote>
+            <template #quote>
+                I'm delighted that you've chosen to purchase Treasure's Gift. I expect that you will enjoy reading the book
+                as much as I have enjoyed writing it.
+            </template>
+            <template #cite>
+                Laurie
+            </template>
+        </quote>
         <div class="flex flex-row flex-auto ">
             <div class="flex-1">
                 <!-- left side -->
@@ -25,8 +33,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import OrderFormContainer from '@/components/OrderFormContainer.vue';
-import SmallHero from '@/components/SmallHero.vue';
 import Group from '@/components/Group.vue';
+import Quote from '@/components/Quote.vue';
 
 import Dedications from '@/components/Dedications.vue';
 import QuantityContainer from '@/components/QuantityContainer.vue';
@@ -36,7 +44,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default defineComponent({
     name: 'Purchase',
     components: {
-        SmallHero,
+        Quote,
         OrderFormContainer,
         QuantityContainer,
         Dedications,

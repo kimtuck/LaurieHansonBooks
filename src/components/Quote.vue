@@ -1,10 +1,12 @@
 <template>
-    <box class="p-6 px-20 m-10 text-2xl bg-white">
-        <blockquote>
-            <slot name="quote" />
-        </blockquote>
-        <cite>&mdash;&mdash; <slot name="cite"/></cite>
-    </box>
+    <div class="p-10">
+        <box class="p-6 px-20 text-2xl bg-white">
+            <blockquote>
+                <slot name="quote" />
+            </blockquote>
+            <cite>&mdash;&mdash; <slot name="cite"/></cite>
+        </box>
+    </div>
 </template>
 
 <script lang="ts">
