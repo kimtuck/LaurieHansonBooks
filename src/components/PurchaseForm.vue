@@ -4,7 +4,7 @@
         <div class="flex flex-row flex-auto ">
             <div class="flex-1">
                 <!-- left side -->
-                <quantity v-model="quantityb" :options="orderOptions" />
+                <quantity-container v-model="quantityb" />
                 <dedications />
             </div>
             <div class="flex-1 ">
@@ -29,7 +29,7 @@ import SmallHero from '@/components/SmallHero.vue';
 import Group from '@/components/Group.vue';
 
 import Dedications from '@/components/Dedications.vue';
-import Quantity from '@/components/Quantity.vue';
+import QuantityContainer from '@/components/QuantityContainer.vue';
 import AmazonPurchase from '@/components/AmazonPurchase.vue';
 import { mapGetters, mapActions } from 'vuex';
 
@@ -38,13 +38,13 @@ export default defineComponent({
     components: {
         SmallHero,
         OrderFormContainer,
-        Quantity,
+        QuantityContainer,
         Dedications,
         Group,
         AmazonPurchase
     },
     computed: {
-        ...mapGetters(['viewingState', 'quantity', 'orderOptions', 'showCompleteFormMsg']),
+        ...mapGetters(['viewingState', 'quantity', 'showCompleteFormMsg']),
         quantityb: {
             // @ts-expect-error
             get() {

@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import { installPayPal, purchaseConfig } from '@/Library/paypal';
-import { pricing, formatPrice } from '@/Library/pricing';
+import { pricing } from '@/Library/pricing';
 import {
     initFirebase,
     logOrderInformation,
@@ -9,6 +9,7 @@ import {
 } from '@/Library/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import orderState from '@/Library/orderState';
+import discountProps from '@/Library/discountProps';
 
 const ViewingState = {
     Form: 'form',
@@ -32,7 +33,8 @@ export default createStore({
             zip: ''
         },
         showCompleteFormMsg: false,
-        details: { purchase_units: [{ soft_descriptor: '', amount: { value: 0 }, shipping: { address: {} } }] }
+        details: { purchase_units: [{ soft_descriptor: '', amount: { value: 0 }, shipping: { address: {} } }] },
+        discount: discountProps
     },
     getters: {
         showSpinner: state => state.showSpinner,
@@ -60,19 +62,20 @@ export default createStore({
             dedications: getters.dedications,
             contact: state.orderForm
         }),
-        orderOptions: () => {
-            return [1, 2, 3, 4].map(x => {
-                const pricingInfo = pricing(x, null);
+        orderOptions: state => {
+            return [1, 2, 3, 4, 5].map(x => {
+                const pricingInfo = pricing(x, state.discount);
                 return {
+                    quantity: x,
                     value: x,
-                    text: `${x} ${x === 1 ? 'copy' : 'copies'} - $${formatPrice(
-                        pricingInfo.price
-                    )}  - shipping $${formatPrice(pricingInfo.shipping)} - Total $${formatPrice(
-                        pricingInfo.price + pricingInfo.shipping
-                    )}`
+                    price: pricingInfo.price,
+                    shipping: pricingInfo.shipping
                 };
             });
         },
+        selectedOrderOption: (state, getters) => getters.orderOptions.find((x: any) => x.quantity === getters.quantity),
+        percentSavings: state => state.discount.percentSavings,
+        originalPrice: state => state.discount.originalPrice,
         shippingPrice: state => state.details.purchase_units[0].amount.value,
         shippingTo: state => {
             return state.details.purchase_units[0].shipping.address;
@@ -148,7 +151,8 @@ export default createStore({
                     label: 'paypal'
                 },
                 createOrder(data: any, actions: any) {
-                    return actions.order.create(purchaseConfig(getters.orderId, getters.quantity, null));
+                    console.log('createOrder', getters.orderId, getters.quantity, getters.selectedOrderOption);
+                    return actions.order.create(purchaseConfig(getters.orderId, getters.selectedOrderOption));
                 },
                 onClick: async (data: any, actions: any) => {
                     if (!getters.orderFormValid) {

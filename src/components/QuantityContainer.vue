@@ -1,5 +1,12 @@
 <template>
-    <quantity v-model="quantityValue" :options="orderOptions" :saleprice="salePrice" />
+    <div>
+        <quantity
+            v-model="quantityValue"
+            :options="orderOptions"
+            :percent-savings="percentSavings"
+            :original-price="originalPrice"
+        />
+    </div>
 </template>
 
 <script lang="ts">
@@ -16,15 +23,10 @@ export default defineComponent({
         modelValue: {
             required: true,
             type: Number
-        },
-        // eslint-disable-next-line
-        options: {
-            default: [],
-            required: true
         }
     },
     computed: {
-        ...mapGetters(['salePrice']),
+        ...mapGetters(['orderOptions', 'percentSavings', 'originalPrice']),
         quantityValue: {
             // @ts-expect-error
             get() {

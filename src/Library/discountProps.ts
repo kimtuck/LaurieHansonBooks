@@ -1,7 +1,8 @@
 const discountProps = {
     couponCode: 'SPRING',
     salePrice: 7.95,
-    percentSavings: (originalPrice: number) => Math.floor(1 - (discountProps.salePrice / originalPrice) * 100)
+    originalPrice: 16.95,
+    percentSavings: Math.floor((1 - 7.95 / 16.95) * 100)
 };
 
 export default discountProps;

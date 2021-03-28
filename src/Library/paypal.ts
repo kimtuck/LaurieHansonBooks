@@ -1,5 +1,5 @@
 import { loadScript } from '@paypal/paypal-js';
-import { pricing, formatPrice } from './pricing';
+import { formatPrice } from './pricing';
 
 const liveClientId = 'AZST4alfX8Pm2K1Iw55j7-QfRdCdSi-Yt4WuOLJ9orkmIhMC-obTIcVhtC82Bl9LnQJsJ0Jihtq6XDpR';
 // const secret = 'ENbbjmSsyF5bAiW8sdlMjDJSNuNxYkka10gd34juHPrR_jbRnkOV1gqVoFWly9dl07BQk9tgSrJMVlNR';
@@ -24,16 +24,16 @@ const amount = (priceInfo: any) => ({
         shipping: money(priceInfo.shipping, 'value')
     }
 });
-const items = (priceInfo: any, quantity: number) => [
+const items = (selectedOption: any) => [
     {
         name: "Treasure's Gift book",
-        unit_amount: money(priceInfo.price / quantity, 'value'),
-        quantity
+        unit_amount: money(selectedOption.price / selectedOption.quantity, 'value'),
+        quantity: selectedOption.quantity
     }
 ];
 
-const purchaseConfig = (orderId: any, quantity: number, discount: any) => {
-    const priceInfo = pricing(quantity, discount);
+const purchaseConfig = (orderId: any, selectedOption: any) => {
+    console.log('purchaseConfig', orderId, selectedOption);
     const payload = {
         purchase_units: [
             {
@@ -42,8 +42,8 @@ const purchaseConfig = (orderId: any, quantity: number, discount: any) => {
                 custom_id: 'my-order-number',
                 invoice_id: orderId,
                 soft_descriptor: "Treasure's Gift",
-                amount: amount(priceInfo),
-                items: items(priceInfo, quantity)
+                amount: amount({ price: selectedOption.price, shipping: selectedOption.shipping }),
+                items: items(selectedOption)
             }
         ]
     };

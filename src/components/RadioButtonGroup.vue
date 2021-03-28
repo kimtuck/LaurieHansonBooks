@@ -14,7 +14,7 @@
                     :required="required"
                     @change="updateValue(option.value)"
                 />
-                <span>{{ option.text }}</span>
+                <span><slot :option="option"/></span>
                 <slot v-if="option.value === modelValue" :name="option.value" />
             </label>
         </div>

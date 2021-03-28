@@ -30,7 +30,7 @@ const shipping = (quantity: number) => {
 };
 
 const pricing = (quantity: number, discount: any) => ({
-    price: quantity * (discount ? discount.salePrice : price),
+    price: quantity * discount.salePrice,
     shipping: shipping(quantity)
 });
 
