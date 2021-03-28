@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-screen bg-pink-200 ">
+    <div class="w-full text-indigo-400 bg-pink-200">
         <landing />
     </div>
 </template>

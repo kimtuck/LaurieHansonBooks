@@ -1,7 +1,7 @@
 <template>
-    <div class="container h-screen mx-auto text-2xl bg-pink-200 border">
+    <div class="container mx-auto text-2xl border-2 border-black ">
         <navigation />
-        <div class="" w-full h-screen>
+        <div class="" w-full>
             <router-view />
         </div>
         <spinner />

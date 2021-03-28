@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="container flex flex-col items-center mx-auto bg-pink-300 text-color bg-opacity-30 md:flex-row ">
+        <div class="container flex flex-col items-center mx-auto text-color md:flex-row ">
             <!-- Left Col -->
-            <div class="justify-center w-full h-full px-12 pt-6 pb-6 align-items: center lg:w-1/2">
+            <div class="justify-center w-full px-12 pt-6 pb-6 align-items: center lg:w-1/2">
                 <vue-agile
                     :options="agileOptions"
                     :class="carouselVisibility"

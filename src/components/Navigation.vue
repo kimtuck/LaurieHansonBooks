@@ -1,5 +1,7 @@
 <template>
-    <nav class="w-full p-2 mt-0 font-extrabold text-white no-underline bg-gray-500 tex-xxl bg-opacity-30 hover:no-underline">
+    <nav
+        class="w-full p-2 mt-0 font-extrabold text-white no-underline bg-gray-500 border-b-2 border-black tex-xxl bg-opacity-30 hover:no-underline"
+    >
         <!-- Add this to make the nav fixed: "fixed z-10 pin-t" -->
         <div class="container flex flex-wrap items-center mx-auto">
             <div class="flex justify-center w-full md:w-1/2 md:justify-start">

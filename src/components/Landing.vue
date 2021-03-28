@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto bg-pink-300 bg-opacity-20 text-indigo-400">
+    <div>
         <hero />
         <landing-body />
     </div>

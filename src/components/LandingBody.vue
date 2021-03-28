@@ -1,10 +1,10 @@
-d<template>
+<template>
     <div>
         <quote-box
             body="What a wonderful book! We gave to a lovely, and lively, little girl on Christmas Eve. She sat still on her grandma's lap and insisted that Grandma read it over and over. She simply loved it!"
             author="Stephanie"
         />
-        <div class="p-16 bg-pink-200">
+        <div class="p-16">
             <box class="p-5">
                 <div class="pb-10 text-4xl font-bold">The Story</div>
                 <p>
@@ -24,8 +24,8 @@ d<template>
             body="I've purchased two of these books and given them to young children as gifts. They were in love with the book. I was sent videos of the kids with the books and they are just so sweet. Wonderfully written and illustrated."
             author="Mark"
         />
-        <div class="p-16 bg-pink-300 bg-opacity-30">
-            <box class="p-5 text-white ">
+        <div class="p-16">
+            <box class="p-5">
                 <div class="pb-10 text-4xl font-bold">About the Book</div>
                 <p>
                     Treasure's Gift is published as a quality hardcover book, with durable pages. I wanted a a high-quality
