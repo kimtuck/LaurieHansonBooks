@@ -4,12 +4,14 @@ import { formatPrice } from './pricing';
 const liveClientId = 'AZST4alfX8Pm2K1Iw55j7-QfRdCdSi-Yt4WuOLJ9orkmIhMC-obTIcVhtC82Bl9LnQJsJ0Jihtq6XDpR';
 // const secret = 'ENbbjmSsyF5bAiW8sdlMjDJSNuNxYkka10gd34juHPrR_jbRnkOV1gqVoFWly9dl07BQk9tgSrJMVlNR';
 
-const useSandbox = true;
+let useSandbox = false;
+// eslint-disable-next-line
+if (process.env.VUE_APP_SANDBOX) {
+    console.log('Use sandbox');
+    useSandbox = true;
+}
 
 const clientId = useSandbox ? 'sb' : liveClientId;
-// const sandboxAccount = 'sb-1nykf590489@business.example.com';
-
-// const sbClientId = 'sb';
 
 const installPayPal = async function() {
     return await loadScript({ 'client-id': clientId, 'disable-funding': 'credit', 'enable-funding': 'venmo' });
