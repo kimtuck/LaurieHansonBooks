@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-row mb-2">
         <div class="w-40 font-bold min-w-40 whitespace-nowrap">{{ label }}</div>
-        <div>{{ value }}</div>
+        <div class="ml-3">{{ value }}</div>
     </div>
 </template>
 

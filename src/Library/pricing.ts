@@ -25,7 +25,6 @@ const shippingTable = [
 
 const shipping = (quantity: number) => {
     const entry = shippingTable.find(x => quantity <= x.upTo) || shippingTable[0];
-    console.log('q', quantity, entry.upTo);
     return quantity * entry.shippingPer + entry.shippingFixed;
 };
 

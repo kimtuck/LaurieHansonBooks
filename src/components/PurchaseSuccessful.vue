@@ -5,6 +5,8 @@
                 >I'll mail out your {{ quantity === 1 ? 'book' : 'books' }} in the next couple of days. It will take about a
                 week to arrive.</span
             >
+
+            <img class="mt-4 mb-4 ml-auto mr-auto" src="@assets/Treasure-ball.png" />
         </group>
         <order-summary />
     </div>

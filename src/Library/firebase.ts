@@ -17,7 +17,6 @@ const initFirebase = asyncOnce(() => {
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     db = firebase.firestore();
-    console.log('firebase initialized');
 });
 
 const logOrderInformation = async (order: any) => {

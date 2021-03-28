@@ -16,6 +16,7 @@
                 :value="dedication"
             />
             <item label="Ship to:" value="" />
+            <item label="Name" :value="shippingTo.name" />
             <item label="Address" :value="shippingTo.address_line_1" />
             <item label="City" :value="shippingTo.admin_area_2" />
             <item label="State" :value="shippingTo.admin_area_1" />
@@ -41,7 +42,6 @@ export default defineComponent({
         ...mapGetters(['quantity', 'dedications', 'shippingTo', 'shippingPrice', 'shippingBillId']),
         price() {
             const x = this.shippingPrice;
-            console.log(x);
             const y = Number.parseFloat(x);
             return `$${formatPrice(y)}`;
         }

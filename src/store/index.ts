@@ -42,13 +42,7 @@ export default createStore({
         viewingState: state => state.viewingState,
         quantity: state => state.quantity,
         orderForm: state => state.orderForm,
-        orderFormValid: state =>
-            state.orderForm.name &&
-            state.orderForm.email &&
-            state.orderForm.address &&
-            state.orderForm.city &&
-            state.orderForm.state &&
-            state.orderForm.zip,
+        orderFormValid: state => state.orderForm.name && state.orderForm.email,
         dedication: state => (index: number) => state.dedications[index],
         dedications: state => state.dedications.slice(0, state.quantity),
         showCompleteFormMsg: (state, getters) => !getters.orderFormValid && state.showCompleteFormMsg,
@@ -78,7 +72,11 @@ export default createStore({
         originalPrice: state => state.discount.originalPrice,
         shippingPrice: state => state.details.purchase_units[0].amount.value,
         shippingTo: state => {
-            return state.details.purchase_units[0].shipping.address;
+            return {
+                ...state.details.purchase_units[0].shipping.address,
+                // @ts-expect-error
+                name: state.details.purchase_units[0].shipping.name.full_name
+            };
         },
         shippingBillId: state => {
             return state.details.purchase_units[0].soft_descriptor;
@@ -106,7 +104,6 @@ export default createStore({
         purchaseSuccessful(state, details) {
             state.viewingState = ViewingState.SuccessfulPurchase;
             state.details = details;
-            console.log(JSON.stringify(details));
         },
         viewing(state, viewingState) {
             state.viewingState = viewingState;
@@ -152,7 +149,6 @@ export default createStore({
                     label: 'paypal'
                 },
                 createOrder(data: any, actions: any) {
-                    console.log('createOrder', getters.orderId, getters.quantity, getters.selectedOrderOption);
                     return actions.order.create(purchaseConfig(getters.orderId, getters.selectedOrderOption));
                 },
                 onClick: async (data: any, actions: any) => {
@@ -171,6 +167,7 @@ export default createStore({
                     // This function captures the funds from the transaction.
                     // await dispatch('viewingSuccessfulPurchase');
                     return actions.order.capture().then(async function(details: any) {
+                        console.log(details);
                         await dispatch('completedPurchase', details);
                         await dispatch('hideSpinner');
                     });

@@ -33,7 +33,6 @@ const items = (selectedOption: any) => [
 ];
 
 const purchaseConfig = (orderId: any, selectedOption: any) => {
-    console.log('purchaseConfig', orderId, selectedOption);
     const payload = {
         purchase_units: [
             {

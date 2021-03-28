@@ -1,13 +1,6 @@
 <template>
     <div>
-        <order-form
-            v-model:name="name"
-            v-model:email="email"
-            v-model:address="address"
-            v-model:city="city"
-            v-model:state="state"
-            v-model:zip="zip"
-        /></div
+        <order-form v-model:name="name" v-model:email="email" /></div
 ></template>
 
 <script lang="ts">
@@ -39,11 +32,7 @@ export default defineComponent({
     computed: {
         ...mapGetters(['orderForm']),
         name: d('name'),
-        email: d('email'),
-        address: d('address'),
-        city: d('city'),
-        state: d('state'),
-        zip: d('zip')
+        email: d('email')
     },
     methods: {
         ...mapActions(['updateOrderForm'])
