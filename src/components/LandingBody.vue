@@ -5,8 +5,8 @@
             author="Stephanie"
         />
         <div class="p-16">
-            <box class="p-5">
-                <div class="pb-10 text-4xl font-bold">The Story</div>
+            <box class="p-5 bg-white">
+                <div class="pb-10 text-4xl font-bold ">The Story</div>
                 <p>
                     Treasure loves her best friend, Annie. One day, Annie hears some sad news -- Annie's family is moving.
                     Annie is worried that she won't have any friends in the new neighborhood, and her birthday is only two
@@ -25,7 +25,7 @@
             author="Mark"
         />
         <div class="p-16">
-            <box class="p-5">
+            <box class="p-5 bg-white">
                 <div class="pb-10 text-4xl font-bold">About the Book</div>
                 <p>
                     Treasure's Gift is published as a quality hardcover book, with durable pages. I wanted a a high-quality
@@ -34,14 +34,14 @@
                 </p>
                 <p>
                     Treasure's Gift is a fully illustrated chapter book, with 36 pages divided into seven chapters. The story
-                    written for readers in first or second grade, and can be enjoyed by young children of all ages. The main
-                    characters in the story are Annie, a young girl, and her very special friend Treasure, a Golden
+                    is written for readers in first or second grade, and can be enjoyed by young children of all ages. The
+                    main characters in the story are Annie, a young girl, and her very special friend Treasure, a Golden
                     Retriever. It captures the essence of that special bond that you have when you grow up with a dog in the
                     family.
                 </p>
                 <p>
-                    This story will appeal to young who loves dogs (especially Golden Retrievers) and anyone who had a very
-                    special dog in their life.
+                    This story will appeal to youngsters who loves dogs (especially Golden Retrievers) and anyone who had a
+                    very special dog in their life.
                 </p>
                 <p>
                     Each book will be signed by the author, and you can have a special dedication to the child you're giving
@@ -52,7 +52,8 @@
             </box>
         </div>
         <quote-box
-            body='I gave this book to the children of 3 of my friends and they all said it was the "best gift ever!" Parents loved it too! and said the children keep reading it over and over'
+            body='I gave this book to the children of 3 of my friends and they all said it was the "best gift ever!" Parents loved it too! and said the children keep reading it over and over!'
+            author="Susan"
         />
     </div>
 </template>

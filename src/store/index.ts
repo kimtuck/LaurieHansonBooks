@@ -82,7 +82,8 @@ export default createStore({
         },
         shippingBillId: state => {
             return state.details.purchase_units[0].soft_descriptor;
-        }
+        },
+        discount: state => state.discount
     },
     mutations: {
         paypalInstance(state, paypal) {

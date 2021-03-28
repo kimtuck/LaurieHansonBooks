@@ -21,7 +21,10 @@
                 <group v-if="showCompleteFormMsg" type="alert" label="Contact/Shipping information is incomplete">
                     <div>Please complete the above form</div>
                 </group>
-                <group label="Payment options">
+                <group label="Payment">
+                    <div class="text-lg">
+                        Payments are secured, encrypted, and processed by PalPal. We never see your payment details.
+                    </div>
                     <div id="paypal-buttons" class="w-1/2 m-auto" />
                     <amazon-purchase />
                 </group>

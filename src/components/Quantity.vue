@@ -1,5 +1,6 @@
 <template>
-    <group label="Order Quantity:">
+    <group label="">
+        <div class="text-red-600">Coupon Code applied: {{ couponCode }}</div>
         <div>Prices reflect {{ percentSavings }}% off of the ${{ originalPrice }} regular price</div>
 
         <radio-button-group id="radio" v-model="quantity" :options="options">
@@ -46,6 +47,11 @@ export default defineComponent({
             default: 12,
             required: true,
             type: Number
+        },
+        couponCode: {
+            default: '',
+            required: true,
+            type: String
         }
     },
     data() {
