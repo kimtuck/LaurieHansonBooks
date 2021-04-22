@@ -25,6 +25,7 @@ const logOrderInformation = async (order: any) => {
         .doc(order.orderId)
         .set({ ...order, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
         .catch(function(error: any) {
+            // eslint-disable-next-line
             console.error('Error writing new message to database', error);
         });
 };
