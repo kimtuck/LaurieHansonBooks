@@ -167,7 +167,6 @@ export default createStore({
                     // This function captures the funds from the transaction.
                     // await dispatch('viewingSuccessfulPurchase');
                     return actions.order.capture().then(async function(details: any) {
-                        console.log(details);
                         await dispatch('completedPurchase', details);
                         await dispatch('hideSpinner');
                     });
@@ -175,6 +174,7 @@ export default createStore({
                 async onCancel() {
                     await dispatch('cancelPurchase');
                 },
+                // eslint-disable-next-line
                 onError: () => console.log('On error')
             };
             // @ts-expect-error

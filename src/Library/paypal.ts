@@ -7,6 +7,7 @@ const liveClientId = 'AZST4alfX8Pm2K1Iw55j7-QfRdCdSi-Yt4WuOLJ9orkmIhMC-obTIcVhtC
 let useSandbox = false;
 // eslint-disable-next-line
 if (process.env.VUE_APP_SANDBOX) {
+    // eslint-disable-next-line
     console.log('Use sandbox');
     useSandbox = true;
 }
