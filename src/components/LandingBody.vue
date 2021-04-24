@@ -14,9 +14,9 @@
                 </p>
                 <p>
                     Treasure can sense that Annie is sad. She tries hard to make Annie happy, but without friends, it will be
-                    a very lonly birthday party.
+                    a very lonely birthday party.
                 </p>
-                <p>Can Treasure help Annie make new friends? Of course -- Treasure has a plan!/</p>
+                <p>Can Treasure help Annie make new friends? Of course -- Treasure has a plan!</p>
             </box>
         </div>
 
