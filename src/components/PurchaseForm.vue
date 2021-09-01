@@ -1,7 +1,7 @@
 <template>
     <div>
         <quote>
-            <template #quote>
+            <template #quote class="hidden sm-visible">
                 I'm delighted that you've chosen to purchase Treasure's Gift. I expect that you will enjoy reading the book
                 as much as I have enjoyed writing it.
             </template>

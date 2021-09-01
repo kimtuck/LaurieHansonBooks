@@ -1,11 +1,11 @@
 const originalPrice = 16.95;
-const salePrice = 7.95;
-const percentSavings = Math.floor((1 - 7.95 / 16.95) * 100);
-const couponCode = 'SPRING';
+const salePrice = 5.0;
+const percentSavings = Math.floor((1 - 5.0 / 16.95) * 100);
+const couponCode = 'STATEFAIR';
 
 const discountProps = {
     couponCode,
-    description: `Spring Sale! Use coupon code ${couponCode} to save ${percentSavings}%`,
+    description: `State Fair Sale! Use coupon code ${couponCode} to save ${percentSavings}%`,
     salePrice,
     originalPrice,
     percentSavings
