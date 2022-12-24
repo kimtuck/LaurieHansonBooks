@@ -1,9 +1,6 @@
 /* eslint-disable */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
-import TreasuresGiftView from '../views/TreasuresGiftView.vue';
-import GoodGirlKarmaView from '../views/GoodGirlKarmaView.vue';
-
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -14,17 +11,22 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/TreasuresGift',
         name: 'Treasures Gift',
-        component: TreasuresGiftView
+        component: () => import(/* webpackChunkName: "treasuresgift" */ '../views/TreasuresGiftView.vue')
     },
     {
         path: '/GoodGirlKarma',
         name: 'Good Girl Karma',
-        component: GoodGirlKarmaView
+        component: () => import(/* webpackChunkName: "goodgirlkarma" */ '../views/GoodGirlKarmaView.vue')
     },
     {
         path: '/purchase',
         name: 'Purchase',
         component: () => import(/* webpackChunkName: "purchase" */ '../views/Purchase.vue')
+    },
+    {
+        path: '/PurchaseNew',
+        name: 'PurchaseNew',
+        component: () => import(/* webpackChunkName: "purchasenew" */ '../views/PurchaseNew.vue')
     },
     {
         path: '/about',

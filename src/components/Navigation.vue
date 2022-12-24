@@ -31,8 +31,9 @@ export default defineComponent({
             routes: [
                 { to: '/', label: 'Home' },
                 { to: '/GoodGirlKarma', label: 'Good Girl Karma' },
-                { to: '/TreasuresGift', label: 'Treasures Gift' },
-                { to: '/Purchase', label: 'Purchase' }
+                { to: '/TreasuresGift', label: "Treasure's Gift" },
+                { to: '/Purchase', label: 'Purchase' },
+                { to: '/PurchaseNew', label: 'Purchase (new)' }
             ]
         };
     }
