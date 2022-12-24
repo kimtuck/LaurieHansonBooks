@@ -11,8 +11,9 @@
             </div>
             <div class="flex content-center justify-between w-full pt-2 md:w-1/2 md:justify-end">
                 <ul class="flex items-center justify-between flex-1 list-reset md:flex-none">
-                    <li v-for="route in routes" :key="route.to" class="mr-3 text-2xl hover:text-purple-200">
+                    <li v-for="(route, index) in routes" :key="route.to" class="mr-3 text-2xl hover:text-purple-200">
                         <router-link :to="route.to">{{ route.label }}</router-link>
+                        <span v-if="index !== routes.length - 1"> | </span>
                     </li>
                 </ul>
             </div>
@@ -29,6 +30,8 @@ export default defineComponent({
         return {
             routes: [
                 { to: '/', label: 'Home' },
+                { to: '/GoodGirlKarma', label: 'Good Girl Karma' },
+                { to: '/TreasuresGift', label: 'Treasures Gift' },
                 { to: '/Purchase', label: 'Purchase' }
             ]
         };

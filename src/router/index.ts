@@ -1,12 +1,25 @@
 /* eslint-disable */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
+import TreasuresGiftView from '../views/TreasuresGiftView.vue';
+import GoodGirlKarmaView from '../views/GoodGirlKarmaView.vue';
+
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
         name: 'Home',
         component: Home
+    },
+    {
+        path: '/TreasuresGift',
+        name: 'Treasures Gift',
+        component: TreasuresGiftView
+    },
+    {
+        path: '/GoodGirlKarma',
+        name: 'Good Girl Karma',
+        component: GoodGirlKarmaView
     },
     {
         path: '/purchase',
