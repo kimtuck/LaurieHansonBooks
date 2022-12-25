@@ -7,8 +7,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import PurchaseSuccessfulNew from '@/components/PurchaseSuccessfulNew.vue';
-import PurchaseFormNew from '@/components/PurchaseFormNew.vue';
+import PurchaseSuccessfulNew from '@/components/purchasenew/PurchaseSuccessfulNew.vue';
+import PurchaseFormNew from '@/components/purchasenew/PurchaseFormNew.vue';
 import { mapGetters, mapActions } from 'vuex';
 import { ViewingState } from '@/store/index';
 

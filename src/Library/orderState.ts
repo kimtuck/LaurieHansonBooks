@@ -1,7 +1,7 @@
-const orderState = {
-    BeginPurchase: 'BeginPurchase',
-    SuccessfulPurchase: 'SuccessfulPurchase',
-    CancelledPurchase: 'CancelledPurchase'
+enum OrderState {
+    BeginPurchase,
+    SuccessfulPurchase,
+    CancelledPurchase
 };
 
-export default orderState;
+export default OrderState;

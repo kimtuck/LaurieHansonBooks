@@ -8,8 +8,9 @@ import {
     logCancelledOrderInformation
 } from '@/Library/firebase';
 import { v4 as uuidv4 } from 'uuid';
-import orderState from '@/Library/orderState';
+import OrderState from '@/Library/OrderState';
 import discountProps from '@/Library/discountProps';
+import OrderDetails from '@/Library/OrderDetails';
 
 const ViewingState = {
     Form: 'form',
@@ -34,7 +35,12 @@ export default createStore({
         },
         showCompleteFormMsg: false,
         details: { purchase_units: [{ soft_descriptor: '', amount: { value: 0 }, shipping: { address: {} } }] },
-        discount: discountProps
+        discount: discountProps,
+
+        // New purchase page
+        orderDetails: new OrderDetails(),
+        orderState: OrderState.BeginPurchase,
+        maxBooksPerOrder: 5
     },
     getters: {
         showSpinner: state => state.showSpinner,
@@ -51,7 +57,7 @@ export default createStore({
         },
         orderInformation: (state, getters) => ({
             orderId: state.orderId,
-            orderState: orderState.BeginPurchase,
+            orderState: OrderState.BeginPurchase,
             quantity: state.quantity,
             dedications: getters.dedications,
             contact: state.orderForm
@@ -81,7 +87,10 @@ export default createStore({
         shippingBillId: state => {
             return state.details.purchase_units[0].soft_descriptor;
         },
-        discount: state => state.discount
+        discount: state => state.discount,
+
+        // New purchase page
+        orderDetails: state => state.orderDetails,
     },
     mutations: {
         paypalInstance(state, paypal) {
@@ -166,7 +175,7 @@ export default createStore({
                     await dispatch('showSpinner');
                     // This function captures the funds from the transaction.
                     // await dispatch('viewingSuccessfulPurchase');
-                    return actions.order.capture().then(async function(details: any) {
+                    return actions.order.capture().then(async function (details: any) {
                         await dispatch('completedPurchase', details);
                         await dispatch('hideSpinner');
                     });
@@ -191,17 +200,25 @@ export default createStore({
         async completedPurchase({ commit, getters }, details) {
             commit('purchaseSuccessful', details);
             await initFirebase();
-            await logCompletedOrderInformation(getters.orderInformation.orderId, orderState.SuccessfulPurchase, details);
+            await logCompletedOrderInformation(getters.orderInformation.orderId, OrderState.SuccessfulPurchase, details);
         },
         async cancelPurchase({ getters }) {
             await initFirebase();
-            await logCancelledOrderInformation(getters.orderInformation.orderId, orderState.CancelledPurchase);
+            await logCancelledOrderInformation(getters.orderInformation.orderId, OrderState.CancelledPurchase);
         },
         async showSpinner({ commit }) {
             commit('showSpinner', true);
         },
         async hideSpinner({ commit }) {
             commit('showSpinner', false);
+        },
+
+        // new purchase form
+        resetPurchaseFormNew() {
+            alert('needs implementation')
+        },
+        purchaseNew() {
+            alert('needs implementation')
         }
     }
 });
