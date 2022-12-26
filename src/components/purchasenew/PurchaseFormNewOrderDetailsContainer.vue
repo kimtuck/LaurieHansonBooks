@@ -1,8 +1,6 @@
 <template>
     <div>
-        <quantity
-            orderDetails="orderDetails"
-        />
+        <quantity orderDetails="orderDetails" />
     </div>
 </template>
 
@@ -11,17 +9,17 @@ import { defineComponent } from 'vue';
 import Quantity from '@/components/Quantity.vue';
 import { mapActions, mapGetters } from 'vuex';
 import OrderDetails from '@/Library/OrderDetails';
-import cloneDeep from 'lodash/clonedeep';
+import cloneDeep from 'lodash.clonedeep';
 
 export default defineComponent({
     name: 'QuantityContainer',
     components: {
-        Quantity
+        Quantity,
     },
     props: {
         orderDetails: {
             type: OrderDetails,
-            required: true
+            required: true,
         },
     },
     computed: {
@@ -29,8 +27,8 @@ export default defineComponent({
     },
     methods: {
         updateOrderDetails(orderDetails: OrderDetails) {
-            this.$emit('input', cloneDeep(orderDetails))
-        }
-    }
+            this.$emit('input', cloneDeep(orderDetails));
+        },
+    },
 });
 </script>

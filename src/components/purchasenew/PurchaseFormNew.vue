@@ -1,25 +1,21 @@
 <template>
     <div>
-
-        <div>Order Details: {{orderDetails}} </div>
+        <div>Order Details: {{ orderDetails }}</div>
         <quote>
             <template #quote class="hidden sm-visible">
-                I'm delighted that you've chosen to purchase a book. I expect that you will enjoy reading the book
-                as much as I have enjoyed writing it.
+                I'm delighted that you've chosen to purchase a book. I expect that you will enjoy reading the book as much as
+                I have enjoyed writing it.
             </template>
-            <template #cite>
-                Laurie
-            </template>
+            <template #cite> Laurie </template>
         </quote>
 
-
-        <div class="flex flex-row flex-auto ">
+        <div class="flex flex-row flex-auto">
             <div class="flex-1">
                 <!-- left side -->
                 <purchase-form-new-order-details-container :orderDetails="orderDetails" @input="updateOrderDetails" />
             </div>
 
-            <div class="flex-1 ">
+            <div class="flex-1">
                 <!-- right side -->
                 <order-form-container />
                 <group v-if="showCompleteFormMsg" type="alert" label="Contact/Shipping information is incomplete">
@@ -45,8 +41,7 @@ import Quote from '@/components/Quote.vue';
 import AmazonPurchase from '@/components/AmazonPurchase.vue';
 import { mapGetters, mapActions } from 'vuex';
 import OrderDetails from '@/Library/OrderDetails';
-import OrderState from '@/Library/OrderState';
-import cloneDeep from 'lodash/clonedeep'
+import cloneDeep from 'lodash.clonedeep';
 
 export default defineComponent({
     name: 'Purchase',
@@ -54,17 +49,17 @@ export default defineComponent({
         Quote,
         PurchaseFormNewOrderDetailsContainer,
         Group,
-        AmazonPurchase
+        AmazonPurchase,
     },
     props: {
         orderDetails: {
             type: OrderDetails,
-            required: true
+            required: true,
         },
         orderState: {
             type: Number,
-            required: true
-        }
+            required: true,
+        },
     },
     computed: {
         ...mapGetters(['orderDetails', 'viewingState', 'quantity', 'showCompleteFormMsg']),
@@ -75,8 +70,8 @@ export default defineComponent({
     methods: {
         ...mapActions(['showPaypalButtons']),
         updateOrderDetails(orderDetails: OrderDetails) {
-            this.$emit('input', cloneDeep(orderDetails))
-        }
-    }
+            this.$emit('input', cloneDeep(orderDetails));
+        },
+    },
 });
 </script>
