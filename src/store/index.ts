@@ -215,10 +215,10 @@ export default createStore({
 
         // new purchase form
         resetPurchaseFormNew() {
-            alert('needs implementation')
+            // alert('needs implementation')
         },
         purchaseNew() {
-            alert('needs implementation')
+            // alert('needs implementation')
         }
     }
 });
