@@ -8,7 +8,7 @@ import {
     logCancelledOrderInformation
 } from '@/Library/firebase';
 import { v4 as uuidv4 } from 'uuid';
-import OrderState from '@/Library/OrderState';
+import OrderState from '@/Library/orderState';
 import discountProps from '@/Library/discountProps';
 import OrderDetails from '@/Library/OrderDetails';
 

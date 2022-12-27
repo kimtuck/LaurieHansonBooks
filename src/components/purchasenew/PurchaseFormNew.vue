@@ -41,7 +41,7 @@ import Quote from '@/components/Quote.vue';
 import AmazonPurchase from '@/components/AmazonPurchase.vue';
 import { mapGetters, mapActions } from 'vuex';
 import OrderDetails from '@/Library/OrderDetails';
-import cloneDeep from 'lodash.clonedeep';
+import { cloneDeep } from 'lodash';
 
 export default defineComponent({
     name: 'Purchase',

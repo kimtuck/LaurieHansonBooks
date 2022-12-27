@@ -15,7 +15,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import OrderDetails from '@/Library/OrderDetails';
-import cloneDeep from 'lodash.clonedeep';
+import { cloneDeep } from 'lodash';
+
 import dropdown from 'vue-dropdowns';
 
 export default defineComponent({

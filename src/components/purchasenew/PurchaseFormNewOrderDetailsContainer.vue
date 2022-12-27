@@ -7,9 +7,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Quantity from '@/components/Quantity.vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import OrderDetails from '@/Library/OrderDetails';
-import cloneDeep from 'lodash.clonedeep';
+import { cloneDeep } from 'lodash';
+
 
 export default defineComponent({
     name: 'QuantityContainer',
