@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- <div>Order Details: {{ orderDetails }}</div> -->
+        <div>Order Details: {{ orderDetails }}</div>
         <quote>
             <template #quote class="hidden sm-visible">
                 I'm delighted that you've chosen to purchase a book. I expect that you will enjoy reading the book as much as
@@ -20,7 +20,7 @@
 
             <div class="flex-1">
                 <!-- right side -->
-                <order-form-container />
+                <order-form-new-container />
                 <group v-if="showCompleteFormMsg" type="alert" label="Contact/Shipping information is incomplete">
                     <div>Please complete the above form</div>
                 </group>
@@ -44,7 +44,7 @@ import Quote from '@/components/Quote.vue';
 import AmazonPurchase from '@/components/AmazonPurchase.vue';
 import { mapActions } from 'vuex';
 import OrderDetails from '@/Library/OrderDetails';
-import OrderFormContainer from '../OrderFormContainer.vue';
+import OrderFormNewContainer from './OrderFormNewContainer.vue';
 import OrderDetailItemType from '../../types/OrderDetailItem';
 
 export default defineComponent({
@@ -54,7 +54,7 @@ export default defineComponent({
         PurchaseFormNewOrderDetailsContainer,
         Group,
         AmazonPurchase,
-        OrderFormContainer
+        OrderFormNewContainer
     },
     props: {
         orderDetails: {
@@ -63,6 +63,10 @@ export default defineComponent({
         },
         orderState: {
             type: Number,
+            required: true
+        },
+        showCompleteFormMsg: {
+            type: Boolean,
             required: true
         }
     },

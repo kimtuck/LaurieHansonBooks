@@ -1,7 +1,8 @@
 <template>
     <purchase-form-new
-        :orderDetails="orderDetails"
-        :orderState="orderState"
+        :order-details="orderDetails"
+        :order-state="orderState"
+        :show-complete-form-msg="showCompleteFormMsg"
         @update:orderDetailItem="xupdateOrderDetailItem"
         @purchase="onPurchase"
     />
@@ -19,7 +20,7 @@ export default defineComponent({
         PurchaseFormNew
     },
     computed: {
-        ...mapGetters(['orderDetails', 'orderState'])
+        ...mapGetters(['orderDetails', 'orderState', 'showCompleteFormMsg'])
     },
     destroyed() {
         this.resetPurchaseFormNew();
