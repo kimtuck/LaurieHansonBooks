@@ -13,11 +13,14 @@ import discountProps from '@/Library/discountProps';
 import OrderDetails from '@/Library/OrderDetails';
 import OrderDetailItemOption from '@/types/OrderDetailItemOption';
 import BookId from '@/types/BookId';
+import OrderDetailItem from '@/types/OrderDetailItem';
 
 const ViewingState = {
     Form: 'form',
     SuccessfulPurchase: 'successfulPurchase'
 };
+
+const maxBooksPerOrder = 5;
 
 export default createStore({
     state: {
@@ -40,9 +43,9 @@ export default createStore({
         discount: discountProps,
 
         // New purchase page
-        orderDetails: new OrderDetails(),
+        orderDetails: new OrderDetails(maxBooksPerOrder),
         orderState: OrderState.BeginPurchase,
-        maxBooksPerOrder: 5
+        maxBooksPerOrder
     },
     getters: {
         showSpinner: state => state.showSpinner,
@@ -128,6 +131,11 @@ export default createStore({
         },
         showSpinner(state, show) {
             state.showSpinner = show;
+        },
+        // new purchase
+        updateOrderDetailItem(state, orderDetailItem: OrderDetailItem) {
+            const ind = orderDetailItem.index;
+            state.orderDetails.bookDetails[ind] = orderDetailItem;
         }
     },
     actions: {
@@ -223,7 +231,14 @@ export default createStore({
         },
 
         // new purchase form
+
+        updateOrderDetailItem({ commit }, orderDetailItem) {
+            commit('updateOrderDetailItem', orderDetailItem);
+        },
+
         resetPurchaseFormNew() {
+            // orderDetails: new OrderDetails(maxBooksPerOrder),
+            // orderState: OrderState.BeginPurchase,
             // alert('needs implementation')
         },
         purchaseNew() {

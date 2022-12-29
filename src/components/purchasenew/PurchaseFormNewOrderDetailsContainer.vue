@@ -4,6 +4,7 @@
             :order-details="orderDetails"
             :items-to-order-options="itemsToOrderOptions"
             :order-detail-item-options="orderDetailItemOptions"
+            @update:orderDetailItem="updateOrderDetailItem"
         />
     </div>
 </template>
@@ -11,9 +12,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import OrderDetails from '@/Library/OrderDetails';
-import { cloneDeep } from 'lodash';
 import PurchaseFormNewOrderDetails from './PurchaseFormNewOrderDetails.vue';
 import { mapGetters } from 'vuex';
+import OrderDetailItemType from '../../types/OrderDetailItem';
 
 export default defineComponent({
     name: 'QuantityContainer',
@@ -30,8 +31,8 @@ export default defineComponent({
         ...mapGetters(['itemsToOrderOptions', 'orderDetailItemOptions'])
     },
     methods: {
-        updateOrderDetails(orderDetails: OrderDetails) {
-            this.$emit('input', cloneDeep(orderDetails));
+        updateOrderDetailItem(orderDetailItem: OrderDetailItemType) {
+            this.$emit('update:orderDetailItem', orderDetailItem);
         }
     }
 });

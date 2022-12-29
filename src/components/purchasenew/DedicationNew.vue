@@ -9,21 +9,24 @@ import { defineComponent } from 'vue';
 import InputArea from '@/components/InputArea.vue';
 
 export default defineComponent({
-    name: 'Dedication',
+    name: 'DedicationNew',
     components: {
         InputArea
     },
     props: {
-        modelValue: {
-            required: true,
-            type: String
+        index: {
+            type: Number,
+            required: true
         },
-        label: {
+        modelValue: {
             required: true,
             type: String
         }
     },
     computed: {
+        label(): string {
+            return `Dedication for book ${this.index +1}, if desired:`;
+        },
         dedication: {
             // @ts-expect-error
             get() {

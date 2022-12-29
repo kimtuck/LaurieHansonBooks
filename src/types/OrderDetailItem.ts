@@ -1,8 +1,9 @@
 import BookId from './BookId';
 
-interface OrderDetailItem {
+type OrderDetailItem {
+    index: number;
     bookId: BookId;
-    dedication: String;
+    dedication: string;
 };
 
 export default OrderDetailItem;

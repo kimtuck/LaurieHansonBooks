@@ -1,9 +1,9 @@
 <template>
-    <purchase-form-new 
-    :orderDetails="orderDetails"
-    :orderState="orderState"
-    @input="updateOrderDetails"
-    @purchase="onPurchase"
+    <purchase-form-new
+        :orderDetails="orderDetails"
+        :orderState="orderState"
+        @update:orderDetailItem="xupdateOrderDetailItem"
+        @purchase="onPurchase"
     />
 </template>
 
@@ -11,6 +11,7 @@
 import { defineComponent } from 'vue';
 import PurchaseFormNew from './PurchaseFormNew.vue';
 import { mapGetters, mapActions } from 'vuex';
+import OrderDetailItem from '@/types/OrderDetailItem';
 
 export default defineComponent({
     name: 'PurchaseFormNewContainer',
@@ -18,14 +19,16 @@ export default defineComponent({
         PurchaseFormNew
     },
     computed: {
-        ...mapGetters(['orderDetails', 'orderState']),
+        ...mapGetters(['orderDetails', 'orderState'])
     },
     destroyed() {
         this.resetPurchaseFormNew();
-
     },
     methods: {
-        ...mapActions(['resetPurchaseFormNew', 'showPaypalButtons', 'updateOrderDetails', 'purchaseNew']),
+        xupdateOrderDetailItem(orderDetailItem: OrderDetailItem) {
+            this.updateOrderDetailItem(orderDetailItem);
+        },
+        ...mapActions(['resetPurchaseFormNew', 'showPaypalButtons', 'updateOrderDetailItem', 'purchaseNew']),
 
         onPurchase() {
             this.purchaseNew();

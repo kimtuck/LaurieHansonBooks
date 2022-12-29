@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>Order Details: {{ orderDetails }}</div>
+        <!-- <div>Order Details: {{ orderDetails }}</div> -->
         <quote>
             <template #quote class="hidden sm-visible">
                 I'm delighted that you've chosen to purchase a book. I expect that you will enjoy reading the book as much as
@@ -12,7 +12,10 @@
         <div class="flex flex-row flex-auto">
             <div class="flex-1">
                 <!-- left side -->
-                <purchase-form-new-order-details-container :orderDetails="orderDetails" @input="updateOrderDetails" />
+                <purchase-form-new-order-details-container
+                    :orderDetails="orderDetails"
+                    @update:orderDetailItem="updateOrderDetailItem"
+                />
             </div>
 
             <div class="flex-1">
@@ -41,7 +44,8 @@ import Quote from '@/components/Quote.vue';
 import AmazonPurchase from '@/components/AmazonPurchase.vue';
 import { mapActions } from 'vuex';
 import OrderDetails from '@/Library/OrderDetails';
-import { cloneDeep } from 'lodash';
+import OrderFormContainer from '../OrderFormContainer.vue';
+import OrderDetailItemType from '../../types/OrderDetailItem';
 
 export default defineComponent({
     name: 'Purchase',
@@ -50,25 +54,26 @@ export default defineComponent({
         PurchaseFormNewOrderDetailsContainer,
         Group,
         AmazonPurchase,
+        OrderFormContainer
     },
     props: {
         orderDetails: {
             type: OrderDetails,
-            required: true,
+            required: true
         },
         orderState: {
             type: Number,
-            required: true,
-        },
+            required: true
+        }
     },
     created() {
         this.showPaypalButtons('#paypal-buttons');
     },
     methods: {
         ...mapActions(['showPaypalButtons']),
-        updateOrderDetails(orderDetails: OrderDetails) {
-            this.$emit('input', cloneDeep(orderDetails));
-        },
-    },
+        updateOrderDetailItem(orderDetailItem: OrderDetailItemType) {
+            this.$emit('update:orderDetailItem', orderDetailItem);
+        }
+    }
 });
 </script>

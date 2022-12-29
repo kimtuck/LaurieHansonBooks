@@ -1,13 +1,18 @@
-import { BookDetails } from './BookDetails';
-import BookType from './BookType';
+import BookId from '@/types/BookId';
+import OrderDetailItem from '@/types/OrderDetailItem';
 
 export default class OrderDetails {
     books: number;
 
-    bookDetails: BookDetails[];
+    // eslint-disable-next-line no-undef
+    bookDetails: OrderDetailItem[];
 
-    constructor() {
+    constructor(maxBooksPerOrder: number) {
         this.books = 1;
-        this.bookDetails = [{ bookType: BookType.GoodGirlKarma, dedication: '' }];
+        this.bookDetails = [...Array(maxBooksPerOrder).keys()].map(index => ({
+            index,
+            bookId: BookId.GoodGirlKarma,
+            dedication: ''
+        }));
     }
 }
