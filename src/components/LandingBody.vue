@@ -6,7 +6,7 @@
         />
         <div class="p-16">
             <box class="p-5 bg-white">
-                <div class="pb-10 text-4xl font-bold ">The Story</div>
+                <div class="pb-10 text-4xl font-bold ">Treasure's Gift: The Story</div>
                 <p>
                     Treasure loves her best friend, Annie. One day, Annie hears some sad news -- Annie's family is moving.
                     Annie is worried that she won't have any friends in the new neighborhood, and her birthday is only two
@@ -26,7 +26,7 @@
         />
         <div class="p-16">
             <box class="p-5 bg-white">
-                <div class="pb-10 text-4xl font-bold">About the Book</div>
+                <div class="pb-10 text-4xl font-bold">Treaure's Gift: About the Book</div>
                 <p>
                     Treasure's Gift is published as a quality hardcover book, with durable pages. I wanted a a high-quality
                     book that is meant to be read over and over again. It's slightly larger than most children's books, which

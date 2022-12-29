@@ -39,7 +39,7 @@ import PurchaseFormNewOrderDetailsContainer from './PurchaseFormNewOrderDetailsC
 import Group from '@/components/Group.vue';
 import Quote from '@/components/Quote.vue';
 import AmazonPurchase from '@/components/AmazonPurchase.vue';
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import OrderDetails from '@/Library/OrderDetails';
 import { cloneDeep } from 'lodash';
 
@@ -60,9 +60,6 @@ export default defineComponent({
             type: Number,
             required: true,
         },
-    },
-    computed: {
-        ...mapGetters(['orderDetails', 'viewingState', 'quantity', 'showCompleteFormMsg']),
     },
     created() {
         this.showPaypalButtons('#paypal-buttons');

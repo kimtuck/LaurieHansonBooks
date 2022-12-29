@@ -11,6 +11,8 @@ import { v4 as uuidv4 } from 'uuid';
 import OrderState from '@/Library/orderState';
 import discountProps from '@/Library/discountProps';
 import OrderDetails from '@/Library/OrderDetails';
+import OrderDetailItemOption from '@/types/OrderDetailItemOption';
+import BookId from '@/types/BookId';
 
 const ViewingState = {
     Form: 'form',
@@ -91,6 +93,13 @@ export default createStore({
 
         // New purchase page
         orderDetails: state => state.orderDetails,
+        itemsToOrderOptions: state => {
+            return [...Array(state.maxBooksPerOrder).keys()].map(x => ({ quantity: x + 1, value: x + 1 }));
+        },
+        orderDetailItemOptions: (): OrderDetailItemOption[] => [
+            { value: BookId.GoodGirlKarma, name: BookId.GoodGirlKarma },
+            { value: BookId.TreasuresGift, name: BookId.TreasuresGift }
+        ]
     },
     mutations: {
         paypalInstance(state, paypal) {
@@ -175,7 +184,7 @@ export default createStore({
                     await dispatch('showSpinner');
                     // This function captures the funds from the transaction.
                     // await dispatch('viewingSuccessfulPurchase');
-                    return actions.order.capture().then(async function (details: any) {
+                    return actions.order.capture().then(async function(details: any) {
                         await dispatch('completedPurchase', details);
                         await dispatch('hideSpinner');
                     });

@@ -1,59 +1,60 @@
 <template>
     <div>
-        <dropdown
-            class="my-dropdown-toggle"
-            :options="arrayOfObjects"
-            :selected="object"
-            v-on:updateOption="methodToRunOnSelect"
-            :placeholder="'Select an Item'"
-            :closeOnOutsideClick="boolean"
+        <radio-button-group
+            id="radio"
+            v-model="itemsToPurchase"
+            :options="itemsToOrderOptions"
+            :horizontal="true"
+            label="Number of books to purchase:"
         >
-        </dropdown>
+            <template #default="slotProps">
+                <div class="mr-8">{{ slotProps.option.value }}</div>
+            </template>
+        </radio-button-group>
+        <div>itemsToPurchase {{ itemsToPurchase }}</div>
+        <div v-for="item in itemsToPurchase" :key="item">
+            <order-detail-item
+                :index="item"
+                :order-detail-item="orderDetails.bookDetails[item]"
+                :order-detail-item-options="orderDetailItemOptions"
+            />
+        </div>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import OrderDetails from '@/Library/OrderDetails';
+import OrderDetailItem from './OrderDetailItem.vue'
+import RadioButtonGroup from '../RadioButtonGroup.vue';
 import { cloneDeep } from 'lodash';
-
-import dropdown from 'vue-dropdowns';
 
 export default defineComponent({
     name: 'PurchaseFormNewOrderDetails',
-    components: {},
-    data() {
-        return {
-            //arrayOfObjects: [1,2,3,4,5].map(x=> { id: 1, name: `${x} book${x === 1 ? '' : 's'}`})
-        };
-    },
+    components: { RadioButtonGroup, OrderDetailItem },
     props: {
         orderDetails: {
             type: OrderDetails,
-            required: true,
+            required: true
         },
+        itemsToOrderOptions: {
+            type: Array,
+            required: true
+        },
+        orderDetailItemOptions: {
+            type: Array,
+            required: true
+        }
     },
-    computed: {},
+    data() {
+        return {
+            itemsToPurchase: 1
+        };
+    },
     methods: {
         updateOrderDetails(orderDetails: OrderDetails) {
             this.$emit('input', cloneDeep(orderDetails));
-        },
-    },
+        }
+    }
 });
-</script>'
-'
-<style scoped>
-.my-dropdown-toggle {
-    border-radius: 5px;
-
-    ::v-deep .dropdown-toggle {
-        color: tomato;
-        font-size: 25px;
-        font-weight: 800;
-    }
-
-    ::v-deep .dropdown-toggle-placeholder {
-        color: #c4c4c4;
-    }
-}
-</style>
+</script>
