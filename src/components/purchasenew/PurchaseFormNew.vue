@@ -20,6 +20,7 @@
 
             <div class="flex-1">
                 <!-- right side -->
+                <pricing-new :order-details="orderDetails" />
                 <order-form-new-container />
                 <group v-if="showCompleteFormMsg" type="alert" label="Contact/Shipping information is incomplete">
                     <div>Please complete the above form</div>
@@ -46,6 +47,7 @@ import { mapActions } from 'vuex';
 import OrderDetails from '@/Library/OrderDetails';
 import OrderFormNewContainer from './OrderFormNewContainer.vue';
 import OrderDetailItemType from '../../types/OrderDetailItem';
+import PricingNew from './PricingNew.vue';
 
 export default defineComponent({
     name: 'Purchase',
@@ -54,7 +56,8 @@ export default defineComponent({
         PurchaseFormNewOrderDetailsContainer,
         Group,
         AmazonPurchase,
-        OrderFormNewContainer
+        OrderFormNewContainer,
+        PricingNew
     },
     props: {
         orderDetails: {
