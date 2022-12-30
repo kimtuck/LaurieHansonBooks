@@ -25,7 +25,7 @@
             <div class="m-4">A funny, thoughful story about a Golden Retriever and her best friend.</div>
         </div>
 
-        <buy-button class="p-2" />
+        <buy-button class="p-2" label="Buy 'Treasure's Gift'"/>
     </div>
 </template>
 

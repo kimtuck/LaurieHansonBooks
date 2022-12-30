@@ -30,7 +30,7 @@ export default defineComponent({
         return {
             routes: [
                 { to: '/', label: 'Home' },
-                { to: '/GoodGirlKarma', label: 'Good Girl Karma' },
+                { to: '/GoodGirlKarma', label: 'Good Girl, Karma' },
                 { to: '/TreasuresGift', label: "Treasure's Gift" },
                 { to: '/Purchase', label: 'Purchase' },
                 { to: '/PurchaseNew', label: 'Purchase (new)' }

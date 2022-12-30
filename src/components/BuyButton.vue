@@ -5,9 +5,8 @@
                 <button
                     class="px-4 py-2 text-4xl text-white bg-green-500 border border-black rounded shadow hover:bg-green-300 hover:text-black hover:shadow-lg"
                 >
-                    Buy Laurie's Books
+                    {{ label }}
                 </button>
-
             </div>
         </div>
     </router-link>
@@ -17,6 +16,12 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'BuyButton'
+    name: 'BuyButton',
+    props: {
+        label: {
+            type: String,
+            default: "Buy Laurie's Books"
+        }
+    }
 });
 </script>
