@@ -32,20 +32,11 @@
         </div>
 
         <div>
-            <div class="mx-6">
-                <box class="p-5 bg-white">
-                    <div class="pb-10 text-4xl font-bold ">The Story</div>
-                    <p>
-                        Karma is a good girl. She helps in many ways.
-                    </p>
-                </box>
-            </div>
-
             <div class="m-6">
                 <box class="p-5 bg-white">
                     <div class="pb-10 text-4xl font-bold">About the Book</div>
                     <p class="pb-10">
-                        Good Girl Karma is published as a quality sooftcover book, with durable pages. Each page has a short,
+                        Good Girl Karma is published as a quality softcover book, with durable pages. Each page has a short,
                         easy to read phrase on the left side, and a beautiful illustration on the right side. There are 15
                         illustrated pages.
                     </p>

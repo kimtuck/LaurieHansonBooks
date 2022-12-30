@@ -25,7 +25,7 @@
 
                 <purple-dragonfly class="w-3/4 m-2 " />
 
-                <buy-button />
+                <buy-button label="Buy 'Treasure's Gift'"/>
             </div>
         </div>
     </div>

@@ -1,6 +1,10 @@
 <template>
     <box class="m-4 p-2 bg-red-100">
-        <div>Book Cost: ${{ totalBookPrice }}</div>
+        <div class="mb-4 text-black">
+            <div>{{ goodGirlKarmPrice }}</div>
+           <div>{{ treasuresGiftPrice }}</div>
+        </div>
+        <div>Your Cost: ${{ totalBookPrice }}</div>
         <div>Shipping: ${{ totalShipping }}</div>
         <div>Total: ${{ total }}</div>
     </box>
@@ -11,6 +15,7 @@ import { defineComponent } from 'vue';
 import Box from '@/components/Box.vue';
 import { newPricing, formatPrice } from '@/Library/pricing';
 import OrderDetails from '@/Library/OrderDetails';
+import BookId from '@/types/BookId';
 
 export default defineComponent({
     name: 'PricingNew',
@@ -24,6 +29,12 @@ export default defineComponent({
         }
     },
     computed: {
+        treasuresGiftPrice(): string {
+            return newPricing.bookPrice[BookId.TreasuresGift].priceNote;
+        },
+        goodGirlKarmPrice(): string {
+            return newPricing.bookPrice[BookId.GoodGirlKarma].priceNote;
+        },
         totalBookPrice(): string {
             return formatPrice(newPricing.totalBookPrice(this.orderDetails));
         },
