@@ -1,15 +1,15 @@
 <template>
-    <box>
-        <div>Book Cost: {{ totalBookPrice }}</div>
-        <div>Shipping: {{ totalShipping }}</div>
-        <div>Total: {{ total }}</div>
+    <box class="m-4 p-2 bg-red-100">
+        <div>Book Cost: ${{ totalBookPrice }}</div>
+        <div>Shipping: ${{ totalShipping }}</div>
+        <div>Total: ${{ total }}</div>
     </box>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Box from '@/components/Box.vue';
-import { newPricing } from '@/Library/pricing';
+import { newPricing, formatPrice } from '@/Library/pricing';
 import OrderDetails from '@/Library/OrderDetails';
 
 export default defineComponent({
@@ -24,14 +24,14 @@ export default defineComponent({
         }
     },
     computed: {
-        totalBookPrice(): number {
-            return newPricing.totalBookPrice(this.orderDetails);
+        totalBookPrice(): string {
+            return formatPrice(newPricing.totalBookPrice(this.orderDetails));
         },
-        totalShipping(): number {
-            return newPricing.totalShipping(this.orderDetails);
+        totalShipping(): string {
+            return formatPrice(newPricing.totalShipping(this.orderDetails));
         },
-        total(): number {
-            return newPricing.total(this.orderDetails);
+        total(): string {
+            return formatPrice(newPricing.total(this.orderDetails));
         }
     }
 });

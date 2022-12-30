@@ -5,6 +5,7 @@
             :items-to-order-options="itemsToOrderOptions"
             :order-detail-item-options="orderDetailItemOptions"
             @update:orderDetailItem="updateOrderDetailItem"
+            @update:orderQuantity="updateOrderQuantity"
         />
     </div>
 </template>
@@ -31,6 +32,9 @@ export default defineComponent({
         ...mapGetters(['itemsToOrderOptions', 'orderDetailItemOptions'])
     },
     methods: {
+        updateOrderQuantity(quantity: number) {
+            this.$emit('update:orderQuantity', quantity)
+        },
         updateOrderDetailItem(orderDetailItem: OrderDetailItemType) {
             this.$emit('update:orderDetailItem', orderDetailItem);
         }

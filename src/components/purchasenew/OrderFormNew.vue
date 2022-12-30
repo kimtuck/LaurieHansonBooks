@@ -1,18 +1,18 @@
 <template>
-    <group>
+    <box class="m-4 p-2 bg-gray-200">
         <v-form id="app" @submit="onSubmit">
             <div class="text-2xl">Contact Information</div>
             <input-field v-model="nameValue" name="name" label="Name" :required="true" />
             <input-field v-model="emailValue" name="email" label="Email Address" :required="true" />
         </v-form>
-    </group>
+    </box>
 </template>
 
 <script lang="ts">
 import { Form as VForm } from 'vee-validate';
 import { defineComponent } from 'vue';
 import InputField from '../InputField.vue';
-import Group from '@/components/Group.vue';
+import Box from '@/components/Box.vue';
 
 const proptype = {
     type: String,
@@ -39,7 +39,7 @@ export default defineComponent({
     components: {
         VForm,
         InputField,
-        Group
+        Box
     },
     props: {
         name: proptype,

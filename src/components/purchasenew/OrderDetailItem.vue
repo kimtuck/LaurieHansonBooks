@@ -1,5 +1,5 @@
 <template>
-    <box class="m-4 p-2">
+    <box class="m-4 p-2  bg-gray-200">
         <!-- <div>orderDetailItem {{ orderDetailItem }} -- selected {{ selected }}</div> -->
         <div>Book {{ orderDetailItem.index +1 }}</div>
         <radio-button-group :id="id" v-model="selected" :options="orderDetailItemOptions">

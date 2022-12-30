@@ -1,12 +1,13 @@
 <template>
     <div>
-        <box class="m-4 p-2">
+        <box class="m-4 p-2  bg-gray-200">
             <radio-button-group
                 id="radio"
                 v-model="itemsToPurchase"
                 :options="itemsToOrderOptions"
                 :horizontal="true"
                 label="Number of books to purchase:"
+                @update:modelValue="updateOrderQuantity"
             >
                 <template #default="slotProps">
                     <div class="mr-8">{{ slotProps.option.value }}</div>
@@ -54,6 +55,9 @@ export default defineComponent({
         };
     },
     methods: {
+        updateOrderQuantity(quantity: number) {
+            this.$emit('update:orderQuantity', quantity);
+        },
         updateOderDetailItem(orderDetailItem: OrderDetailItemType) {
             this.$emit('update:orderDetailItem', orderDetailItem);
         }

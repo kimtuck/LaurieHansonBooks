@@ -95,6 +95,7 @@ export default createStore({
         discount: state => state.discount,
 
         // New purchase page
+        orderState: state => state.orderState,
         orderDetails: state => state.orderDetails,
         itemsToOrderOptions: state => {
             return [...Array(state.maxBooksPerOrder).keys()].map(x => ({ quantity: x + 1, value: x + 1 }));
@@ -133,6 +134,9 @@ export default createStore({
             state.showSpinner = show;
         },
         // new purchase
+        updateOrderQuantity(state, quantity: number) {
+            state.orderDetails.books = quantity;
+        },
         updateOrderDetailItem(state, orderDetailItem: OrderDetailItem) {
             const ind = orderDetailItem.index;
             state.orderDetails.bookDetails[ind] = orderDetailItem;
@@ -232,6 +236,9 @@ export default createStore({
 
         // new purchase form
 
+        updateOrderQuantity({commit}, quantity) {
+            commit('updateOrderQuantity', quantity)
+        },
         updateOrderDetailItem({ commit }, orderDetailItem) {
             commit('updateOrderDetailItem', orderDetailItem);
         },

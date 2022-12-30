@@ -12,26 +12,36 @@
         <div class="flex flex-row flex-auto">
             <div class="flex-1">
                 <!-- left side -->
+                <order-form-new-container />
                 <purchase-form-new-order-details-container
                     :orderDetails="orderDetails"
                     @update:orderDetailItem="updateOrderDetailItem"
+                    @update:orderQuantity="updateOrderQuantity"
                 />
             </div>
 
             <div class="flex-1">
                 <!-- right side -->
                 <pricing-new :order-details="orderDetails" />
-                <order-form-new-container />
-                <group v-if="showCompleteFormMsg" type="alert" label="Contact/Shipping information is incomplete">
+                <box
+                    class="m-4 p-2"
+                    v-if="showCompleteFormMsg"
+                    type="alert"
+                    label="Contact/Shipping information is incomplete"
+                >
                     <div>Please complete the above form</div>
-                </group>
-                <group label="Payment">
+                </box>
+                <box class="m-4 p-2 bg-red-100" label="Payment">
                     <div class="text-lg">
-                        Payments are secured, encrypted, and processed by PalPal. We never see your payment details.
+                        Payments are secured, encrypted, and processed by PayPal. We never see your payment details.
                     </div>
-                    <div id="paypal-buttons" class="w-1/2 m-auto" />
+                    <div class="w-1/2 m-auto">
+                        <div class="bg-gray-100 p-4">
+                            <div id="paypal-buttons" />
+                        </div>
+                    </div>
                     <amazon-purchase />
-                </group>
+                </box>
             </div>
         </div>
     </div>
@@ -40,7 +50,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import PurchaseFormNewOrderDetailsContainer from './PurchaseFormNewOrderDetailsContainer.vue';
-import Group from '@/components/Group.vue';
+import Box from '@/components/Box.vue';
 import Quote from '@/components/Quote.vue';
 import AmazonPurchase from '@/components/AmazonPurchase.vue';
 import { mapActions } from 'vuex';
@@ -54,7 +64,7 @@ export default defineComponent({
     components: {
         Quote,
         PurchaseFormNewOrderDetailsContainer,
-        Group,
+        Box,
         AmazonPurchase,
         OrderFormNewContainer,
         PricingNew
@@ -78,6 +88,9 @@ export default defineComponent({
     },
     methods: {
         ...mapActions(['showPaypalButtons']),
+        updateOrderQuantity(quantity: number) {
+            this.$emit('update:orderQuantity', quantity);
+        },
         updateOrderDetailItem(orderDetailItem: OrderDetailItemType) {
             this.$emit('update:orderDetailItem', orderDetailItem);
         }

@@ -3,25 +3,30 @@ import OrderDetailItem from '@/types/OrderDetailItem';
 import OrderDetails from './OrderDetails';
 
 const newPricing = {
-    baseShipping: 2.00,
-    shippingPerBook: 1.00,
+    baseShipping: 2.0,
+    shippingPerBook: 1.0,
     bookPrice: {
         [BookId.GoodGirlKarma]: {
             listPrice: 13.95,
             actualPrice: 10.95,
-            priceNote: 'Book Launch: $10.95 (normally $13.95)'
+            priceNote: 'Book Launch!: $10.95 (normally $13.95)'
         },
         [BookId.TreasuresGift]: {
             listPrice: 16.95,
             actualPrice: 5.0,
-            priceNote: "Today's deal: $5.00 (normally $16.95)"
+            priceNote: '$5.00 (normally $16.95)'
         }
     },
     shipping: (books: number) => 3.0 + (books - 1) * 1.0,
-    actualBooks: (orderDetails: OrderDetails): OrderDetailItem[] => orderDetails.bookDetails.slice(orderDetails.books),
-    totalBookPrice: (orderDetails: OrderDetails): number => newPricing.actualBooks(orderDetails).reduce((accum, entry) => accum + newPricing.bookPrice[entry.bookId].actualPrice, 0),
-    totalShipping: (orderDetails: OrderDetails): number => newPricing.baseShipping + orderDetails.books * newPricing.shippingPerBook,
-    total: (orderDetails: OrderDetails): number => newPricing.totalBookPrice(orderDetails) + newPricing.totalShipping(orderDetails)
+    actualBooks: (orderDetails: OrderDetails): OrderDetailItem[] => orderDetails.bookDetails.slice(0, orderDetails.books),
+    totalBookPrice: (orderDetails: OrderDetails): number =>
+        newPricing
+            .actualBooks(orderDetails)
+            .reduce((accum, entry) => accum + newPricing.bookPrice[entry.bookId].actualPrice, 0),
+    totalShipping: (orderDetails: OrderDetails): number =>
+        newPricing.baseShipping + orderDetails.books * newPricing.shippingPerBook,
+    total: (orderDetails: OrderDetails): number =>
+        newPricing.totalBookPrice(orderDetails) + newPricing.totalShipping(orderDetails)
 };
 
 const price = 16.95;

@@ -4,6 +4,7 @@
         :order-state="orderState"
         :show-complete-form-msg="showCompleteFormMsg"
         @update:orderDetailItem="xupdateOrderDetailItem"
+        @update:orderQuantity="xupdateOrderQuantity"
         @purchase="onPurchase"
     />
 </template>
@@ -26,10 +27,19 @@ export default defineComponent({
         this.resetPurchaseFormNew();
     },
     methods: {
+        xupdateOrderQuantity(quantity: number) {
+            this.updateOrderQuantity(quantity);
+        },
         xupdateOrderDetailItem(orderDetailItem: OrderDetailItem) {
             this.updateOrderDetailItem(orderDetailItem);
         },
-        ...mapActions(['resetPurchaseFormNew', 'showPaypalButtons', 'updateOrderDetailItem', 'purchaseNew']),
+        ...mapActions([
+            'resetPurchaseFormNew',
+            'showPaypalButtons',
+            'updateOrderQuantity',
+            'updateOrderDetailItem',
+            'purchaseNew'
+        ]),
 
         onPurchase() {
             this.purchaseNew();
