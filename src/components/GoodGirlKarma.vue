@@ -26,7 +26,7 @@
                     <div class="m-2 text-4xl">A golden retriever who likes to do good things.</div>
                     <div class="m-4">Let's discover all the ways Karma is a good dog!</div>
                     <div class="m-4">A book for beginning readers, with beautiful illustrations.</div>
-                    <buy-button label="Buy 'Good Girl Karma'" />
+                    <buy-button label="Buy 'Good Girl, Karma'" />
                 </div>
             </div>
         </div>

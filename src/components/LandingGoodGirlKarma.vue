@@ -14,10 +14,10 @@
                 pause-on-hover
                 autoplay
             >
-                <img class="w-full shadow-xl" src="@assets/carousel/Treasure-Annie.png" />
-                <img class="w-full shadow-xl" src="@assets/carousel/cropped-book-covertreasure.jpg" />
-                <img class="w-full shadow-xl" src="@assets/carousel/annie2.png" />
-                <img class="w-full shadow-xl" src="@assets/carousel/Treasure-ball.png" />
+                <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page4-min.jpg" />
+                <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/Page6-min.jpg" />
+                <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page7-min.jpg" />
+                <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page14-min.jpg" />
             </vue-agile>
         </div>
         <div class="flex flex-col items-center w-full text-center text-indigo-400">
