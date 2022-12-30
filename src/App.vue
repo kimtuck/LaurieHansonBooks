@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto text-2xl border-2 border-black ">
+    <div class="container mx-auto text-2xl border-2 border-black mb-4">
         <navigation />
         <div class="" w-full>
             <router-view />

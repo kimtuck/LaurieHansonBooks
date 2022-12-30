@@ -5,7 +5,6 @@
             :options="orderOptions"
             :percent-savings="percentSavings"
             :original-price="originalPrice"
-            :coupon-code="discount.couponCode"
         />
     </div>
 </template>
@@ -27,7 +26,7 @@ export default defineComponent({
         }
     },
     computed: {
-        ...mapGetters(['orderOptions', 'percentSavings', 'originalPrice', 'discount']),
+        ...mapGetters(['orderOptions', 'percentSavings', 'originalPrice']),
         quantityValue: {
             // @ts-expect-error
             get() {
