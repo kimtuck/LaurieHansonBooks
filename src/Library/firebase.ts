@@ -19,7 +19,7 @@ const initFirebase = asyncOnce(() => {
     db = firebase.firestore();
 });
 
-const logOrderInformation = async (order: any) => {
+const logOrderInformation = async (orderId: any, order: any) => {
     return db
         .collection('orders')
         .doc(order.orderId)

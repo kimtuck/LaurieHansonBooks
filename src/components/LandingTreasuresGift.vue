@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col items-center w-full">
         <!-- Left Col -->
-        <div class="border-solid border-black border-2 p-4 m-2 flex flex-col items-center">
+        <div class="border-solid border-black border-2 p-4 m-2 bg-white flex flex-col items-center">
             <div class="text-5xl">Treasure's Gift</div>
         </div>
         <div class="text-4xl text-red-700 font-extrabold">&nbsp;</div>

@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import { installPayPal, purchaseConfig } from '@/Library/paypal';
+import { installPayPal, purchaseConfig, purchaseConfigNew } from '@/Library/paypal';
 import { pricing } from '@/Library/pricing';
 import {
     initFirebase,
@@ -95,6 +95,7 @@ export default createStore({
         discount: state => state.discount,
 
         // New purchase page
+        orderId: state => state.orderId,
         orderState: state => state.orderState,
         orderDetails: state => state.orderDetails,
         itemsToOrderOptions: state => {
@@ -179,6 +180,7 @@ export default createStore({
                     label: 'paypal'
                 },
                 createOrder(data: any, actions: any) {
+                    console.log('old', purchaseConfig(getters.orderId, getters.selectedOrderOption));
                     return actions.order.create(purchaseConfig(getters.orderId, getters.selectedOrderOption));
                 },
                 onClick: async (data: any, actions: any) => {
@@ -215,17 +217,17 @@ export default createStore({
         },
         async logOrder({ getters }) {
             await initFirebase();
-            await logOrderInformation(getters.orderInformation);
+            await logOrderInformation(getters.orderId, getters.orderInformation);
         },
 
         async completedPurchase({ commit, getters }, details) {
             commit('purchaseSuccessful', details);
             await initFirebase();
-            await logCompletedOrderInformation(getters.orderInformation.orderId, OrderState.SuccessfulPurchase, details);
+            await logCompletedOrderInformation(getters.orderId, OrderState.SuccessfulPurchase, details);
         },
         async cancelPurchase({ getters }) {
             await initFirebase();
-            await logCancelledOrderInformation(getters.orderInformation.orderId, OrderState.CancelledPurchase);
+            await logCancelledOrderInformation(getters.orderId, OrderState.CancelledPurchase);
         },
         async showSpinner({ commit }) {
             commit('showSpinner', true);
@@ -236,8 +238,8 @@ export default createStore({
 
         // new purchase form
 
-        updateOrderQuantity({commit}, quantity) {
-            commit('updateOrderQuantity', quantity)
+        updateOrderQuantity({ commit }, quantity) {
+            commit('updateOrderQuantity', quantity);
         },
         updateOrderDetailItem({ commit }, orderDetailItem) {
             commit('updateOrderDetailItem', orderDetailItem);
@@ -250,6 +252,63 @@ export default createStore({
         },
         purchaseNew() {
             // alert('needs implementation')
+        },
+
+        async showPaypalButtonsNew({ state, commit, getters, dispatch }, id) {
+            debugger;
+            await dispatch('logOrderNew');
+            await dispatch('loadPaypal');
+
+            const ButtonConfig = {
+                style: {
+                    layout: 'vertical',
+                    color: 'blue',
+                    shape: 'rect',
+                    label: 'paypal'
+                },
+                createOrder(data: any, actions: any) {
+                    debugger;
+                    console.log('new', purchaseConfigNew(getters.orderId, getters.orderDetails));
+                    return actions.order.create(purchaseConfigNew(getters.orderId, getters.orderDetails));
+                },
+                onClick: async (data: any, actions: any) => {
+                    debugger;
+                    if (!getters.orderFormValid) {
+                        commit('showCompleteFormMsg', true);
+                        return actions.reject();
+                    }
+
+                    // Intentionally not awaited
+                    await dispatch('logOrder');
+                    commit('showCompleteFormMsg', false);
+                    return actions.resolve();
+                },
+                async onApprove(data: any, actions: any) {
+                    await dispatch('showSpinner');
+                    // This function captures the funds from the transaction.
+                    // await dispatch('viewingSuccessfulPurchase');
+                    return actions.order.capture().then(async function(details: any) {
+                        await dispatch('completedPurchase', details);
+                        await dispatch('hideSpinner');
+                    });
+                },
+                async onCancel() {
+                    debugger;
+                    await dispatch('cancelPurchase');
+                },
+                // eslint-disable-next-line
+                onError: (e: any) => console.log('On error', e)
+            };
+            // @ts-expect-error
+            if (state.paypalInstance && state.paypalInstance.Buttons) {
+                debugger;
+                // @ts-expect-error
+                state.paypalInstance.Buttons(ButtonConfig).render(id);
+            }
+        },
+        async logOrderNew({ getters }) {
+            await initFirebase();
+            await logOrderInformation(getters.orderId, getters.orderDetails);
         }
     }
 });

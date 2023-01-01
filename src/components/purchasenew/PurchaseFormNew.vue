@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div>Order Details: {{ orderDetails }}</div>
         <quote>
             <template #quote class="hidden sm-visible">
                 I'm delighted that you've chosen to purchase a book. I expect that you will enjoy reading the book as much as
@@ -29,7 +28,7 @@
                     type="alert"
                     label="Contact/Shipping information is incomplete"
                 >
-                    <div>Please complete the above form</div>
+                    <div class="text-red-500">Please fill in your contact information</div>
                 </box>
                 <box class="m-4 p-2 bg-red-100" label="Payment">
                     <div class="text-lg">
@@ -84,10 +83,10 @@ export default defineComponent({
         }
     },
     created() {
-        this.showPaypalButtons('#paypal-buttons');
+        this.showPaypalButtonsNew('#paypal-buttons');
     },
     methods: {
-        ...mapActions(['showPaypalButtons']),
+        ...mapActions(['showPaypalButtonsNew']),
         updateOrderQuantity(quantity: number) {
             this.$emit('update:orderQuantity', quantity);
         },
