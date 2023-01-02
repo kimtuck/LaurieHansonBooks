@@ -1,13 +1,17 @@
 <template>
-    <box class="m-4 p-2  bg-gray-200">
+    <box class="m-4 p-2  bg-white">
         <!-- <div>orderDetailItem {{ orderDetailItem }} -- selected {{ selected }}</div> -->
-        <div>Book {{ orderDetailItem.index +1 }}</div>
+        <div>Book {{ orderDetailItem.index + 1 }}</div>
         <radio-button-group :id="id" v-model="selected" :options="orderDetailItemOptions">
             <template #default="slotProps">
                 <div class="mr-8">{{ slotProps.option.name }}</div>
             </template>
         </radio-button-group>
-        <dedication-new :index="orderDetailItem.index" :model-value="orderDetailItem.dedication" @update:modelValue="updateDedication" />
+        <dedication-new
+            :index="orderDetailItem.index"
+            :model-value="orderDetailItem.dedication"
+            @update:modelValue="updateDedication"
+        />
     </box>
 </template>
 

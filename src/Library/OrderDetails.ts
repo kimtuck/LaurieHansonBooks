@@ -7,6 +7,10 @@ export default class OrderDetails {
     // eslint-disable-next-line no-undef
     bookDetails: OrderDetailItem[];
 
+    get booksOrdered() {
+        return this.bookDetails.slice(0, this.books);
+    }
+
     constructor(maxBooksPerOrder: number) {
         this.books = 1;
         this.bookDetails = [...Array(maxBooksPerOrder).keys()].map(index => ({

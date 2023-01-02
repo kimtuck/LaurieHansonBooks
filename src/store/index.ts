@@ -5,7 +5,8 @@ import {
     initFirebase,
     logOrderInformation,
     logCompletedOrderInformation,
-    logCancelledOrderInformation
+    logCancelledOrderInformation,
+    logOrderResultsInformation
 } from '@/Library/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import OrderState from '@/Library/orderState';
@@ -14,6 +15,7 @@ import OrderDetails from '@/Library/OrderDetails';
 import OrderDetailItemOption from '@/types/OrderDetailItemOption';
 import BookId from '@/types/BookId';
 import OrderDetailItem from '@/types/OrderDetailItem';
+import dateTimeString from '@/Library/dates';
 
 const ViewingState = {
     Form: 'form',
@@ -39,7 +41,7 @@ export default createStore({
             zip: ''
         },
         showCompleteFormMsg: false,
-        details: { purchase_units: [{ soft_descriptor: '', amount: { value: 0 }, shipping: { address: {} } }] },
+        details: { purchase_units: [{ soft_descriptor: '', amount: { value: 0 }, shipping: { address: {}, name: {} } }] },
         discount: discountProps,
 
         // New purchase page
@@ -135,6 +137,20 @@ export default createStore({
             state.showSpinner = show;
         },
         // new purchase
+        resetPurchaseFormNew(state) {
+            debugger;
+            state.orderId = dateTimeString();
+            state.orderDetails = new OrderDetails(maxBooksPerOrder);
+            state.orderState = OrderState.BeginPurchase;
+            state.details = {
+                purchase_units: [
+                    { soft_descriptor: '', amount: { value: 0 }, shipping: { address: {}, name: { full_name: '' } } }
+                ]
+            };
+        },
+        updateOrderState(state, orderState: OrderState) {
+            state.orderState = orderState;
+        },
         updateOrderQuantity(state, quantity: number) {
             state.orderDetails.books = quantity;
         },
@@ -169,6 +185,7 @@ export default createStore({
             }
         },
         async showPaypalButtons({ state, commit, getters, dispatch }, id) {
+            commit('updateOrderState', OrderState.BeginPurchase);
             await dispatch('logOrder');
             await dispatch('loadPaypal');
 
@@ -190,6 +207,7 @@ export default createStore({
                     }
 
                     // Intentionally not awaited
+                    commit('updateOrderState', OrderState.ShowPaypalDialog);
                     await dispatch('logOrder');
                     commit('showCompleteFormMsg', false);
                     return actions.resolve();
@@ -199,6 +217,7 @@ export default createStore({
                     // This function captures the funds from the transaction.
                     // await dispatch('viewingSuccessfulPurchase');
                     return actions.order.capture().then(async function(details: any) {
+                        commit('updateOrderState', OrderState.SuccessfulPurchase);
                         await dispatch('completedPurchase', details);
                         await dispatch('hideSpinner');
                     });
@@ -245,17 +264,15 @@ export default createStore({
             commit('updateOrderDetailItem', orderDetailItem);
         },
 
-        resetPurchaseFormNew() {
-            // orderDetails: new OrderDetails(maxBooksPerOrder),
-            // orderState: OrderState.BeginPurchase,
-            // alert('needs implementation')
+        resetPurchaseFormNew({ commit }) {
+            commit('resetPurchaseFormNew');
         },
         purchaseNew() {
             // alert('needs implementation')
         },
 
         async showPaypalButtonsNew({ state, commit, getters, dispatch }, id) {
-            debugger;
+            commit('updateOrderState', OrderState.BeginPurchase);
             await dispatch('logOrderNew');
             await dispatch('loadPaypal');
 
@@ -267,19 +284,17 @@ export default createStore({
                     label: 'paypal'
                 },
                 createOrder(data: any, actions: any) {
-                    debugger;
-                    console.log('new', purchaseConfigNew(getters.orderId, getters.orderDetails));
-                    return actions.order.create(purchaseConfigNew(getters.orderId, getters.orderDetails));
+                    return actions.order.create(purchaseConfigNew(getters.orderId, getters.orderDetails, getters.orderForm));
                 },
                 onClick: async (data: any, actions: any) => {
-                    debugger;
                     if (!getters.orderFormValid) {
                         commit('showCompleteFormMsg', true);
                         return actions.reject();
                     }
 
                     // Intentionally not awaited
-                    await dispatch('logOrder');
+                    commit('updateOrderState', OrderState.ShowPaypalDialog);
+                    await dispatch('logOrderNew');
                     commit('showCompleteFormMsg', false);
                     return actions.resolve();
                 },
@@ -288,27 +303,41 @@ export default createStore({
                     // This function captures the funds from the transaction.
                     // await dispatch('viewingSuccessfulPurchase');
                     return actions.order.capture().then(async function(details: any) {
-                        await dispatch('completedPurchase', details);
+                        commit('updateOrderState', OrderState.SuccessfulPurchase);
+                        console.log('details received', details);
+                        commit('purchaseSuccessful', details);
+                        await dispatch('logOrderResultsNew', details);
                         await dispatch('hideSpinner');
                     });
                 },
                 async onCancel() {
-                    debugger;
-                    await dispatch('cancelPurchase');
+                    commit('updateOrderState', OrderState.CancelledPurchase);
+                    await dispatch('logOrderNew');
                 },
                 // eslint-disable-next-line
                 onError: (e: any) => console.log('On error', e)
             };
             // @ts-expect-error
             if (state.paypalInstance && state.paypalInstance.Buttons) {
-                debugger;
                 // @ts-expect-error
                 state.paypalInstance.Buttons(ButtonConfig).render(id);
             }
         },
         async logOrderNew({ getters }) {
+            debugger;
             await initFirebase();
-            await logOrderInformation(getters.orderId, getters.orderDetails);
+            await logOrderInformation(getters.orderId, {
+                orderState: getters.orderState,
+                contactInfo: getters.orderForm,
+                ...getters.orderDetails,
+                booksOrdered: getters.orderDetails.booksOrdered,
+                shippingTo: getters.shippingTo
+            });
+        },
+        async logOrderResultsNew({ getters }, details) {
+            debugger;
+            await initFirebase();
+            await logOrderResultsInformation(getters.orderId, details)
         }
     }
 });

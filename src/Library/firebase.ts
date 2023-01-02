@@ -20,14 +20,24 @@ const initFirebase = asyncOnce(() => {
 });
 
 const logOrderInformation = async (orderId: any, order: any) => {
+    debugger;
+    const payload = { orderId, ...order, timestamp: firebase.firestore.FieldValue.serverTimestamp() };
+    console.log(payload);
     return db
         .collection('orders')
-        .doc(order.orderId)
-        .set({ ...order, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
+        .doc(orderId)
+        .set({ orderId, ...order, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
         .catch(function(error: any) {
             // eslint-disable-next-line
             console.error('Error writing new message to database', error);
         });
+};
+
+const logOrderResultsInformation = async (orderId: any, details: any) => {
+    return db
+        .collection('orders')
+        .doc(orderId)
+        .update({ details });
 };
 
 const logCompletedOrderInformation = async (orderId: any, orderState: any, details: any) => {
@@ -44,4 +54,10 @@ const logCancelledOrderInformation = async (orderId: any, orderState: any) => {
         .update({ orderState });
 };
 
-export { initFirebase, logOrderInformation, logCompletedOrderInformation, logCancelledOrderInformation };
+export {
+    initFirebase,
+    logOrderInformation,
+    logOrderResultsInformation,
+    logCompletedOrderInformation,
+    logCancelledOrderInformation
+};

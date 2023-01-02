@@ -8,10 +8,10 @@
             <template #cite> Laurie </template>
         </quote>
 
-        <div class="flex flex-row flex-auto">
+        <div class="flex flex-row flex-auto text-black">
             <div class="flex-1">
                 <!-- left side -->
-                <order-form-new-container />
+                <pricing-new :order-details="orderDetails" />
                 <purchase-form-new-order-details-container
                     :orderDetails="orderDetails"
                     @update:orderDetailItem="updateOrderDetailItem"
@@ -21,7 +21,7 @@
 
             <div class="flex-1">
                 <!-- right side -->
-                <pricing-new :order-details="orderDetails" />
+                <order-form-new-container />
                 <box
                     class="m-4 p-2"
                     v-if="showCompleteFormMsg"

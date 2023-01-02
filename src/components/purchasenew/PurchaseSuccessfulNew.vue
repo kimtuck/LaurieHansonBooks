@@ -2,20 +2,17 @@
     <div class="flex flex-col lg:flex-row">
         <group label="Thank you  for your purchase!">
             <span
-                >I'll mail out your {{ quantity === 1 ? 'book' : 'books' }} in the next couple of days. It will take about a
-                week to arrive.</span
+                >I'll mail out your {{ orderDetails.books === 1 ? 'book' : 'books' }} soon.</span
             >
-
-            <img class="mt-4 mb-4 ml-auto mr-auto" src="@assets/Treasure-ball.png" />
         </group>
-        <order-summary />
+        <order-summary-new />
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Group from '@/components/Group.vue';
-import OrderSummary from '@/components/OrderSummary.vue';
+import OrderSummaryNew from '@/components/purchasenew/OrderSummaryNew.vue';
 
 import { mapGetters, mapActions } from 'vuex';
 
@@ -23,10 +20,10 @@ export default defineComponent({
     name: 'Purchase',
     components: {
         Group,
-        OrderSummary
+        OrderSummaryNew
     },
     computed: {
-        ...mapGetters(['viewingState', 'quantity', 'orderOptions', 'showCompleteFormMsg'])
+        ...mapGetters(['orderDetails'])
     },
     methods: {
         ...mapActions([])

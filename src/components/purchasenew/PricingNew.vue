@@ -1,10 +1,6 @@
 <template>
-    <box class="m-4 p-2 bg-red-100">
-        <div class="mb-4 text-black">
-            <div>{{ goodGirlKarmPrice }}</div>
-           <div>{{ treasuresGiftPrice }}</div>
-        </div>
-        <div>Your Cost: ${{ totalBookPrice }}</div>
+    <box class="m-4 p-2 bg-gray-100  text-black">
+        <div>Order Amount: ${{ totalBookPrice }}</div>
         <div>Shipping: ${{ totalShipping }}</div>
         <div>Total: ${{ total }}</div>
     </box>

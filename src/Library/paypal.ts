@@ -7,7 +7,7 @@ const liveClientId = 'AZST4alfX8Pm2K1Iw55j7-QfRdCdSi-Yt4WuOLJ9orkmIhMC-obTIcVhtC
 
 let useSandbox = false;
 // eslint-disable-next-line
-if (process.env.VUE_APP_SANDBOX) {
+if (true || process.env.VUE_APP_SANDBOX) {
     // eslint-disable-next-line
     console.log('Use sandbox');
     useSandbox = true;
@@ -53,8 +53,7 @@ const purchaseConfig = (orderId: any, selectedOption: any) => {
     return payload;
 };
 
-const purchaseConfigNew = (orderId: any, orderDetails: OrderDetails) => {
-    debugger;
+const purchaseConfigNew = (orderId: any, orderDetails: OrderDetails, orderForm: Object) => {
     const actualBooks = orderDetails.bookDetails.slice(0, orderDetails.books);
     const itemsNew = actualBooks.map(orderDetailItem => ({
         name: orderDetailItem.bookId,
@@ -72,7 +71,7 @@ const purchaseConfigNew = (orderId: any, orderDetails: OrderDetails) => {
         invoice_id: orderId,
         soft_descriptor: 'Book Purchase'
     };
-    const payload = { purchase_units: [{ ...invoiceMetadata, amount: amounts, items: itemsNew }] };
+    const payload = { purchase_units: [{ ...invoiceMetadata, amount: amounts, items: itemsNew, contact: orderForm }] };
     console.log(payload);
     return payload;
 };
