@@ -33,7 +33,7 @@ export default defineComponent({
     },
     methods: {
         updateOrderQuantity(quantity: number) {
-            this.$emit('update:orderQuantity', quantity)
+            this.$emit('update:orderQuantity', quantity);
         },
         updateOrderDetailItem(orderDetailItem: OrderDetailItemType) {
             this.$emit('update:orderDetailItem', orderDetailItem);

@@ -25,7 +25,7 @@ export default defineComponent({
     },
     computed: {
         label(): string {
-            return `Dedication for book ${this.index +1}, if desired:`;
+            return `Dedication for book ${this.index + 1}, if desired:`;
         },
         dedication: {
             // @ts-expect-error

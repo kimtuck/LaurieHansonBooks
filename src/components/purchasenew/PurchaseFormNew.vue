@@ -13,7 +13,7 @@
                 <!-- left side -->
                 <pricing-new :order-details="orderDetails" />
                 <purchase-form-new-order-details-container
-                    :orderDetails="orderDetails"
+                    :order-details="orderDetails"
                     @update:orderDetailItem="updateOrderDetailItem"
                     @update:orderQuantity="updateOrderQuantity"
                 />
@@ -23,8 +23,8 @@
                 <!-- right side -->
                 <order-form-new-container />
                 <box
-                    class="m-4 p-2"
                     v-if="showCompleteFormMsg"
+                    class="m-4 p-2"
                     type="alert"
                     label="Contact/Shipping information is incomplete"
                 >

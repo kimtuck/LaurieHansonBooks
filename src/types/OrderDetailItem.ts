@@ -1,6 +1,6 @@
 import BookId from './BookId';
 
-type OrderDetailItem {
+type OrderDetailItem = {
     index: number;
     bookId: BookId;
     dedication: string;

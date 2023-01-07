@@ -20,7 +20,6 @@ const initFirebase = asyncOnce(() => {
 });
 
 const logOrderInformation = async (orderId: any, order: any) => {
-    const payload = { orderId, ...order, timestamp: firebase.firestore.FieldValue.serverTimestamp() };
     return db
         .collection('orders')
         .doc(orderId)

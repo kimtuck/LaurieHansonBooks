@@ -1,9 +1,7 @@
 <template>
     <div class="flex flex-col lg:flex-row">
         <group label="Thank you  for your purchase!">
-            <span
-                >I'll mail out your {{ orderDetails.books === 1 ? 'book' : 'books' }} soon.</span
-            >
+            <span>I'll mail out your {{ orderDetails.books === 1 ? 'book' : 'books' }} soon.</span>
         </group>
         <order-summary-new />
     </div>

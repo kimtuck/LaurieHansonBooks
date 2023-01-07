@@ -48,7 +48,7 @@
                     the book to. Imagine giving a special gift with a message from the author, addressed to your child or
                     grandchild!
                 </p>
-                <buy-button label="Buy 'Treasure's Gift'"/>
+                <buy-button label="Buy 'Treasure's Gift'" />
             </box>
         </div>
         <quote-box
