@@ -1,17 +1,19 @@
 <template>
     <div class="w-full text-indigo-400 bg-green-200">
-        <landing />
+        <treasures-gift />
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Landing from '@/components/Landing.vue';
+import TreasuresGift from '@/components/TreasuresGift.vue';
 
 export default defineComponent({
-    name: 'Home',
+    name: 'TreasuresGiftView',
     components: {
-        Landing
+        TreasuresGift
     }
 });
 </script>
+
+TreasuresGiftBody

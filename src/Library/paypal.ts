@@ -1,5 +1,6 @@
 import { loadScript } from '@paypal/paypal-js';
-import { formatPrice } from './pricing';
+import OrderDetails from './OrderDetails';
+import { formatPrice, newPricing } from './pricing';
 
 const liveClientId = 'AZST4alfX8Pm2K1Iw55j7-QfRdCdSi-Yt4WuOLJ9orkmIhMC-obTIcVhtC82Bl9LnQJsJ0Jihtq6XDpR';
 // const secret = 'ENbbjmSsyF5bAiW8sdlMjDJSNuNxYkka10gd34juHPrR_jbRnkOV1gqVoFWly9dl07BQk9tgSrJMVlNR';
@@ -52,7 +53,30 @@ const purchaseConfig = (orderId: any, selectedOption: any) => {
     return payload;
 };
 
-export { installPayPal, purchaseConfig };
+const purchaseConfigNew = (orderId: any, orderDetails: OrderDetails, orderForm: Object) => {
+    const actualBooks = orderDetails.bookDetails.slice(0, orderDetails.books);
+    const itemsNew = actualBooks.map(orderDetailItem => ({
+        name: orderDetailItem.bookId,
+        unit_amount: money(newPricing.bookPrice[orderDetailItem.bookId].actualPrice, 'value'),
+        quantity: 1
+    }));
+    const amounts = amount({
+        price: newPricing.totalBookPrice(orderDetails),
+        shipping: newPricing.totalShipping(orderDetails)
+    });
+
+    const invoiceMetadata = {
+        reference_id: orderId,
+        description: 'Book Purchase from LaurieHansonBooks.com',
+        invoice_id: orderId,
+        soft_descriptor: 'Book Purchase'
+    };
+    const payload = { purchase_units: [{ ...invoiceMetadata, amount: amounts, items: itemsNew, contact: orderForm }] };
+    console.log(payload);
+    return payload;
+};
+
+export { installPayPal, purchaseConfig, purchaseConfigNew };
 
 /*
 [{

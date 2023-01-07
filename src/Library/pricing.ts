@@ -1,3 +1,34 @@
+import BookId from '@/types/BookId';
+import OrderDetailItem from '@/types/OrderDetailItem';
+import OrderDetails from './OrderDetails';
+
+const newPricing = {
+    baseShipping: 2.0,
+    shippingPerBook: 1.0,
+    bookPrice: {
+        [BookId.GoodGirlKarma]: {
+            listPrice: 13.95,
+            actualPrice: 10.95,
+            priceNote: 'Good Girl, Karma: $10.95 -- Normally $13.95'
+        },
+        [BookId.TreasuresGift]: {
+            listPrice: 16.95,
+            actualPrice: 5.0,
+            priceNote: "Treasure's Gift: $5.00 -- Normally $16.95"
+        }
+    },
+    shipping: (books: number) => 3.0 + (books - 1) * 1.0,
+    actualBooks: (orderDetails: OrderDetails): OrderDetailItem[] => orderDetails.bookDetails.slice(0, orderDetails.books),
+    totalBookPrice: (orderDetails: OrderDetails): number =>
+        newPricing
+            .actualBooks(orderDetails)
+            .reduce((accum, entry) => accum + newPricing.bookPrice[entry.bookId].actualPrice, 0),
+    totalShipping: (orderDetails: OrderDetails): number =>
+        newPricing.baseShipping + orderDetails.books * newPricing.shippingPerBook,
+    total: (orderDetails: OrderDetails): number =>
+        newPricing.totalBookPrice(orderDetails) + newPricing.totalShipping(orderDetails)
+};
+
 const price = 16.95;
 
 const shippingTable = [
@@ -35,4 +66,4 @@ const pricing = (quantity: number, discount: any) => ({
 
 const formatPrice = (value: number) => `${value.toFixed(2)}`;
 
-export { price, shipping, pricing, formatPrice };
+export { newPricing, price, shipping, pricing, formatPrice };

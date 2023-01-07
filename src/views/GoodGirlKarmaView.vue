@@ -1,17 +1,17 @@
 <template>
     <div class="w-full text-indigo-400 bg-green-200">
-        <landing />
+        <good-girl-karma />
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Landing from '@/components/Landing.vue';
+import GoodGirlKarma from '@/components/GoodGirlKarma.vue';
 
 export default defineComponent({
-    name: 'Home',
+    name: 'GoodGirlKarmaView',
     components: {
-        Landing
+        GoodGirlKarma
     }
 });
 </script>

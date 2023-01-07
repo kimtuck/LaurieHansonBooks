@@ -1,20 +1,28 @@
 import { createStore } from 'vuex';
-import { installPayPal, purchaseConfig } from '@/Library/paypal';
+import { installPayPal, purchaseConfig, purchaseConfigNew } from '@/Library/paypal';
 import { pricing } from '@/Library/pricing';
 import {
     initFirebase,
     logOrderInformation,
     logCompletedOrderInformation,
-    logCancelledOrderInformation
+    logCancelledOrderInformation,
+    logOrderResultsInformation
 } from '@/Library/firebase';
 import { v4 as uuidv4 } from 'uuid';
-import orderState from '@/Library/orderState';
+import OrderState from '@/Library/orderState';
 import discountProps from '@/Library/discountProps';
+import OrderDetails from '@/Library/OrderDetails';
+import OrderDetailItemOption from '@/types/OrderDetailItemOption';
+import BookId from '@/types/BookId';
+import OrderDetailItem from '@/types/OrderDetailItem';
+import dateTimeString from '@/Library/dates';
 
 const ViewingState = {
     Form: 'form',
     SuccessfulPurchase: 'successfulPurchase'
 };
+
+const maxBooksPerOrder = 5;
 
 export default createStore({
     state: {
@@ -33,8 +41,13 @@ export default createStore({
             zip: ''
         },
         showCompleteFormMsg: false,
-        details: { purchase_units: [{ soft_descriptor: '', amount: { value: 0 }, shipping: { address: {} } }] },
-        discount: discountProps
+        details: { purchase_units: [{ soft_descriptor: '', amount: { value: 0 }, shipping: { address: {}, name: {} } }] },
+        discount: discountProps,
+
+        // New purchase page
+        orderDetails: new OrderDetails(maxBooksPerOrder),
+        orderState: OrderState.BeginPurchase,
+        maxBooksPerOrder
     },
     getters: {
         showSpinner: state => state.showSpinner,
@@ -51,7 +64,7 @@ export default createStore({
         },
         orderInformation: (state, getters) => ({
             orderId: state.orderId,
-            orderState: orderState.BeginPurchase,
+            orderState: OrderState.BeginPurchase,
             quantity: state.quantity,
             dedications: getters.dedications,
             contact: state.orderForm
@@ -81,7 +94,19 @@ export default createStore({
         shippingBillId: state => {
             return state.details.purchase_units[0].soft_descriptor;
         },
-        discount: state => state.discount
+        discount: state => state.discount,
+
+        // New purchase page
+        orderId: state => state.orderId,
+        orderState: state => state.orderState,
+        orderDetails: state => state.orderDetails,
+        itemsToOrderOptions: state => {
+            return [...Array(state.maxBooksPerOrder).keys()].map(x => ({ quantity: x + 1, value: x + 1 }));
+        },
+        orderDetailItemOptions: (): OrderDetailItemOption[] => [
+            { value: BookId.GoodGirlKarma, name: BookId.GoodGirlKarma },
+            { value: BookId.TreasuresGift, name: BookId.TreasuresGift }
+        ]
     },
     mutations: {
         paypalInstance(state, paypal) {
@@ -110,6 +135,27 @@ export default createStore({
         },
         showSpinner(state, show) {
             state.showSpinner = show;
+        },
+        // new purchase
+        resetPurchaseFormNew(state) {
+            state.orderId = dateTimeString();
+            state.orderDetails = new OrderDetails(maxBooksPerOrder);
+            state.orderState = OrderState.BeginPurchase;
+            state.details = {
+                purchase_units: [
+                    { soft_descriptor: '', amount: { value: 0 }, shipping: { address: {}, name: { full_name: '' } } }
+                ]
+            };
+        },
+        updateOrderState(state, orderState: OrderState) {
+            state.orderState = orderState;
+        },
+        updateOrderQuantity(state, quantity: number) {
+            state.orderDetails.books = quantity;
+        },
+        updateOrderDetailItem(state, orderDetailItem: OrderDetailItem) {
+            const ind = orderDetailItem.index;
+            state.orderDetails.bookDetails[ind] = orderDetailItem;
         }
     },
     actions: {
@@ -138,6 +184,7 @@ export default createStore({
             }
         },
         async showPaypalButtons({ state, commit, getters, dispatch }, id) {
+            commit('updateOrderState', OrderState.BeginPurchase);
             await dispatch('logOrder');
             await dispatch('loadPaypal');
 
@@ -149,6 +196,7 @@ export default createStore({
                     label: 'paypal'
                 },
                 createOrder(data: any, actions: any) {
+                    console.log('old', purchaseConfig(getters.orderId, getters.selectedOrderOption));
                     return actions.order.create(purchaseConfig(getters.orderId, getters.selectedOrderOption));
                 },
                 onClick: async (data: any, actions: any) => {
@@ -158,6 +206,7 @@ export default createStore({
                     }
 
                     // Intentionally not awaited
+                    commit('updateOrderState', OrderState.ShowPaypalDialog);
                     await dispatch('logOrder');
                     commit('showCompleteFormMsg', false);
                     return actions.resolve();
@@ -167,6 +216,7 @@ export default createStore({
                     // This function captures the funds from the transaction.
                     // await dispatch('viewingSuccessfulPurchase');
                     return actions.order.capture().then(async function(details: any) {
+                        commit('updateOrderState', OrderState.SuccessfulPurchase);
                         await dispatch('completedPurchase', details);
                         await dispatch('hideSpinner');
                     });
@@ -185,23 +235,106 @@ export default createStore({
         },
         async logOrder({ getters }) {
             await initFirebase();
-            await logOrderInformation(getters.orderInformation);
+            await logOrderInformation(getters.orderId, getters.orderInformation);
         },
 
         async completedPurchase({ commit, getters }, details) {
             commit('purchaseSuccessful', details);
             await initFirebase();
-            await logCompletedOrderInformation(getters.orderInformation.orderId, orderState.SuccessfulPurchase, details);
+            await logCompletedOrderInformation(getters.orderId, OrderState.SuccessfulPurchase, details);
         },
         async cancelPurchase({ getters }) {
             await initFirebase();
-            await logCancelledOrderInformation(getters.orderInformation.orderId, orderState.CancelledPurchase);
+            await logCancelledOrderInformation(getters.orderId, OrderState.CancelledPurchase);
         },
         async showSpinner({ commit }) {
             commit('showSpinner', true);
         },
         async hideSpinner({ commit }) {
             commit('showSpinner', false);
+        },
+
+        // new purchase form
+
+        updateOrderQuantity({ commit }, quantity) {
+            commit('updateOrderQuantity', quantity);
+        },
+        updateOrderDetailItem({ commit }, orderDetailItem) {
+            commit('updateOrderDetailItem', orderDetailItem);
+        },
+
+        resetPurchaseFormNew({ commit }) {
+            commit('resetPurchaseFormNew');
+        },
+        purchaseNew() {
+            // alert('needs implementation')
+        },
+
+        async showPaypalButtonsNew({ state, commit, getters, dispatch }, id) {
+            commit('updateOrderState', OrderState.BeginPurchase);
+            await dispatch('logOrderNew');
+            await dispatch('loadPaypal');
+
+            const ButtonConfig = {
+                style: {
+                    layout: 'vertical',
+                    color: 'blue',
+                    shape: 'rect',
+                    label: 'paypal'
+                },
+                createOrder(data: any, actions: any) {
+                    return actions.order.create(purchaseConfigNew(getters.orderId, getters.orderDetails, getters.orderForm));
+                },
+                onClick: async (data: any, actions: any) => {
+                    if (!getters.orderFormValid) {
+                        commit('showCompleteFormMsg', true);
+                        return actions.reject();
+                    }
+
+                    // Intentionally not awaited
+                    commit('updateOrderState', OrderState.ShowPaypalDialog);
+                    await dispatch('logOrderNew');
+                    commit('showCompleteFormMsg', false);
+                    return actions.resolve();
+                },
+                async onApprove(data: any, actions: any) {
+                    await dispatch('showSpinner');
+                    // This function captures the funds from the transaction.
+                    // await dispatch('viewingSuccessfulPurchase');
+                    return actions.order.capture().then(async function(details: any) {
+                        commit('updateOrderState', OrderState.SuccessfulPurchase);
+                        console.log('details received', details);
+                        commit('purchaseSuccessful', details);
+                        await dispatch('logOrderResultsNew', details);
+                        await dispatch('hideSpinner');
+                    });
+                },
+                async onCancel() {
+                    commit('updateOrderState', OrderState.CancelledPurchase);
+                    await dispatch('logOrderNew');
+                },
+                // eslint-disable-next-line
+                onError: (e: any) => console.log('On error', e)
+            };
+            // @ts-expect-error
+            if (state.paypalInstance && state.paypalInstance.Buttons) {
+                // @ts-expect-error
+                state.paypalInstance.Buttons(ButtonConfig).render(id);
+            }
+        },
+        async logOrderNew({ getters }) {
+            await initFirebase();
+            await logOrderInformation(getters.orderId, {
+                orderState: getters.orderState,
+                contactInfo: getters.orderForm,
+                ...getters.orderDetails,
+                booksOrdered: getters.orderDetails.booksOrdered,
+                shippingTo: getters.shippingTo
+            });
+        },
+        async logOrderResultsNew({ getters }, details) {
+            await initFirebase();
+            await logOrderResultsInformation(getters.orderId, details);
         }
     }
 });

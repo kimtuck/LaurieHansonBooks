@@ -1,7 +1,8 @@
-const orderState = {
-    BeginPurchase: 'BeginPurchase',
-    SuccessfulPurchase: 'SuccessfulPurchase',
-    CancelledPurchase: 'CancelledPurchase'
-};
+enum OrderState {
+    BeginPurchase = 'Begin Purchase',
+    ShowPaypalDialog = 'Show Paypal Dialog',
+    SuccessfulPurchase = 'Successful Purchase',
+    CancelledPurchase = 'Cancelled Purchase'
+}
 
-export default orderState;
+export default OrderState;

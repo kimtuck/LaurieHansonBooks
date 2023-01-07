@@ -1,5 +1,5 @@
 <template>
-    <fieldset :id="id">
+    <fieldset :id="id" :class="layoutClasses">
         <legend v-if="label">{{ label }}</legend>
         <div v-for="(option, index) in options" :key="option.text">
             <label :for="id + index">
@@ -56,6 +56,15 @@ export default defineComponent({
         inputClass: {
             type: [String, Object],
             default: ''
+        },
+        horizontal: {
+            type: Boolean,
+            default: false
+        }
+    },
+    computed: {
+        layoutClasses(): string {
+            return this.horizontal ? 'flex flex-column' : '';
         }
     },
     methods: {
@@ -66,12 +75,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-xx {
-}
-$primary-color: #00005c; // Change color here. C'mon, try it!
-$text-color: mix(#000, $primary-color, 64%);
-
+<style scoped>
 label {
     display: flex;
     cursor: pointer;
@@ -81,42 +85,41 @@ label {
     margin-bottom: 0.375em;
     /* Accessible outline */
     /* Remove comment to use */
-    /*
-		&:focus-within {
-				outline: .125em solid $primary-color;
-		}
-	*/
-    input {
-        position: absolute;
-        left: -9999px;
-        &:checked + span {
-            background-color: mix(#fff, $primary-color, 84%);
-            &:before {
-                box-shadow: inset 0 0 0 0.4375em $primary-color;
-            }
-        }
-    }
-    span {
-        display: flex;
-        align-items: center;
-        padding: 0.375em 0.75em 0.375em 0.375em;
-        border-radius: 99em; // or something higher...
-        transition: 0.25s ease;
-        &:hover {
-            background-color: mix(#fff, $primary-color, 84%);
-        }
-        &:before {
-            display: flex;
-            flex-shrink: 0;
-            content: '';
-            background-color: #fff;
-            width: 1.5em;
-            height: 1.5em;
-            border-radius: 50%;
-            margin-right: 0.375em;
-            transition: 0.25s ease;
-            box-shadow: inset 0 0 0 0.125em $primary-color;
-        }
-    }
+    /* &:focus-within {
+		 outline: .125em solid $primary-color;
+	}
+	 */
+}
+label input {
+    position: absolute;
+    left: -9999px;
+}
+label input:checked + span {
+    background-color: #d6d6e5;
+}
+label input:checked + span:before {
+    box-shadow: inset 0 0 0 0.4375em #00005c;
+}
+label span {
+    display: flex;
+    align-items: center;
+    padding: 0.375em 0.75em 0.375em 0.375em;
+    border-radius: 99em;
+    transition: 0.25s ease;
+}
+label span:hover {
+    background-color: #d6d6e5;
+}
+label span:before {
+    display: flex;
+    flex-shrink: 0;
+    content: '';
+    background-color: #fff;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    margin-right: 0.375em;
+    transition: 0.25s ease;
+    box-shadow: inset 0 0 0 0.125em #00005c;
 }
 </style>
