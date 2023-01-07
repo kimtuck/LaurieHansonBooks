@@ -138,7 +138,6 @@ export default createStore({
         },
         // new purchase
         resetPurchaseFormNew(state) {
-            debugger;
             state.orderId = dateTimeString();
             state.orderDetails = new OrderDetails(maxBooksPerOrder);
             state.orderState = OrderState.BeginPurchase;
@@ -324,7 +323,6 @@ export default createStore({
             }
         },
         async logOrderNew({ getters }) {
-            debugger;
             await initFirebase();
             await logOrderInformation(getters.orderId, {
                 orderState: getters.orderState,
@@ -335,9 +333,8 @@ export default createStore({
             });
         },
         async logOrderResultsNew({ getters }, details) {
-            debugger;
             await initFirebase();
-            await logOrderResultsInformation(getters.orderId, details)
+            await logOrderResultsInformation(getters.orderId, details);
         }
     }
 });

@@ -1,9 +1,11 @@
 <template>
     <div class="flex flex-col items-center w-full">
         <!-- Left Col -->
-        <div class="border-solid border-black border-2 p-4 m-2 bg-white flex flex-col items-center">
-            <div class="text-5xl">Treasure's Gift</div>
-        </div>
+        <router-link to="/TreasuresGift">
+            <div class="border-solid border-black border-2 p-4 m-2 bg-white flex flex-col items-center">
+                <div class="text-5xl">Treasure's Gift</div>
+            </div>
+        </router-link>
         <div class="text-4xl text-red-700 font-extrabold">&nbsp;</div>
         <div class="justify-center w-full px-12 pt-2 pb-2 align-items: center">
             <vue-agile
@@ -25,7 +27,7 @@
             <div class="m-4">A funny, thoughful story about a Golden Retriever and her best friend.</div>
         </div>
 
-        <buy-button class="p-2" label="Buy 'Treasure's Gift'"/>
+        <buy-button class="p-2" label="Buy 'Treasure's Gift'" />
     </div>
 </template>
 

@@ -24,6 +24,7 @@ export default defineComponent({
         ...mapGetters(['orderDetails', 'orderState', 'showCompleteFormMsg'])
     },
     created() {
+        console.log('reset form');
         this.resetPurchaseFormNew();
     },
     destroyed() {

@@ -1,9 +1,11 @@
 <template>
     <div class="flex flex-col items-center w-full">
-        <div class="border-solid border-black border-2 p-4 m-2 bg-white flex flex-col items-center">
-            <div class="text-5xl">Good Girl, Karma</div>
-            <div class="text-4xl text-red-700 font-extrabold">New!</div>
-        </div>
+        <router-link to="/GoodGirlKarma">
+            <div class="border-solid border-black border-2 p-4 m-2 bg-white flex flex-col items-center">
+                <div class="text-5xl">Good Girl, Karma</div>
+                <div class="text-4xl text-red-700 font-extrabold">New!</div>
+            </div>
+        </router-link>
         <div class="justify-center w-full px-12 pt-2 pb-2 align-items: center">
             <vue-agile
                 :options="agileOptions"
