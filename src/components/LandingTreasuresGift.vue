@@ -17,10 +17,10 @@
                 pause-on-hover
                 autoplay
             >
-                <img class="w-full shadow-xl" src="@assets/carousel/Treasure-Annie.png" />
-                <img class="w-full shadow-xl" src="@assets/carousel/cropped-book-covertreasure.jpg" />
-                <img class="w-full shadow-xl" src="@assets/carousel/annie2.png" />
-                <img class="w-full shadow-xl" src="@assets/carousel/Treasure-ball.png" />
+                <img class="w-full shadow-xl" src="@assets/carousel/Treasure-Annie-min.png" />
+                <img class="w-full shadow-xl" src="@assets/carousel/cropped-book-covertreasure-min.jpg" />
+                <img class="w-full shadow-xl" src="@assets/carousel/annie2-min.png" />
+                <img class="w-full shadow-xl" src="@assets/carousel/Treasure-ball-min.png" />
             </vue-agile>
         </div>
         <div class="flex flex-col items-center w-full text-center text-indigo-400">
@@ -63,7 +63,7 @@ export default defineComponent({
         getImgUrl(pic) {
             // eslint-disable-next=line
             // eslint-disable-next-line global-require
-            return require(`@assets/carousel/${pic}`);
+            return require(`@assets/carousel/${pic}-min`);
         }
     }
 });

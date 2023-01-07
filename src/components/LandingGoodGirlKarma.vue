@@ -16,8 +16,8 @@
                 pause-on-hover
                 autoplay
             >
-                <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page4-min.jpg" />
-                <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/Page6-min.jpg" />
+                <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page1-min.jpg" />
+                <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page12-min.jpg" />
                 <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page7-min.jpg" />
                 <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page14-min.jpg" />
             </vue-agile>
@@ -60,7 +60,7 @@ export default defineComponent({
         getImgUrl(pic) {
             // eslint-disable-next=line
             // eslint-disable-next-line global-require
-            return require(`@assets/carousel/${pic}`);
+            return require(`@assets/carousel/${pic}-min`);
         }
     }
 });

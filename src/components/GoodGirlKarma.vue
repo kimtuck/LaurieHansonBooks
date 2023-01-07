@@ -13,8 +13,8 @@
                         pause-on-hover
                         autoplay
                     >
-                        <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page4-min.jpg" />
-                        <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/Page6-min.jpg" />
+                        <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page1-min.jpg" />
+                        <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page12-min.jpg" />
                         <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page7-min.jpg" />
                         <img class="w-full shadow-xl" src="@assets/GoodGirlKarma/page14-min.jpg" />
                     </vue-agile>
