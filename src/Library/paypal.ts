@@ -72,7 +72,6 @@ const purchaseConfigNew = (orderId: any, orderDetails: OrderDetails, orderForm: 
         soft_descriptor: 'Book Purchase'
     };
     const payload = { purchase_units: [{ ...invoiceMetadata, amount: amounts, items: itemsNew, contact: orderForm }] };
-    console.log(payload);
     return payload;
 };
 

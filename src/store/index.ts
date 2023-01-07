@@ -196,7 +196,6 @@ export default createStore({
                     label: 'paypal'
                 },
                 createOrder(data: any, actions: any) {
-                    console.log('old', purchaseConfig(getters.orderId, getters.selectedOrderOption));
                     return actions.order.create(purchaseConfig(getters.orderId, getters.selectedOrderOption));
                 },
                 onClick: async (data: any, actions: any) => {
@@ -303,7 +302,6 @@ export default createStore({
                     // await dispatch('viewingSuccessfulPurchase');
                     return actions.order.capture().then(async function(details: any) {
                         commit('updateOrderState', OrderState.SuccessfulPurchase);
-                        console.log('details received', details);
                         commit('purchaseSuccessful', details);
                         await dispatch('logOrderResultsNew', details);
                         await dispatch('hideSpinner');
