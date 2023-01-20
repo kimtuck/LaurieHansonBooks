@@ -31,13 +31,16 @@
                     <div class="text-red-500">Please fill in your contact information</div>
                 </box>
                 <box class="m-4 p-2 bg-red-100" label="Payment">
-                    <div class="text-lg">
+                    <div class="text-lg p-2">
                         Payments are secured, encrypted, and processed by PayPal. We never see your payment details.
                     </div>
                     <div class="w-1/2 m-auto">
                         <div class="bg-gray-100 p-4">
                             <div id="paypal-buttons" />
                         </div>
+                    </div>
+                    <div class="text-lg p-8">
+                        Troubles making your purchase? Contact Laurie directly at kimtuck@comcast.net.
                     </div>
                     <amazon-purchase />
                 </box>
