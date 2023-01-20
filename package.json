@@ -7,7 +7,8 @@
         "build": "vue-cli-service build",
         "test": "vue-cli-service test:unit",
         "test:e2e": "vue-cli-service test:e2e",
-        "lint": "vue-cli-service lint"
+        "lint": "vue-cli-service lint",
+        "sandbox": "cross-env VUE_APP_SANDBOX=true npm run serve"
     },
     "dependencies": {
         "@paypal/paypal-js": "2.1.6",
@@ -51,6 +52,7 @@
         "@vue/eslint-config-prettier": "^6.0.0",
         "@vue/eslint-config-typescript": "^5.0.2",
         "@vue/test-utils": "2.0.0-rc.0",
+        "cross-env": "^7.0.3",
         "eslint": "^6.7.2",
         "eslint-plugin-prettier": "3.3.1",
         "eslint-plugin-vue": "7.5.0",

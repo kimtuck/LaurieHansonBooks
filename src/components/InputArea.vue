@@ -5,7 +5,6 @@
             <textarea
                 rows="4"
                 :name="name"
-                class="block w-11/12 border-2 border-black border-solid resize-y"
                 :value="modelValue"
                 :rules="isRequired"
                 @input="$emit('update:modelValue', $event.target.value)"
@@ -45,3 +44,11 @@ export default defineComponent({
     }
 });
 </script>
+
+<style scoped>
+textarea {
+    border: solid black 1px;
+    width: 100%;
+    padding: 4px;
+}
+</style>
