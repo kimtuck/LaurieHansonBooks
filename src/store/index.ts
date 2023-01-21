@@ -22,7 +22,7 @@ const ViewingState = {
     SuccessfulPurchase: 'successfulPurchase'
 };
 
-const maxBooksPerOrder = 5;
+const maxBooksPerOrder = 15;
 
 export default createStore({
     state: {
@@ -31,7 +31,7 @@ export default createStore({
         orderId: uuidv4(),
         paypalInstance: null,
         quantity: 1,
-        dedications: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+        dedications: Array.from(Array(maxBooksPerOrder).keys()).map(() => ''),
         orderForm: {
             name: '',
             email: '',
@@ -70,7 +70,7 @@ export default createStore({
             contact: state.orderForm
         }),
         orderOptions: state => {
-            return [1, 2, 3, 4, 5].map(x => {
+            return Array.from(Array(maxBooksPerOrder).keys()).map(x => {
                 const pricingInfo = pricing(x, state.discount);
                 return {
                     quantity: x,

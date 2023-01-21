@@ -55,11 +55,37 @@ const purchaseConfig = (orderId: any, selectedOption: any) => {
 
 const purchaseConfigNew = (orderId: any, orderDetails: OrderDetails, orderForm: Object) => {
     const actualBooks = orderDetails.bookDetails.slice(0, orderDetails.books);
-    const itemsNew = actualBooks.map(orderDetailItem => ({
+
+    const booksOrdered = actualBooks.map(orderDetailItem => ({
         name: orderDetailItem.bookId,
         unit_amount: money(newPricing.bookPrice[orderDetailItem.bookId].actualPrice, 'value'),
         quantity: 1
     }));
+
+    type Ded = {
+        dedication: string;
+        index: number;
+    };
+
+    const dedications = actualBooks
+        .map((orderDetailItem, index) => ({
+            dedication: orderDetailItem.dedication,
+            index
+        }))
+        .filter(x => x.dedication)
+        .reduce<Ded[]>((accum, x) => {
+            const splitted = x.dedication.match(/(.|[\r\n]){1,100}/g);
+            const entries = splitted?.map(str => ({ dedication: str, index: x.index })) || [];
+            return [...accum, ...entries];
+        }, [])
+        .map(x => ({
+            name: `Dedication (book ${x.index + 1}): ${x.dedication}`,
+            unit_amount: money(0, 'value'),
+            quantity: 1
+        }));
+
+    const itemsNew = [...booksOrdered, ...dedications];
+  
     const amounts = amount({
         price: newPricing.totalBookPrice(orderDetails),
         shipping: newPricing.totalShipping(orderDetails)
