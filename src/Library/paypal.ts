@@ -62,30 +62,30 @@ const purchaseConfigNew = (orderId: any, orderDetails: OrderDetails, orderForm: 
         quantity: 1
     }));
 
-    type Ded = {
-        dedication: string;
-        index: number;
-    };
+    // type Ded = {
+    //     dedication: string;
+    //     index: number;
+    // };
 
-    const dedications = actualBooks
-        .map((orderDetailItem, index) => ({
-            dedication: orderDetailItem.dedication,
-            index
-        }))
-        .filter(x => x.dedication)
-        .reduce<Ded[]>((accum, x) => {
-            const splitted = x.dedication.match(/(.|[\r\n]){1,100}/g);
-            const entries = splitted?.map(str => ({ dedication: str, index: x.index })) || [];
-            return [...accum, ...entries];
-        }, [])
-        .map(x => ({
-            name: `Dedication (book ${x.index + 1}): ${x.dedication}`,
-            unit_amount: money(0, 'value'),
-            quantity: 1
-        }));
+    // const dedications = actualBooks
+    //     .map((orderDetailItem, index) => ({
+    //         dedication: orderDetailItem.dedication,
+    //         index
+    //     }))
+    //     .filter(x => x.dedication)
+    //     .reduce<Ded[]>((accum, x) => {
+    //         const splitted = x.dedication.match(/(.|[\r\n]){1,100}/g);
+    //         const entries = splitted?.map(str => ({ dedication: str, index: x.index })) || [];
+    //         return [...accum, ...entries];
+    //     }, [])
+    //     .map(x => ({
+    //         name: `Dedication (book ${x.index + 1}): ${x.dedication}`,
+    //         unit_amount: money(0, 'value'),
+    //         quantity: 1
+    //     }));
 
-    const itemsNew = [...booksOrdered, ...dedications];
-  
+    const itemsNew = [...booksOrdered];
+
     const amounts = amount({
         price: newPricing.totalBookPrice(orderDetails),
         shipping: newPricing.totalShipping(orderDetails)
