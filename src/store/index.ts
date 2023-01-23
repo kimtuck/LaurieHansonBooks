@@ -229,10 +229,14 @@ export default createStore({
                         });
                 },
                 async onCancel() {
+                    // eslint-disable-next-line
+                    console.log('onCancel');
                     await dispatch('cancelPurchase');
                 },
                 // eslint-disable-next-line
-                onError: () => console.log('On error')
+                onError: () => {
+                    console.log('On error')
+                }
             };
             // @ts-expect-error
             if (state.paypalInstance && state.paypalInstance.Buttons) {
