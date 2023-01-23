@@ -2,7 +2,7 @@
     <fieldset :id="id" :class="layoutClasses">
         <legend v-if="label">{{ label }}</legend>
         <div v-for="(option, index) in options" :key="option.text">
-            <label :for="id + index">
+            <label style="min-width: 8rem" :for="id + index">
                 <input
                     :id="id + index"
                     :name="id"
@@ -64,7 +64,7 @@ export default defineComponent({
     },
     computed: {
         layoutClasses(): string {
-            return this.horizontal ? 'flex flex-column' : '';
+            return this.horizontal ? 'flex flex-column flex-wrap' : '';
         }
     },
     methods: {
