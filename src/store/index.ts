@@ -214,11 +214,16 @@ export default createStore({
                     await dispatch('showSpinner');
                     // This function captures the funds from the transaction.
                     // await dispatch('viewingSuccessfulPurchase');
-                    return actions.order.capture().then(async function(details: any) {
-                        commit('updateOrderState', OrderState.SuccessfulPurchase);
-                        await dispatch('completedPurchase', details);
-                        await dispatch('hideSpinner');
-                    });
+                    return actions.order
+                        .capture()
+                        .then(async function(details: any) {
+                            commit('updateOrderState', OrderState.SuccessfulPurchase);
+                            await dispatch('completedPurchase', details);
+                            await dispatch('hideSpinner');
+                        })
+                        .catch((error: any) => {
+                            console.log('error occurred', error);
+                        });d
                 },
                 async onCancel() {
                     await dispatch('cancelPurchase');
