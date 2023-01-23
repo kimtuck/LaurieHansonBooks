@@ -222,6 +222,7 @@ export default createStore({
                             await dispatch('hideSpinner');
                         })
                         .catch((error: any) => {
+                            // eslint-disable-next-line
                             console.log('some error occurred', error);
                         });
                 },
