@@ -217,6 +217,8 @@ export default createStore({
                     return actions.order
                         .capture()
                         .then(async function(details: any) {
+                            // eslint-disable-next-line
+                            console.log('no error occurred,', details);
                             commit('updateOrderState', OrderState.SuccessfulPurchase);
                             await dispatch('completedPurchase', details);
                             await dispatch('hideSpinner');
