@@ -223,7 +223,7 @@ export default createStore({
                         })
                         .catch((error: any) => {
                             console.log('error occurred', error);
-                        });d
+                        });
                 },
                 async onCancel() {
                     await dispatch('cancelPurchase');
