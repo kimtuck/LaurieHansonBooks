@@ -222,7 +222,7 @@ export default createStore({
                             await dispatch('hideSpinner');
                         })
                         .catch((error: any) => {
-                            console.log('error occurred', error);
+                            console.log('some error occurred', error);
                         });
                 },
                 async onCancel() {
