@@ -25,12 +25,6 @@ export default defineComponent({
         ErrorMessage
     },
 
-    data() {
-        return {
-            maxChars: 300
-        };
-    },
-
     props: {
         modelValue: {
             required: true,
@@ -44,6 +38,12 @@ export default defineComponent({
             required: true,
             type: String
         }
+    },
+
+    data() {
+        return {
+            maxChars: 300
+        };
     },
     methods: {
         isRequired(value: any) {
