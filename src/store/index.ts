@@ -235,7 +235,8 @@ export default createStore({
                 },
                 // eslint-disable-next-line
                 onError: () => {
-                    console.log('On error')
+                    // eslint-disable-next-line
+                    console.log('On error');
                 }
             };
             // @ts-expect-error
