@@ -97,12 +97,10 @@ export default defineComponent({
         }
     },
     created() {
-        console.log('created');
         this.resetPurchaseFormNew();
         this.showPaypalButtonsNew('#paypal-buttons');
     },
     destroyed() {
-        console.log('reset form');
         this.resetPurchaseFormNew();
     },
     methods: {
