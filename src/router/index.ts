@@ -33,7 +33,6 @@ const router = createRouter({
 });
 
 router.beforeResolve(async to => {
-    debugger
     store.commit('resetPurchaseFormNew');
 });
 
