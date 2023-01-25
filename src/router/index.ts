@@ -1,6 +1,8 @@
 /* eslint-disable */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
+import store from '../store/index'
+
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -28,6 +30,11 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes
+});
+
+router.beforeResolve(async to => {
+    debugger
+    store.commit('resetPurchaseFormNew');
 });
 
 export default router;

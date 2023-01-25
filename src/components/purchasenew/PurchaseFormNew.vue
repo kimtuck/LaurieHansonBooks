@@ -40,7 +40,18 @@
                         </div>
                     </div>
                     <div class="text-lg p-8">
-                        Troubles making your purchase? Contact Laurie directly at kimtuck@comcast.net.
+                        <p>Troubles making your purchase?</p>
+                        <ul class="list-disc">
+                            <li>
+                                If you see a blank Paypal window, something went wrong with your order. Close paypal window
+                                and try again.
+                            </li>
+                            <li>
+                                If you're paying by credit card, scroll up to see if there is a message from paypal. Check
+                                your address information, and try again
+                            </li>
+                            <li>Contact Laurie directly at kimtuck@comcast.net.</li>
+                        </ul>
                     </div>
                     <amazon-purchase />
                 </box>
@@ -86,10 +97,16 @@ export default defineComponent({
         }
     },
     created() {
+        console.log('created');
+        this.resetPurchaseFormNew();
         this.showPaypalButtonsNew('#paypal-buttons');
     },
+    destroyed() {
+        console.log('reset form');
+        this.resetPurchaseFormNew();
+    },
     methods: {
-        ...mapActions(['showPaypalButtonsNew']),
+        ...mapActions(['showPaypalButtonsNew', 'resetPurchaseFormNew']),
         updateOrderQuantity(quantity: number) {
             this.$emit('update:orderQuantity', quantity);
         },

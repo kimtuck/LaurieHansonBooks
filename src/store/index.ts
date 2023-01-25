@@ -141,6 +141,8 @@ export default createStore({
             state.orderId = dateTimeString();
             state.orderDetails = new OrderDetails(maxBooksPerOrder);
             state.orderState = OrderState.BeginPurchase;
+            state.viewingState = ViewingState.Form;
+
             state.details = {
                 purchase_units: [
                     { soft_descriptor: '', amount: { value: 0 }, shipping: { address: {}, name: { full_name: '' } } }
@@ -233,7 +235,6 @@ export default createStore({
                     console.log('onCancel');
                     await dispatch('cancelPurchase');
                 },
-                // eslint-disable-next-line
                 onError: () => {
                     // eslint-disable-next-line
                     console.log('On error');
