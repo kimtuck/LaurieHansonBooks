@@ -354,7 +354,6 @@ export default createStore({
             await initFirebase();
             return getOrders();
         }
-
     }
 });
 export { ViewingState };

@@ -39,12 +39,6 @@
                 </li>
             </ul>
         </box>
-        <!-- <box class="mb-6">
-            <h1>Viewed Purchase Page without starting payment process</h1>
-            <ul>
-                <li v-for="entry in started" :key="entry.orderId">{{ entry.orderId }} {{ entry.count }}</li>
-            </ul>
-        </box> -->
     </div>
 </template>
 
@@ -100,10 +94,6 @@ export default defineComponent({
     },
 
     async created() {
-        const replaceAt = (s: string, index: number, replacement: string) => {
-            return s.substring(0, index) + replacement + s.substring(index + replacement.length);
-        };
-
         const result = await this.getOrders();
         this.docs = result.docs
             .map((x: { data: () => any }) => x.data())
