@@ -75,7 +75,6 @@ export default defineComponent({
 
         abandoned(): any {
             // eslint-disable-next-line
-
             console.log('started only', this.started);
             return this.docs.filter((x: any) => x.orderState === 'Show Paypal Dialog' && !x.details);
         },
@@ -83,7 +82,9 @@ export default defineComponent({
         completedNoDedication(): any {
             return this.docs.filter(
                 (x: any) =>
-                    x.orderState === 'Show Paypal Dialog' && x.details && !x.booksOrdered.some((book: any) => book.dedication)
+                    x.orderState === 'Show Paypal Dialog' &&
+                    x.details &&
+                    !x.booksOrdered.some((book: any) => book.dedication)
             );
         },
 
