@@ -60,9 +60,9 @@ export default defineComponent({
         started(): any {
             return this.docs
                 .filter((x: any) => x.orderState === 'Begin Purchase')
-                .map(x => ({ orderId: x.orderId.substring(0, 10) }))
-                .reduce((accum, x) => {
-                    const entry = accum.find(a => a.orderId === x.orderId);
+                .map((x: any) => ({ orderId: x.orderId.substring(0, 10) }))
+                .reduce((accum: Array<{ orderId: string; count: number }>, x: any) => {
+                    const entry = accum.find((a: any) => a.orderId === x.orderId);
                     if (!entry) {
                         accum.push({ orderId: x.orderId, count: 1 });
                     } else {
@@ -74,6 +74,8 @@ export default defineComponent({
         },
 
         abandoned(): any {
+            // eslint-disable-next-line
+
             console.log('started only', this.started);
             return this.docs.filter((x: any) => x.orderState === 'Show Paypal Dialog' && !x.details);
         },
@@ -98,12 +100,12 @@ export default defineComponent({
         this.docs = result.docs
             .map((x: { data: () => any }) => x.data())
             .filter(
-                x =>
+                (x: any) =>
                     !['robert.h.hanson@rbc.com', 'f', 'robert.hanson@solutiondesign.com', 'ss'].includes(
                         x.contactInfo?.email
                     )
             )
-            .sort((a, b) => (a.orderId > b.orderId ? 1 : b.orderId > a.orderid ? -1 : 0))
+            .sort((a: any, b: any) => (a.orderId > b.orderId ? 1 : b.orderId > a.orderid ? -1 : 0))
             .reverse();
     },
 
