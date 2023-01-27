@@ -6,7 +6,8 @@ import {
     logOrderInformation,
     logCompletedOrderInformation,
     logCancelledOrderInformation,
-    logOrderResultsInformation
+    logOrderResultsInformation,
+    getOrders
 } from '@/Library/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import OrderState from '@/Library/orderState';
@@ -347,7 +348,13 @@ export default createStore({
         async logOrderResultsNew({ getters }, details) {
             await initFirebase();
             await logOrderResultsInformation(getters.orderId, details);
+        },
+
+        async getOrders() {
+            await initFirebase();
+            return getOrders();
         }
+
     }
 });
 export { ViewingState };

@@ -51,10 +51,15 @@ const logCancelledOrderInformation = async (orderId: any, orderState: any) => {
         .update({ orderState });
 };
 
+const getOrders = async () => {
+    return db.collection('orders').get();
+};
+
 export {
     initFirebase,
     logOrderInformation,
     logOrderResultsInformation,
     logCompletedOrderInformation,
-    logCancelledOrderInformation
+    logCancelledOrderInformation,
+    getOrders
 };
