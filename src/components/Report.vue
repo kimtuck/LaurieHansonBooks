@@ -83,14 +83,14 @@ export default defineComponent({
         completedNoDedication(): any {
             return this.docs.filter(
                 (x: any) =>
-                    x.orderState === 'Show Paypal Dialog' && x.details && !x.booksOrdered.some(book => book.dedication)
+                    x.orderState === 'Show Paypal Dialog' && x.details && !x.booksOrdered.some((book: any) => book.dedication)
             );
         },
 
         completedWithDedicationOnly(): any {
             return this.docs.filter(
                 (x: any) =>
-                    x.orderState === 'Show Paypal Dialog' && x.details && x.booksOrdered.some(book => book.dedication)
+                    x.orderState === 'Show Paypal Dialog' && x.details && x.booksOrdered.some((book: any) => book.dedication)
             );
         }
     },
