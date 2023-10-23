@@ -6,7 +6,7 @@ let db: any;
 
 const initFirebase = asyncOnce(() => {
     const firebaseConfig = {
-        apiKey: 'AIzaSyD28ZiJOOSaUh6nMeVIo2Q4jjV169snOO4',
+        apiKey: 'AIzaSyDBKsUBv76SGHM2YhaSOruPg6kVh8bV6W0',
         authDomain: 'lauriehansonbooks-5a053.firebaseapp.com',
         databaseURL: 'https://lauriehansonbooks-5a053.firebaseio.com',
         projectId: 'lauriehansonbooks-5a053',

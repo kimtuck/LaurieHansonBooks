@@ -3,13 +3,13 @@ import OrderDetailItem from '@/types/OrderDetailItem';
 import OrderDetails from './OrderDetails';
 
 const newPricing = {
-    baseShipping: 2.0,
+    baseShipping: 3.0,
     shippingPerBook: 1.0,
     bookPrice: {
         [BookId.GoodGirlKarma]: {
             listPrice: 13.95,
-            actualPrice: 10.95,
-            priceNote: 'Good Girl, Karma: $10.95 -- Normally $13.95'
+            actualPrice: 9,
+            priceNote: 'Good Girl, Karma: $9.00 -- Normally $13.95'
         },
         [BookId.TreasuresGift]: {
             listPrice: 16.95,
@@ -17,7 +17,7 @@ const newPricing = {
             priceNote: "Treasure's Gift: $5.00 -- Normally $16.95"
         }
     },
-    shipping: (books: number) => 3.0 + (books - 1) * 1.0,
+    shipping: (books: number) => 4.0 + (books - 1) * 1.0,
     actualBooks: (orderDetails: OrderDetails): OrderDetailItem[] => orderDetails.bookDetails.slice(0, orderDetails.books),
     totalBookPrice: (orderDetails: OrderDetails): number =>
         newPricing
