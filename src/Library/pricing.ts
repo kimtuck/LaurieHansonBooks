@@ -8,8 +8,8 @@ const newPricing = {
     bookPrice: {
         [BookId.GoodGirlKarma]: {
             listPrice: 13.95,
-            actualPrice: 9,
-            priceNote: 'Good Girl, Karma: $9.00 -- Normally $13.95'
+            actualPrice: 7,
+            priceNote: 'Good Girl, Karma: $7.00 -- Normally $13.95'
         },
         [BookId.TreasuresGift]: {
             listPrice: 16.95,
